@@ -100,7 +100,11 @@ const Header: React.FC<HeaderProps> = ({
     }
     return (
         <>
-            <AppBar position="static" color={'primary'}>
+            <AppBar position="static"
+                    sx={{
+                        bgcolor: 'grey.900',
+                        color: 'white',
+                    }}>
                 <Toolbar sx={{justifyContent: 'space-between'}}>
                     {/* Left: Menu (on mobile) + Logo */}
                     <Box sx={{display: 'flex', alignItems: 'center', gap: 1}}>

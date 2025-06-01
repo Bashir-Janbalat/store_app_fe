@@ -2,6 +2,7 @@ import React from 'react';
 import {Outlet} from 'react-router-dom';
 import Header from './Header';
 import {Box} from "@mui/material";
+import Footer from "./Footer";
 
 const Layout: React.FC = () => {
     const handleCartClick = () => {
@@ -22,7 +23,7 @@ const Layout: React.FC = () => {
                         onWishlistClick={handleWishlistClick}/>
             </Box>
             <Outlet/>
-            {/*<Footer/>*/}
+            <Footer/>
         </>
     );
 };

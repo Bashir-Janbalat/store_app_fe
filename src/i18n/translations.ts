@@ -43,6 +43,25 @@ export interface Translations {
         newPassword: string;
         resetPasswordButton: string;
     };
+    footer: {
+        description: string;
+        quickLinks: string;
+        customerService: string;
+        contactInfo: string;
+        copyright: string;
+        links: {
+            faq: string;
+            returnPolicy: string;
+            terms: string;
+            privacy: string;
+            shipping: string;
+        },
+        contact: {
+            phone: string;
+            email: string;
+            address: string;
+        }
+    };
     common: {
         storeName: string;
     };
@@ -94,6 +113,25 @@ export const translations: Record<'ar' | 'en', Translations> = {
             newPassword: 'كلمة المرور الجديدة',
             resetPasswordButton: ' إعادة تعيين كلمة المرور',
         },
+        footer: {
+            description: 'متجرنا الإلكتروني - وجهتك المفضلة للتسوق الإلكتروني',
+            quickLinks: 'روابط سريعة',
+            customerService: 'خدمة العملاء',
+            contactInfo: 'معلومات التواصل',
+            copyright: '© 2025 متجرنا الألكتروني. جميع الحقوق محفوظة.',
+            links: {
+                faq: 'الأسئلة الشائعة',
+                returnPolicy: 'سياسة الإرجاع',
+                terms: 'الشروط والأحكام',
+                privacy: 'سياسة الخصوصية',
+                shipping: 'الشحن والتوصيل',
+            },
+            contact: {
+                phone: '+49 165 789 789',
+                email: 'info@store.com',
+                address: 'برلين، ألمانيا',
+            }
+        },
         common: {
             storeName: 'متجرنا الإلكتروني',
         },
@@ -142,6 +180,25 @@ export const translations: Record<'ar' | 'en', Translations> = {
             passwordResetSuccess: 'Password has been reset successfully',
             newPassword: 'New Password',
             resetPasswordButton: 'Confirm Password',
+        },
+        footer: {
+            description: 'Our e-store - your favorite e-shopping destination',
+            quickLinks: 'Quick Links',
+            customerService: 'Customer Service',
+            contactInfo: 'Contact Info',
+            copyright: '© 2025 Our e-store. All rights reserved.',
+            links: {
+                faq: 'FAQ',
+                returnPolicy: 'Return Policy',
+                terms: 'Terms & Conditions',
+                privacy: 'Privacy Policy',
+                shipping: 'Shipping & Delivery',
+            },
+            contact: {
+                phone: '+49 165 789 789',
+                email: 'info@store.com',
+                address: 'برلين، ألمانيا',
+            }
         },
         common: {
             storeName: 'Our Online Store',

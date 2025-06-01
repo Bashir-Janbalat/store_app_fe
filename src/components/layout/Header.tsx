@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     AppBar,
     Badge,
@@ -52,6 +52,10 @@ const Header: React.FC<HeaderProps> = ({
     const {t, isRTL, language, toggleLanguage} = useLanguage();
     const {user, signOut} = useAuth();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        setAnchorEl(null);
+    }, [user]);
 
     const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);

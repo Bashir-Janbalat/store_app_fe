@@ -1,29 +1,58 @@
-import React, {type ReactNode, useState} from "react";
+import React, {type ReactNode, useEffect, useState} from "react";
 import {AuthContext} from "./AuthContext";
-import {loginUser} from "../services/authService.ts";
+import {resetPassword, sendResetLink, signInUser, signupUser} from "../services/authService.ts";
+import type {JwtPayload, PasswordResetRequest, SignUp} from "../types/auth.ts";
+import {getUserFromToken, removeToken, saveToken} from "../utils/JwtUtils.ts";
 
 interface AuthProviderProps {
     children: ReactNode;
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
-    const [token, setToken] = useState<string | null>(null);
+    const [user, setUser] = useState<JwtPayload | null>(null);
 
-    const login = async (email: string, password: string) => {
-        const response = await loginUser(email, password);
-        setToken(response.accessToken);
-        localStorage.setItem("token", response.accessToken);
+    useEffect(() => {
+        const decodedUser = getUserFromToken();
+        setUser(decodedUser);
+    }, []);
+
+    const signIn = async (email: string, password: string) => {
+        const response = await signInUser(email, password);
+        const token = response.accessToken;
+        saveToken(token);
+        const decoded = getUserFromToken();
+        setUser(decoded);
     };
 
-    const logout = () => {
-        setToken(null);
-        localStorage.removeItem("token");
+    const signOut = () => {
+        removeToken();
+        setUser(null);
     };
 
-    const isAuthenticated = !!token;
+    const signUp = async (signUp: SignUp) => {
+        const status = await signupUser(signUp);
+
+        if (status === 201) {
+            const response = await signInUser(signUp.email, signUp.password);
+            const token = response.accessToken;
+
+            saveToken(token);
+            const decoded = getUserFromToken();
+            setUser(decoded);
+        }
+
+        return status;
+    };
+
+    const sendResetLinkFor = async (email: string) => {
+        return await sendResetLink(email);
+    };
+    const resetPasswordFor = async (passwordResetRequest: PasswordResetRequest) => {
+        return await resetPassword(passwordResetRequest)
+    }
 
     return (
-        <AuthContext.Provider value={{token, login, logout, isAuthenticated}}>
+        <AuthContext.Provider value={{user, signIn, signUp, signOut, sendResetLinkFor, resetPasswordFor}}>
             {children}
         </AuthContext.Provider>
     );

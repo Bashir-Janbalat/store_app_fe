@@ -4,26 +4,34 @@ import {
     Badge,
     Box,
     Button,
+    Divider,
     Drawer,
     IconButton,
+    ListItemIcon,
+    ListItemText,
     Menu,
     MenuItem,
     Toolbar,
     Tooltip,
-    Typography
+    Typography,
 } from '@mui/material';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {
     AccountCircle,
+    ExitToApp,
     FavoriteBorder,
     Language,
     Menu as MenuIcon,
+    Person,
+    Settings,
+    ShoppingBag,
     ShoppingCart,
     Store,
     Translate
 } from '@mui/icons-material';
 import {useLanguage} from "../hooks/useLanguage.ts";
 import {useIsMobile} from "../hooks/useIsMobile.ts";
+import {useAuth} from "../hooks/useAuth.ts";
 
 interface HeaderProps {
     cartItemsCount: number;
@@ -42,6 +50,8 @@ const Header: React.FC<HeaderProps> = ({
     const [drawerOpen, setDrawerOpen] = useState(false);
     const isMobile = useIsMobile();
     const {t, isRTL, language, toggleLanguage} = useLanguage();
+    const {user, signOut} = useAuth();
+    const navigate = useNavigate();
 
     const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -79,7 +89,11 @@ const Header: React.FC<HeaderProps> = ({
             </Button>
         </Box>
     );
-
+    const handleWishlistClick = () => {
+        if (onWishlistClick) {
+            onWishlistClick();
+        }
+    }
     return (
         <>
             <AppBar position="static" color={'primary'}>
@@ -111,28 +125,80 @@ const Header: React.FC<HeaderProps> = ({
                                 {language === 'ar' ? <Language/> : <Translate/>}
                             </IconButton>
                         </Tooltip>
+                        {user ? (
+                            <>
+                                <IconButton color="inherit" onClick={onWishlistClick}>
+                                    <Badge badgeContent={wishlistItemsCount} color="error">
+                                        <FavoriteBorder/>
+                                    </Badge>
+                                </IconButton>
 
-                        <IconButton color="inherit" onClick={onWishlistClick}>
-                            <Badge badgeContent={wishlistItemsCount} color="error">
-                                <FavoriteBorder/>
-                            </Badge>
-                        </IconButton>
+                                <IconButton color="inherit" onClick={onCartClick}>
+                                    <Badge badgeContent={cartItemsCount} color="error">
+                                        <ShoppingCart/>
+                                    </Badge>
+                                </IconButton>
 
-                        <IconButton color="inherit" onClick={onCartClick}>
-                            <Badge badgeContent={cartItemsCount} color="error">
-                                <ShoppingCart/>
-                            </Badge>
-                        </IconButton>
+                                <IconButton color="inherit" onClick={handleMenu}>
+                                    <AccountCircle/>
+                                </IconButton>
 
-                        <IconButton color="inherit" onClick={handleMenu}>
-                            <AccountCircle/>
-                        </IconButton>
+                                <Menu
+                                    anchorEl={anchorEl}
+                                    open={Boolean(anchorEl)}
+                                    onClose={handleClose}
+                                    sx={{mt: 1}}
+                                    transformOrigin={{horizontal: isRTL ? 'left' : 'right', vertical: 'top'}}
+                                    anchorOrigin={{horizontal: isRTL ? 'left' : 'right', vertical: 'bottom'}}
+                                >
+                                    <MenuItem onClick={handleClose}>
+                                        <ListItemIcon>
+                                            <Person fontSize="small"/>
+                                        </ListItemIcon>
+                                        <ListItemText>{t.nav.profile}</ListItemText>
+                                    </MenuItem>
 
-                        <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
-                            <MenuItem onClick={handleClose}>{t.nav.profile}</MenuItem>
-                            <MenuItem onClick={handleClose}>{t.nav.account}</MenuItem>
-                            <MenuItem onClick={handleClose}>{t.nav.logout}</MenuItem>
-                        </Menu>
+                                    <MenuItem onClick={handleClose}>
+                                        <ListItemIcon>
+                                            <ShoppingBag fontSize="small"/>
+                                        </ListItemIcon>
+                                        <ListItemText>{t.nav.orders}</ListItemText>
+                                    </MenuItem>
+
+                                    <MenuItem onClick={handleWishlistClick}>
+                                        <ListItemIcon>
+                                            <FavoriteBorder fontSize="small"/>
+                                        </ListItemIcon>
+                                        <ListItemText>{t.nav.wishlist}</ListItemText>
+                                    </MenuItem>
+
+                                    <Divider/>
+
+                                    <MenuItem onClick={handleClose}>
+                                        <ListItemIcon>
+                                            <Settings fontSize="small"/>
+                                        </ListItemIcon>
+                                        <ListItemText>{t.nav.settings}</ListItemText>
+                                    </MenuItem>
+
+                                    <MenuItem onClick={signOut}>
+                                        <ListItemIcon>
+                                            <ExitToApp fontSize="small"/>
+                                        </ListItemIcon>
+                                        <ListItemText>{t.nav.logout}</ListItemText>
+                                    </MenuItem>
+                                </Menu>
+                            </>
+                        ) : (
+                            <Box sx={{display: 'flex', gap: 1, ml: 2}}>
+                                <Button color="inherit" onClick={() => navigate('/login')}>
+                                    {t.nav.login}
+                                </Button>
+                                <Button color="inherit" onClick={() => navigate('/register')}>
+                                    {t.nav.signup}
+                                </Button>
+                            </Box>
+                        )}
                     </Box>
                 </Toolbar>
             </AppBar>

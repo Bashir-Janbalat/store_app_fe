@@ -1,15 +1,44 @@
 import axiosInstance from './axiosInstance';
-import type {LoginResponse} from "../types/auth";
+import type {PasswordResetRequest, SignInResponse, SignUp} from "../types/auth";
+import {getDetailedApiError} from "../utils/ErrorUtils.ts";
 
 
-export const loginUser = async (email: string, password: string): Promise<LoginResponse> => {
+export const signInUser = async (email: string, password: string): Promise<SignInResponse> => {
     try {
         const response = await axiosInstance.post('/auth/login', {
             email,
             password,
         });
-        return response.data as LoginResponse;
+        return response.data as SignInResponse;
     } catch (error) {
-        throw error;
+        throw getDetailedApiError(error);
     }
 };
+
+export const signupUser = async (user: SignUp): Promise<number> => {
+    try {
+        const response = await axiosInstance.post('/auth/signup', user);
+        return response.status;
+    } catch (error) {
+        throw getDetailedApiError(error);
+    }
+};
+
+export const sendResetLink = async (email: string): Promise<number> => {
+    try {
+        const encodedEmail = encodeURIComponent(email);
+        const response = await axiosInstance.post(`/auth/send-reset-link?email=${encodedEmail}`);
+        return response.status;
+    } catch (error) {
+        throw getDetailedApiError(error);
+    }
+}
+
+export const resetPassword = async (request: PasswordResetRequest): Promise<number> => {
+    try {
+        const response = await axiosInstance.post(`/auth/reset-password`, request);
+        return response.status;
+    } catch (error) {
+        throw getDetailedApiError(error);
+    }
+}

@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-const axiosInstance = axios.create({
-    baseURL: import.meta.env.VITE_API_BASE_URL,
+const axiosInstanceStore = axios.create({
+    baseURL: import.meta.env.VITE_API_BASE_URL_STORE,
     headers: {
         'Content-Type': 'application/json',
     },
 });
 
-axiosInstance.interceptors.request.use(
+axiosInstanceStore.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem('token');
         if (token && config.headers) {
@@ -18,7 +18,7 @@ axiosInstance.interceptors.request.use(
     (error) => Promise.reject(error)
 );
 
-axiosInstance.interceptors.response.use(
+axiosInstanceStore.interceptors.response.use(
     (response) => response,
     (error) => {
         const isLoginPage = window.location.pathname === '/login';
@@ -30,4 +30,4 @@ axiosInstance.interceptors.response.use(
     }
 );
 
-export default axiosInstance;
+export default axiosInstanceStore;

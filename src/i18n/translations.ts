@@ -62,6 +62,9 @@ export interface Translations {
             address: string;
         }
     };
+    categories: {
+        title: string;
+    },
     common: {
         storeName: string;
     };
@@ -132,6 +135,9 @@ export const translations: Record<'ar' | 'en', Translations> = {
                 address: 'برلين، ألمانيا',
             }
         },
+        categories: {
+            title: 'تسوق حسب الفئة',
+        },
         common: {
             storeName: 'متجرنا الإلكتروني',
         },
@@ -199,6 +205,9 @@ export const translations: Record<'ar' | 'en', Translations> = {
                 email: 'info@store.com',
                 address: 'برلين، ألمانيا',
             }
+        },
+        categories: {
+            title: 'Shop by Category',
         },
         common: {
             storeName: 'Our Online Store',

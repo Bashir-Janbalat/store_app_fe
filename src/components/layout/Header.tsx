@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     AppBar,
     Badge,
@@ -7,15 +7,17 @@ import {
     Divider,
     Drawer,
     IconButton,
+    InputAdornment,
     ListItemIcon,
     ListItemText,
     Menu,
     MenuItem,
+    TextField,
     Toolbar,
     Tooltip,
     Typography,
 } from '@mui/material';
-import {Link, useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
     AccountCircle,
     ExitToApp,
@@ -27,11 +29,12 @@ import {
     ShoppingBag,
     ShoppingCart,
     Store,
-    Translate
+    Translate,
 } from '@mui/icons-material';
-import {useLanguage} from "../hooks/useLanguage.ts";
-import {useIsMobile} from "../hooks/useIsMobile.ts";
-import {useAuth} from "../hooks/useAuth.ts";
+import SearchIcon from '@mui/icons-material/Search';
+import { useLanguage } from "../hooks/useLanguage.ts";
+import { useIsMobile } from "../hooks/useIsMobile.ts";
+import { useAuth } from "../hooks/useAuth.ts";
 
 interface HeaderProps {
     cartItemsCount: number;
@@ -49,9 +52,10 @@ const Header: React.FC<HeaderProps> = ({
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [drawerOpen, setDrawerOpen] = useState(false);
     const isMobile = useIsMobile();
-    const {t, isRTL, language, toggleLanguage} = useLanguage();
-    const {user, signOut} = useAuth();
+    const { t, isRTL, language, toggleLanguage } = useLanguage();
+    const { user, signOut } = useAuth();
     const navigate = useNavigate();
+    const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
         setAnchorEl(null);
@@ -69,16 +73,55 @@ const Header: React.FC<HeaderProps> = ({
         setDrawerOpen(prev => !prev);
     };
 
+    const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter' && searchQuery.trim()) {
+            navigate(`/products?search=${encodeURIComponent(searchQuery.trim())}`);
+        }
+    };
+
     const NavLinks = (
         <Box
             sx={{
+                flex: 1,
                 display: 'flex',
-                flexDirection: isMobile ? 'column' : 'row',
+                justifyContent: 'center',
+                alignItems: 'center',
                 gap: 2,
-                alignItems: isMobile && !isRTL ? 'flex-start' : 'flex-end',
-                px: isMobile ? 2 : 0
             }}
         >
+            <TextField
+                size="small"
+                placeholder={t.common.searchPlaceholder ?? "Search..."}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={handleSearchKeyDown}
+                variant="outlined"
+                sx={{
+                    flex: 1,
+                    maxWidth: 500,
+                    bgcolor: 'rgba(255,255,255,0.1)',
+                    mx: 2,
+                    input: { color: 'white' },
+                    '& .MuiOutlinedInput-notchedOutline': {
+                        borderColor: 'rgba(255,255,255,0.5)',
+                    },
+                    '&:hover .MuiOutlinedInput-notchedOutline': {
+                        borderColor: 'white',
+                    },
+                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                        borderColor: 'white',
+                    },
+                }}
+                slotProps={{
+                    input: {
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <SearchIcon sx={{ color: 'white' }} />
+                            </InputAdornment>
+                        )
+                    }
+                }}
+            />
             <Button color="inherit" component={Link} to="/">
                 {t.nav.home}
             </Button>
@@ -93,112 +136,87 @@ const Header: React.FC<HeaderProps> = ({
             </Button>
         </Box>
     );
+
     const handleWishlistClick = () => {
-        if (onWishlistClick) {
-            onWishlistClick();
-        }
-    }
+        if (onWishlistClick) onWishlistClick();
+    };
+
     return (
         <>
-            <AppBar position="static"
-                    sx={{
-                        bgcolor: 'grey.900',
-                        color: 'white',
-                    }}>
-                <Toolbar sx={{justifyContent: 'space-between'}}>
-                    {/* Left: Menu (on mobile) + Logo */}
-                    <Box sx={{display: 'flex', alignItems: 'center', gap: 1}}>
+            <AppBar position="static" sx={{ bgcolor: 'grey.900', color: 'white' }}>
+                <Toolbar sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
+                    {/* Left: Logo/Menu */}
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                         {isMobile && (
                             <IconButton color="inherit" onClick={toggleDrawer}>
-                                <MenuIcon/>
+                                <MenuIcon />
                             </IconButton>
                         )}
-                        <Store/>
+                        <Store />
                         <Typography variant="h6" noWrap>
                             {t.common.storeName}
                         </Typography>
                     </Box>
 
-                    {/* Middle: NavLinks for Desktop */}
+                    {/* Middle: NavLinks */}
                     {!isMobile && NavLinks}
 
-                    {/* Right: Language + Wishlist + Cart + Account */}
-                    <Box sx={{display: 'flex', alignItems: 'center', gap: 2}}>
+                    {/* Right: Icons */}
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                         <Tooltip title={language === 'ar' ? 'en' : 'ar'}>
-                            <IconButton
-                                color="inherit"
-                                onClick={toggleLanguage}
-                                sx={{ml: 1}}
-                            >
-                                {language === 'ar' ? <Language/> : <Translate/>}
+                            <IconButton color="inherit" onClick={toggleLanguage} sx={{ ml: 1 }}>
+                                {language === 'ar' ? <Language /> : <Translate />}
                             </IconButton>
                         </Tooltip>
+
                         {user ? (
                             <>
                                 <IconButton color="inherit" onClick={onWishlistClick}>
                                     <Badge badgeContent={wishlistItemsCount} color="error">
-                                        <FavoriteBorder/>
+                                        <FavoriteBorder />
                                     </Badge>
                                 </IconButton>
-
                                 <IconButton color="inherit" onClick={onCartClick}>
                                     <Badge badgeContent={cartItemsCount} color="error">
-                                        <ShoppingCart/>
+                                        <ShoppingCart />
                                     </Badge>
                                 </IconButton>
-
                                 <IconButton color="inherit" onClick={handleMenu}>
-                                    <AccountCircle/>
+                                    <AccountCircle />
                                 </IconButton>
-
                                 <Menu
                                     anchorEl={anchorEl}
                                     open={Boolean(anchorEl)}
                                     onClose={handleClose}
-                                    sx={{mt: 1}}
-                                    transformOrigin={{horizontal: isRTL ? 'left' : 'right', vertical: 'top'}}
-                                    anchorOrigin={{horizontal: isRTL ? 'left' : 'right', vertical: 'bottom'}}
+                                    sx={{ mt: 1 }}
+                                    transformOrigin={{ horizontal: isRTL ? 'left' : 'right', vertical: 'top' }}
+                                    anchorOrigin={{ horizontal: isRTL ? 'left' : 'right', vertical: 'bottom' }}
                                 >
                                     <MenuItem onClick={handleClose}>
-                                        <ListItemIcon>
-                                            <Person fontSize="small"/>
-                                        </ListItemIcon>
+                                        <ListItemIcon><Person fontSize="small" /></ListItemIcon>
                                         <ListItemText>{t.nav.profile}</ListItemText>
                                     </MenuItem>
-
                                     <MenuItem onClick={handleClose}>
-                                        <ListItemIcon>
-                                            <ShoppingBag fontSize="small"/>
-                                        </ListItemIcon>
+                                        <ListItemIcon><ShoppingBag fontSize="small" /></ListItemIcon>
                                         <ListItemText>{t.nav.orders}</ListItemText>
                                     </MenuItem>
-
                                     <MenuItem onClick={handleWishlistClick}>
-                                        <ListItemIcon>
-                                            <FavoriteBorder fontSize="small"/>
-                                        </ListItemIcon>
+                                        <ListItemIcon><FavoriteBorder fontSize="small" /></ListItemIcon>
                                         <ListItemText>{t.nav.wishlist}</ListItemText>
                                     </MenuItem>
-
-                                    <Divider/>
-
+                                    <Divider />
                                     <MenuItem onClick={handleClose}>
-                                        <ListItemIcon>
-                                            <Settings fontSize="small"/>
-                                        </ListItemIcon>
+                                        <ListItemIcon><Settings fontSize="small" /></ListItemIcon>
                                         <ListItemText>{t.nav.settings}</ListItemText>
                                     </MenuItem>
-
                                     <MenuItem onClick={signOut}>
-                                        <ListItemIcon>
-                                            <ExitToApp fontSize="small"/>
-                                        </ListItemIcon>
+                                        <ListItemIcon><ExitToApp fontSize="small" /></ListItemIcon>
                                         <ListItemText>{t.nav.logout}</ListItemText>
                                     </MenuItem>
                                 </Menu>
                             </>
                         ) : (
-                            <Box sx={{display: 'flex', gap: 1, ml: 2}}>
+                            <Box sx={{ display: 'flex', gap: 1, ml: 2 }}>
                                 <Button color="inherit" onClick={() => navigate('/login')}>
                                     {t.nav.login}
                                 </Button>
@@ -213,12 +231,8 @@ const Header: React.FC<HeaderProps> = ({
 
             {/* Drawer for Mobile Nav */}
             {isMobile && drawerOpen && (
-                <Drawer
-                    anchor="left"
-                    open={drawerOpen}
-                    onClose={toggleDrawer}
-                >
-                    <Box sx={{width: 250, mt: 2,}} role="presentation" onClick={toggleDrawer}>
+                <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer}>
+                    <Box sx={{ width: 250, mt: 2 }} role="presentation" onClick={toggleDrawer}>
                         {NavLinks}
                     </Box>
                 </Drawer>

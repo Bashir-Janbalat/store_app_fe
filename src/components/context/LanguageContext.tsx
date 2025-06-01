@@ -1,5 +1,6 @@
-import { createContext } from "react";
-import type {Translations} from "../../i18n/translations.ts";
+import {createContext} from "react";
+import type {Translations} from "../../i18n/types.ts";
+
 
 type Language = 'ar' | 'en';
 

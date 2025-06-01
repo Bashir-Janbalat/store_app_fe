@@ -1,6 +1,7 @@
 import React, {type ReactNode, useEffect, useState} from "react";
 import {LanguageContext} from "./LanguageContext";
-import {translations} from "../../i18n/translations";
+import {ar} from "../../i18n/ar";
+import {en} from "../../i18n/en";
 import {CacheProvider} from "@emotion/react";
 import {ThemeProvider} from "@mui/material/styles";
 import {CssBaseline} from "@mui/material";
@@ -15,6 +16,7 @@ interface LanguageProviderProps {
 
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({children}) => {
     const [language, setLanguage] = useState<Language>('ar');
+    const translations = { ar, en };
 
     const toggleLanguage = () => {
         setLanguage(prev => (prev === 'ar' ? 'en' : 'ar'));

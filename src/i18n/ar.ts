@@ -91,6 +91,9 @@ export const ar: Translations = {
         categories: {
             title: 'تسوق حسب الفئة',
         },
+        brands: {
+            title: 'تسوق حسب العلامة التجارية',
+        },
         product: {
             title: 'المنتجات',
             category: "الفئة",

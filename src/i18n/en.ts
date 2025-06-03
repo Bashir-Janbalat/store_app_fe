@@ -92,6 +92,9 @@ export const en: Translations = {
     categories: {
         title: 'Shop by Category',
     },
+    brands: {
+        title: 'Shop by Brand',
+    },
     product: {
         title: 'Products',
         category: "Category",

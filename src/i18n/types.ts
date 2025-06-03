@@ -89,6 +89,9 @@ export interface Translations {
     categories: {
         title: string;
     };
+    brands: {
+        title: string;
+    };
     product: {
         title: string;
         category: string,

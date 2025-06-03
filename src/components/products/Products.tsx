@@ -12,9 +12,10 @@ import {useSearchParams} from 'react-router-dom';
 
 interface ProductsProps {
     selectedCategoryName: string | null;
+    selectedBrandName: string | null;
 }
 
-const Products = ({selectedCategoryName}: ProductsProps) => {
+const Products = ({selectedCategoryName, selectedBrandName}: ProductsProps) => {
     const {t} = useLanguage();
     const [wishlist, setWishlist] = useState<number[]>([]);
     const [products, setProducts] = useState<ProductDTO[]>([]);
@@ -28,12 +29,14 @@ const Products = ({selectedCategoryName}: ProductsProps) => {
     const query =
         useFetchData<PagedResponseDTO<ProductDTO>, {
             categoryName?: string,
+            brandName?: string,
             searchBy?: string,
             page: number,
             size: number
         }>
         (ApiType.INVENTORY, "featuredProducts", "/products", {
             categoryName: selectedCategoryName || undefined,
+            brandName: selectedBrandName || undefined,
             searchBy: productName || undefined,
             page: page - 1,
             size: size
@@ -43,7 +46,7 @@ const Products = ({selectedCategoryName}: ProductsProps) => {
 
     useEffect(() => {
         setPage(1);
-    }, [selectedCategoryName, productName]);
+    }, [selectedCategoryName, selectedBrandName, productName]);
 
     useEffect(() => {
         if (data) {

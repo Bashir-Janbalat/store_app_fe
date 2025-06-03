@@ -8,15 +8,23 @@ import LoadingSkeleton from "../common/LoadingSkeleton.tsx";
 import {useQueryToast} from "../../hooks/useQueryToast.ts";
 import ErrorFallback from "../common/ErrorFallback.tsx";
 import {useLanguage} from "../../hooks/useLanguage.ts";
+import {useSearchParams} from 'react-router-dom';
 
+interface ProductsProps {
+    selectedCategoryName: string | null;
+}
 
-const FeaturedProducts = () => {
+const Products = ({selectedCategoryName}: ProductsProps) => {
     const {t} = useLanguage();
     const [wishlist, setWishlist] = useState<number[]>([]);
     const [products, setProducts] = useState<ProductDTO[]>([]);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const size = 8;
+    const [searchParams] = useSearchParams();
+    const productName = searchParams.get('productName') || '';
+
+
     const query =
         useFetchData<PagedResponseDTO<ProductDTO>, {
             categoryName?: string,
@@ -25,12 +33,17 @@ const FeaturedProducts = () => {
             size: number
         }>
         (ApiType.INVENTORY, "featuredProducts", "/products", {
+            categoryName: selectedCategoryName || undefined,
+            searchBy: productName || undefined,
             page: page - 1,
             size: size
         });
 
     const {data, isLoading, isError, retryWithToast} = useQueryToast(query, {showLoading: true});
 
+    useEffect(() => {
+        setPage(1);
+    }, [selectedCategoryName, productName]);
 
     useEffect(() => {
         if (data) {
@@ -58,7 +71,7 @@ const FeaturedProducts = () => {
     return (
         <Container>
             <Typography variant="h5" textAlign="center">
-                {t.featuredProducts.title}
+                {t.product.title}
             </Typography>
             <Grid container spacing={2} justifyContent="center">
                 {products.map((product: ProductDTO) => (
@@ -86,4 +99,4 @@ const FeaturedProducts = () => {
         </Container>
     );
 }
-export default FeaturedProducts;
+export default Products;

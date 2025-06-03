@@ -47,7 +47,7 @@ const Header: React.FC<HeaderProps> = ({
                                            cartItemsCount,
                                            wishlistItemsCount,
                                            onCartClick,
-                                           onWishlistClick
+                                           onWishlistClick,
                                        }) => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [drawerOpen, setDrawerOpen] = useState(false);
@@ -55,7 +55,7 @@ const Header: React.FC<HeaderProps> = ({
     const {t, isRTL, language, toggleLanguage} = useLanguage();
     const {user, signOut} = useAuth();
     const navigate = useNavigate();
-    const [searchQuery, setSearchQuery] = useState('');
+    const [searchValue, setSearchValue] = useState('');
 
     useEffect(() => {
         setAnchorEl(null);
@@ -74,8 +74,8 @@ const Header: React.FC<HeaderProps> = ({
     };
 
     const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter' && searchQuery.trim()) {
-            navigate(`/products?search=${encodeURIComponent(searchQuery.trim())}`);
+        if (e.key === 'Enter') {
+            navigate(`/products?productName=${encodeURIComponent(searchValue)}`);
         }
     };
 
@@ -94,8 +94,8 @@ const Header: React.FC<HeaderProps> = ({
             <TextField
                 size="small"
                 placeholder={t.common.searchPlaceholder ?? "Search..."}
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
                 onKeyDown={handleSearchKeyDown}
                 variant="outlined"
                 sx={{
@@ -124,18 +124,18 @@ const Header: React.FC<HeaderProps> = ({
                     }
                 }}
             />
-                <Button color="inherit" component={Link} to="/">
-                    {t.nav.home}
-                </Button>
-                <Button color="inherit" component={Link} to="/products">
-                    {t.nav.products}
-                </Button>
-                <Button color="inherit" component={Link} to="/about">
-                    {t.nav.about}
-                </Button>
-                <Button color="inherit" component={Link} to="/contact">
-                    {t.nav.contact}
-                </Button>
+            <Button color="inherit" component={Link} to="/">
+                {t.nav.home}
+            </Button>
+            <Button color="inherit" component={Link} to="/products">
+                {t.nav.products}
+            </Button>
+            <Button color="inherit" component={Link} to="/about">
+                {t.nav.about}
+            </Button>
+            <Button color="inherit" component={Link} to="/contact">
+                {t.nav.contact}
+            </Button>
         </Box>
     );
 

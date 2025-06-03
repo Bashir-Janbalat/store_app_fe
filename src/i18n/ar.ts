@@ -68,6 +68,7 @@ export const ar: Translations = {
             title: 'تسوق حسب الفئة',
         },
         product: {
+            title: 'المنتجات',
             category: "الفئة",
             unknownCategory: "غير محددة",
             brand: "الماركة",

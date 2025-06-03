@@ -74,7 +74,7 @@ const CategorySlider: React.FC<CategorySliderProps> = ({selectedCategory, onCate
                                 backgroundColor: selectedCategory === category.name ? 'primary.light' : undefined,
                             }}
                             variant={selectedCategory === category.name ? 'filled' : 'outlined'}
-                            onClick={() => onCategorySelect(category.name)}
+                            onClick={() => onCategorySelect(selectedCategory === category.name ? null : category.name)}
                         />
                     ))}
                 </Box>

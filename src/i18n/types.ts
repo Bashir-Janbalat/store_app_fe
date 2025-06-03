@@ -66,6 +66,7 @@ export interface Translations {
         title: string;
     };
     product: {
+        title: string;
         category: string,
         unknownCategory: string,
         brand: string,

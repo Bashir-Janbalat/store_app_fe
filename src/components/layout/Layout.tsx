@@ -20,7 +20,8 @@ const Layout: React.FC = () => {
                 <Header cartItemsCount={2}
                         onCartClick={handleCartClick}
                         wishlistItemsCount={2}
-                        onWishlistClick={handleWishlistClick}/>
+                        onWishlistClick={handleWishlistClick}
+                />
             </Box>
             <Outlet/>
             <Footer/>

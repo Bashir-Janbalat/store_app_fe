@@ -7,6 +7,7 @@ import ForgotPassword from "../pages/ForgotPassword.tsx";
 import Layout from "../components/layout/Layout.tsx";
 import ResetPassword from "../pages/ResetPassword.tsx";
 import Index from "../pages/Index.tsx";
+import ProductsPage from "../pages/ProductsPage.tsx";
 
 
 const AppRoutes: React.FC = () => {
@@ -16,12 +17,15 @@ const AppRoutes: React.FC = () => {
         {path: "forgot-password", element: <ForgotPassword/>},
         {path: "reset-password", element: <ResetPassword/>},
     ];
+    const productRoutes = [
+        {path: "products", element: <ProductsPage/>},
+    ];
     return (
         <Router>
             <Routes>
                 <Route element={<Layout/>}>
                     <Route index path="/" element={<Index/>}/>
-                    {[...authRoutes].map(
+                    {[...authRoutes, ...productRoutes].map(
                         ({path, element}) => (
                             <Route key={path} path={path} element={element}/>
                         )

@@ -69,6 +69,7 @@ export const en: Translations = {
         title: 'Shop by Category',
     },
     product: {
+        title: 'Products',
         category: "Category",
         unknownCategory: "Unspecified",
         brand: "Brand",

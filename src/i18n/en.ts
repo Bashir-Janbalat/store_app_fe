@@ -126,5 +126,11 @@ export const en: Translations = {
     success: {
         loaded: "Data loaded successfully.",
     },
+    filter: {
+        title: "Filters",
+        price: "Price",
+        applyFilters: "Apply Filters",
+        reset: "Reset",
+    },
 }
 

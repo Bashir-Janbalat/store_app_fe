@@ -123,4 +123,10 @@ export interface Translations {
     success: {
         loaded: string;
     };
+    filter: {
+        title: string,
+        price: string,
+        applyFilters: string,
+        reset: string,
+    };
 }

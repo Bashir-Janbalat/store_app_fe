@@ -124,6 +124,12 @@ export const ar: Translations = {
         },
         success: {
             loaded: "تم تحميل البيانات بنجاح."
-        }
+        },
+        filter: {
+            title: "الفلاتر",
+            price: "السعر",
+            applyFilters: "تطبيق الفلاتر",
+            reset: "إعادة تعيين",
+        },
     }
 ;

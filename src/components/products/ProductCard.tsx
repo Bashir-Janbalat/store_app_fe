@@ -1,13 +1,4 @@
-import {
-    Card,
-    CardContent,
-    CardMedia,
-    Typography,
-    Button,
-    CardActions,
-    IconButton,
-    Tooltip,
-} from '@mui/material';
+import {Button, Card, CardActions, CardContent, CardMedia, IconButton, Tooltip, Typography,} from '@mui/material';
 import {Favorite, FavoriteBorder} from '@mui/icons-material';
 import type {ProductDTO} from "../../types/product.ts";
 import {useLanguage} from "../../hooks/useLanguage.ts";
@@ -23,7 +14,7 @@ const ProductCard = ({product, isInWishlist, onWishlistToggle, onAddToCart}: Pro
     const {t} = useLanguage();
     const imageUrl = product.images?.[0]?.imageUrl;
     const altText = product.images?.[0]?.altText;
-    const price = product.sellingPrice ?? product.costPrice;
+    const price = product.sellingPrice ?? 0;
 
     const isLong = (text?: string) => (text ? text.length > 30 : false);
 

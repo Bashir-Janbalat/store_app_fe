@@ -13,9 +13,11 @@ import {useSearchParams} from 'react-router-dom';
 interface ProductsProps {
     selectedCategoryName: string | null;
     selectedBrandName: string | null;
+    minPrice?: number | null;
+    maxPrice?: number | null;
 }
 
-const Products = ({selectedCategoryName, selectedBrandName}: ProductsProps) => {
+const Products = ({selectedCategoryName, selectedBrandName, minPrice, maxPrice}: ProductsProps) => {
     const {t} = useLanguage();
     const [wishlist, setWishlist] = useState<number[]>([]);
     const [products, setProducts] = useState<ProductDTO[]>([]);
@@ -31,6 +33,8 @@ const Products = ({selectedCategoryName, selectedBrandName}: ProductsProps) => {
             categoryName?: string,
             brandName?: string,
             searchBy?: string,
+            minPrice?: number,
+            maxPrice?: number,
             page: number,
             size: number
         }>
@@ -38,6 +42,8 @@ const Products = ({selectedCategoryName, selectedBrandName}: ProductsProps) => {
             categoryName: selectedCategoryName || undefined,
             brandName: selectedBrandName || undefined,
             searchBy: productName || undefined,
+            minPrice: minPrice || undefined,
+            maxPrice: maxPrice || undefined,
             page: page - 1,
             size: size
         });
@@ -46,7 +52,7 @@ const Products = ({selectedCategoryName, selectedBrandName}: ProductsProps) => {
 
     useEffect(() => {
         setPage(1);
-    }, [selectedCategoryName, selectedBrandName, productName]);
+    }, [selectedCategoryName, selectedBrandName, productName, minPrice, maxPrice]);
 
     useEffect(() => {
         if (data) {

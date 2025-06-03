@@ -65,8 +65,34 @@ export interface Translations {
     categories: {
         title: string;
     };
+    product: {
+        category: string,
+        unknownCategory: string,
+        brand: string,
+        unknownBrand: string,
+        price: string,
+        addToCart: string,
+        addToWishlist: string,
+        removeFromWishlist: string,
+    };
+    featuredProducts: {
+        title: string;
+    };
     common: {
         searchPlaceholder: string;
         storeName: string;
+    };
+    error: {
+        message: string;
+        retry: string;
+        imageAlt: string;
+        retryFail: string
+    };
+    loading: {
+        message: string;
+        retry: string;
+    }
+    success: {
+        loaded: string;
     };
 }

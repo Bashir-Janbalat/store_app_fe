@@ -17,7 +17,7 @@ import {
 import {Login as LoginIcon, Store, Visibility, VisibilityOff} from '@mui/icons-material';
 import {useLanguage} from "../hooks/useLanguage.ts";
 import {useAuth} from "../hooks/useAuth.ts";
-import {handleSetError} from "../utils/ErrorUtils.ts";
+import {handleSetError} from "../utils/error-utils.ts";
 
 
 const Login = () => {

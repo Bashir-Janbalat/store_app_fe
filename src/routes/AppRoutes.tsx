@@ -1,12 +1,12 @@
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import NotFound from '../pages/NotFound.tsx';
 import React from "react";
-import Index from "../pages/Index.tsx";
 import Login from "../pages/Login.tsx";
 import Register from "../pages/Register.tsx";
 import ForgotPassword from "../pages/ForgotPassword.tsx";
-import Layout from "../layout/Layout.tsx";
+import Layout from "../components/layout/Layout.tsx";
 import ResetPassword from "../pages/ResetPassword.tsx";
+import Index from "../pages/Index.tsx";
 
 
 const AppRoutes: React.FC = () => {
@@ -21,9 +21,11 @@ const AppRoutes: React.FC = () => {
             <Routes>
                 <Route element={<Layout/>}>
                     <Route index path="/" element={<Index/>}/>
-                    {authRoutes.map(({path, element}) => (
-                        <Route key={path} path={path} element={element}/>
-                    ))}
+                    {[...authRoutes].map(
+                        ({path, element}) => (
+                            <Route key={path} path={path} element={element}/>
+                        )
+                    )}
                 </Route>
                 <Route path="*" element={<NotFound/>}/>
             </Routes>

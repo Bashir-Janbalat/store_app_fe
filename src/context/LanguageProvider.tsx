@@ -1,12 +1,12 @@
 import React, {type ReactNode, useEffect, useState} from "react";
-import {LanguageContext} from "./LanguageContext";
-import {ar} from "../../i18n/ar";
-import {en} from "../../i18n/en";
+import {LanguageContext} from "./LanguageContext.tsx";
 import {CacheProvider} from "@emotion/react";
 import {ThemeProvider} from "@mui/material/styles";
 import {CssBaseline} from "@mui/material";
-import {cacheLtr, cacheRtl} from "../../theme/emotionCache";
-import {createAppTheme} from "../../theme";
+import {cacheLtr, cacheRtl} from "../theme/emotionCache.ts";
+import {createAppTheme} from "../theme";
+import { ar } from "../i18n/ar.ts";
+import {en} from "../i18n/en.ts";
 
 type Language = 'ar' | 'en';
 

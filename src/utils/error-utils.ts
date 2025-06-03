@@ -1,5 +1,5 @@
 import axios from "axios";
-import {DetailedApiError, type ServerErrorResponse} from "../types/error.ts";
+import {DetailedApiError, type ServerErrorResponse} from "../types/server-error.ts";
 
 export function getDetailedApiError(error: unknown): DetailedApiError {
     if (axios.isAxiosError(error)) {

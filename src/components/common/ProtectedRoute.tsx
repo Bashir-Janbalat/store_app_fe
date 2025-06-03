@@ -1,15 +1,15 @@
 import React from "react";
 import {Navigate} from "react-router-dom";
-import {useAuth} from "../hooks/useAuth.ts";
+import {useAuth} from "../../hooks/useAuth.ts";
 
 interface ProtectedRouteProps {
     children: React.ReactNode;
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({children}) => {
-    const {isAuthenticated} = useAuth();
+    const {user} = useAuth();
 
-    if (!isAuthenticated) {
+    if (!user) {
         return <Navigate to="/" replace/>;
     }
 

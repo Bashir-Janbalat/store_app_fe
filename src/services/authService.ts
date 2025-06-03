@@ -1,6 +1,6 @@
-import axiosInstanceStore from './axiosInstanceStore.ts';
-import type {PasswordResetRequest, SignInResponse, SignUp} from "../types/auth";
-import {getDetailedApiError} from "../utils/ErrorUtils.ts";
+import axiosInstanceStore from '../api/axiosInstanceStore.ts';
+import type {PasswordResetRequest, SignInResponse, SignUp} from "../types/auth.ts";
+import {getDetailedApiError} from "../utils/error-utils.ts";
 
 
 export const signInUser = async (email: string, password: string): Promise<SignInResponse> => {

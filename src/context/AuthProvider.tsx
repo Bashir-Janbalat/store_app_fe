@@ -1,8 +1,8 @@
 import React, {type ReactNode, useEffect, useState} from "react";
-import {AuthContext} from "./AuthContext";
+import {AuthContext} from "./AuthContext.tsx";
 import {resetPassword, sendResetLink, signInUser, signupUser} from "../services/authService.ts";
 import type {JwtPayload, PasswordResetRequest, SignUp} from "../types/auth.ts";
-import {getUserFromToken, removeToken, saveToken} from "../utils/JwtUtils.ts";
+import {getUserFromToken, removeToken, saveToken} from "../utils/jwt-utils.ts";
 
 interface AuthProviderProps {
     children: ReactNode;

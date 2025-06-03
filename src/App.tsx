@@ -1,6 +1,6 @@
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
-import AppRoutes from "./components/routes/AppRoutes.tsx";
-import {AuthProvider} from "./components/context/AuthProvider.tsx";
+import AppRoutes from "./routes/AppRoutes.tsx";
+import {AuthProvider} from "./context/AuthProvider.tsx";
 import {Toaster} from 'react-hot-toast';
 
 const queryClient = new QueryClient({

@@ -68,8 +68,35 @@ export const en: Translations = {
     categories: {
         title: 'Shop by Category',
     },
+    product: {
+        category: "Category",
+        unknownCategory: "Unspecified",
+        brand: "Brand",
+        unknownBrand: "Unspecified",
+        price: "Price",
+        addToCart: "Add to Cart",
+        addToWishlist: "Add to Wishlist",
+        removeFromWishlist: "Remove from Wishlist",
+    },
+    featuredProducts: {
+        title: 'Featured Products',
+    },
     common: {
         storeName: 'Our Online Store',
         searchPlaceholder: 'Search products...',
     },
-};
+    error: {
+        message: "Something went wrong.",
+        retry: "Retry",
+        imageAlt: "Broken workshop error image",
+        retryFail: "Error while retrying.",
+    },
+    loading: {
+        message: "Loading data...",
+        retry: "Retrying...",
+    },
+    success: {
+        loaded: "Data loaded successfully.",
+    },
+}
+

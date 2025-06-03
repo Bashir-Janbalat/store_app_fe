@@ -1,6 +1,6 @@
 import {useQuery} from '@tanstack/react-query';
-import axiosInstanceStore from "../services/axiosInstanceStore.ts";
-import axiosInstanceInventory from "../services/axiosInstanceInventory.ts";
+import axiosInstanceStore from "../api/axiosInstanceStore.ts";
+import axiosInstanceInventory from "../api/axiosInstanceInventory.ts";
 import {ApiType} from "../types/common.ts";
 
 

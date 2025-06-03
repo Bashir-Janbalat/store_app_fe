@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     AppBar,
     Badge,
@@ -17,7 +17,7 @@ import {
     Tooltip,
     Typography,
 } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {
     AccountCircle,
     ExitToApp,
@@ -32,9 +32,9 @@ import {
     Translate,
 } from '@mui/icons-material';
 import SearchIcon from '@mui/icons-material/Search';
-import { useLanguage } from "../hooks/useLanguage.ts";
-import { useIsMobile } from "../hooks/useIsMobile.ts";
-import { useAuth } from "../hooks/useAuth.ts";
+import {useLanguage} from "../../hooks/useLanguage.ts";
+import {useIsMobile} from "../../hooks/useIsMobile.ts";
+import {useAuth} from "../../hooks/useAuth.ts";
 
 interface HeaderProps {
     cartItemsCount: number;
@@ -52,8 +52,8 @@ const Header: React.FC<HeaderProps> = ({
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [drawerOpen, setDrawerOpen] = useState(false);
     const isMobile = useIsMobile();
-    const { t, isRTL, language, toggleLanguage } = useLanguage();
-    const { user, signOut } = useAuth();
+    const {t, isRTL, language, toggleLanguage} = useLanguage();
+    const {user, signOut} = useAuth();
     const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState('');
 
@@ -84,9 +84,11 @@ const Header: React.FC<HeaderProps> = ({
             sx={{
                 flex: 1,
                 display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
+                flexDirection: isMobile ? 'column' : 'row',
+                justifyContent: isMobile ? 'flex-start' : 'center',
+                alignItems: isMobile ? 'flex-start' : 'center',
                 gap: 2,
+                p: isMobile ? 2 : 0,
             }}
         >
             <TextField
@@ -101,7 +103,7 @@ const Header: React.FC<HeaderProps> = ({
                     maxWidth: 500,
                     bgcolor: 'rgba(255,255,255,0.1)',
                     mx: 2,
-                    input: { color: 'white' },
+                    input: {color: 'white'},
                     '& .MuiOutlinedInput-notchedOutline': {
                         borderColor: 'rgba(255,255,255,0.5)',
                     },
@@ -116,24 +118,24 @@ const Header: React.FC<HeaderProps> = ({
                     input: {
                         startAdornment: (
                             <InputAdornment position="start">
-                                <SearchIcon sx={{ color: 'white' }} />
+                                <SearchIcon sx={{color: 'white'}}/>
                             </InputAdornment>
                         )
                     }
                 }}
             />
-            <Button color="inherit" component={Link} to="/">
-                {t.nav.home}
-            </Button>
-            <Button color="inherit" component={Link} to="/products">
-                {t.nav.products}
-            </Button>
-            <Button color="inherit" component={Link} to="/about">
-                {t.nav.about}
-            </Button>
-            <Button color="inherit" component={Link} to="/contact">
-                {t.nav.contact}
-            </Button>
+                <Button color="inherit" component={Link} to="/">
+                    {t.nav.home}
+                </Button>
+                <Button color="inherit" component={Link} to="/products">
+                    {t.nav.products}
+                </Button>
+                <Button color="inherit" component={Link} to="/about">
+                    {t.nav.about}
+                </Button>
+                <Button color="inherit" component={Link} to="/contact">
+                    {t.nav.contact}
+                </Button>
         </Box>
     );
 
@@ -143,16 +145,16 @@ const Header: React.FC<HeaderProps> = ({
 
     return (
         <>
-            <AppBar position="static" sx={{ bgcolor: 'grey.900', color: 'white' }}>
-                <Toolbar sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
+            <AppBar position="static" sx={{bgcolor: 'grey.900', color: 'white'}}>
+                <Toolbar sx={{justifyContent: 'space-between', alignItems: 'center'}}>
                     {/* Left: Logo/Menu */}
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    <Box sx={{display: 'flex', alignItems: 'center', gap: 1}}>
                         {isMobile && (
                             <IconButton color="inherit" onClick={toggleDrawer}>
-                                <MenuIcon />
+                                <MenuIcon/>
                             </IconButton>
                         )}
-                        <Store />
+                        <Store/>
                         <Typography variant="h6" noWrap>
                             {t.common.storeName}
                         </Typography>
@@ -162,61 +164,62 @@ const Header: React.FC<HeaderProps> = ({
                     {!isMobile && NavLinks}
 
                     {/* Right: Icons */}
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <Box sx={{display: 'flex', alignItems: 'center', gap: 2}}>
+                        {/* Toggle Language */}
                         <Tooltip title={language === 'ar' ? 'en' : 'ar'}>
-                            <IconButton color="inherit" onClick={toggleLanguage} sx={{ ml: 1 }}>
-                                {language === 'ar' ? <Language /> : <Translate />}
+                            <IconButton color="inherit" onClick={toggleLanguage} sx={{ml: 1}}>
+                                {language === 'ar' ? <Language/> : <Translate/>}
                             </IconButton>
                         </Tooltip>
-
+                        {/* Auth */}
                         {user ? (
                             <>
                                 <IconButton color="inherit" onClick={onWishlistClick}>
                                     <Badge badgeContent={wishlistItemsCount} color="error">
-                                        <FavoriteBorder />
+                                        <FavoriteBorder/>
                                     </Badge>
                                 </IconButton>
                                 <IconButton color="inherit" onClick={onCartClick}>
                                     <Badge badgeContent={cartItemsCount} color="error">
-                                        <ShoppingCart />
+                                        <ShoppingCart/>
                                     </Badge>
                                 </IconButton>
                                 <IconButton color="inherit" onClick={handleMenu}>
-                                    <AccountCircle />
+                                    <AccountCircle/>
                                 </IconButton>
                                 <Menu
                                     anchorEl={anchorEl}
                                     open={Boolean(anchorEl)}
                                     onClose={handleClose}
-                                    sx={{ mt: 1 }}
-                                    transformOrigin={{ horizontal: isRTL ? 'left' : 'right', vertical: 'top' }}
-                                    anchorOrigin={{ horizontal: isRTL ? 'left' : 'right', vertical: 'bottom' }}
+                                    sx={{mt: 1}}
+                                    transformOrigin={{horizontal: isRTL ? 'left' : 'right', vertical: 'top'}}
+                                    anchorOrigin={{horizontal: isRTL ? 'left' : 'right', vertical: 'bottom'}}
                                 >
                                     <MenuItem onClick={handleClose}>
-                                        <ListItemIcon><Person fontSize="small" /></ListItemIcon>
+                                        <ListItemIcon><Person fontSize="small"/></ListItemIcon>
                                         <ListItemText>{t.nav.profile}</ListItemText>
                                     </MenuItem>
                                     <MenuItem onClick={handleClose}>
-                                        <ListItemIcon><ShoppingBag fontSize="small" /></ListItemIcon>
+                                        <ListItemIcon><ShoppingBag fontSize="small"/></ListItemIcon>
                                         <ListItemText>{t.nav.orders}</ListItemText>
                                     </MenuItem>
                                     <MenuItem onClick={handleWishlistClick}>
-                                        <ListItemIcon><FavoriteBorder fontSize="small" /></ListItemIcon>
+                                        <ListItemIcon><FavoriteBorder fontSize="small"/></ListItemIcon>
                                         <ListItemText>{t.nav.wishlist}</ListItemText>
                                     </MenuItem>
-                                    <Divider />
+                                    <Divider/>
                                     <MenuItem onClick={handleClose}>
-                                        <ListItemIcon><Settings fontSize="small" /></ListItemIcon>
+                                        <ListItemIcon><Settings fontSize="small"/></ListItemIcon>
                                         <ListItemText>{t.nav.settings}</ListItemText>
                                     </MenuItem>
                                     <MenuItem onClick={signOut}>
-                                        <ListItemIcon><ExitToApp fontSize="small" /></ListItemIcon>
+                                        <ListItemIcon><ExitToApp fontSize="small"/></ListItemIcon>
                                         <ListItemText>{t.nav.logout}</ListItemText>
                                     </MenuItem>
                                 </Menu>
                             </>
                         ) : (
-                            <Box sx={{ display: 'flex', gap: 1, ml: 2 }}>
+                            <Box sx={{display: 'flex', gap: 1, ml: 2}}>
                                 <Button color="inherit" onClick={() => navigate('/login')}>
                                     {t.nav.login}
                                 </Button>
@@ -231,8 +234,8 @@ const Header: React.FC<HeaderProps> = ({
 
             {/* Drawer for Mobile Nav */}
             {isMobile && drawerOpen && (
-                <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer}>
-                    <Box sx={{ width: 250, mt: 2 }} role="presentation" onClick={toggleDrawer}>
+                <Drawer open={drawerOpen} onClose={toggleDrawer}>
+                    <Box sx={{width: 250}} role="presentation" onClick={toggleDrawer}>
                         {NavLinks}
                     </Box>
                 </Drawer>

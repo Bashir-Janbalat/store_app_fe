@@ -1,17 +1,20 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {Box, Chip, IconButton, Typography} from '@mui/material';
 import {ArrowBackIos, ArrowForwardIos} from '@mui/icons-material';
-import {useLanguage} from "../hooks/useLanguage.ts";
-import {useFetchData} from "../hooks/useFetchData.ts";
-import {ApiType, type PagedResponseDTO} from "../types/common.ts";
-import type {CategoryDTO} from "../types/category.ts";
+import {useLanguage} from "../../hooks/useLanguage.ts";
+import {useFetchData} from "../../hooks/useFetchData.ts";
+import {ApiType, type PagedResponseDTO} from "../../types/common.ts";
+import type {CategoryDTO} from "../../types/category.ts";
+import LoadingSkeleton from '../common/LoadingSkeleton.tsx';
+import ErrorFallback from "../common/ErrorFallback.tsx";
+import {useQueryToast} from "../../hooks/useQueryToast.ts";
 
 interface CategorySliderProps {
-    selectedCategoryId: number | null;
-    onCategorySelect: (categoryId: number | null) => void;
+    selectedCategory: string | null;
+    onCategorySelect: (categoryName: string | null) => void;
 }
 
-const CategorySlider: React.FC<CategorySliderProps> = ({selectedCategoryId, onCategorySelect}) => {
+const CategorySlider: React.FC<CategorySliderProps> = ({selectedCategory, onCategorySelect}) => {
     const {t} = useLanguage();
     const scrollRef = useRef<HTMLDivElement>(null);
     const [categories, setCategories] = useState<CategoryDTO[]>([]);
@@ -21,18 +24,21 @@ const CategorySlider: React.FC<CategorySliderProps> = ({selectedCategoryId, onCa
             scrollRef.current.scrollBy({left: scrollOffset, behavior: 'smooth'});
         }
     };
-    const {data, isLoading, error} =
+    const query =
         useFetchData<PagedResponseDTO<CategoryDTO>, { page: number, size: number }>
-        (ApiType.INVENTORY, 'categories', '/categories', {page: 0, size: 1000});
+        (ApiType.INVENTORY, "categorySlider", "/categories", {
+            page: 0,
+            size: 1000
+        });
+    const {data, isLoading, isError, retryWithToast} = useQueryToast(query, {showLoading: true});
 
     useEffect(() => {
         if (data)
             setCategories(data.content);
     }, [data]);
 
-    if (isLoading) return <p>Loading categories...</p>;
-    if (error) return <p>Error loading categories {error.message}.</p>;
-
+    if (isLoading) return <LoadingSkeleton/>;
+    if (isError) return <ErrorFallback onRetry={retryWithToast}/>;
     return (
         <Box display="flex" flexDirection="column" gap={2} p={2}>
             <Typography variant="h5" textAlign="center">
@@ -64,11 +70,11 @@ const CategorySlider: React.FC<CategorySliderProps> = ({selectedCategoryId, onCa
                                 cursor: 'pointer',
                                 height: '50px',
                                 px: 2,
-                                borderColor: selectedCategoryId === category.id ? 'primary.main' : undefined,
-                                backgroundColor: selectedCategoryId === category.id ? 'primary.light' : undefined,
+                                borderColor: selectedCategory === category.name ? 'primary.main' : undefined,
+                                backgroundColor: selectedCategory === category.name ? 'primary.light' : undefined,
                             }}
-                            variant={selectedCategoryId === category.id ? 'filled' : 'outlined'}
-                            onClick={() => onCategorySelect(category.id)}
+                            variant={selectedCategory === category.name ? 'filled' : 'outlined'}
+                            onClick={() => onCategorySelect(category.name)}
                         />
                     ))}
                 </Box>

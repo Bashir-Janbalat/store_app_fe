@@ -15,9 +15,9 @@ import {
     Typography
 } from '@mui/material';
 import {PersonAdd, Store, Visibility, VisibilityOff} from '@mui/icons-material';
-import {useAuth} from '../hooks/useAuth';
+import {useAuth} from '../hooks/useAuth.ts';
 import {useLanguage} from "../hooks/useLanguage.ts";
-import {handleSetError} from "../utils/ErrorUtils.ts";
+import {handleSetError} from "../utils/error-utils.ts";
 
 const Register = () => {
     const {t} = useLanguage();

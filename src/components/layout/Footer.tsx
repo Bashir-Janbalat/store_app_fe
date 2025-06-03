@@ -1,6 +1,6 @@
 import {Box, Container, Divider, Grid, IconButton, Link, Typography,} from '@mui/material';
 import {Email, Facebook, Instagram, LinkedIn, LocationOn, Phone, Store, Twitter,} from '@mui/icons-material';
-import {useLanguage} from "../hooks/useLanguage.ts";
+import {useLanguage} from "../../hooks/useLanguage.ts";
 
 const Footer = () => {
     const {t, isRTL} = useLanguage();

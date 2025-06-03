@@ -15,6 +15,30 @@ export const ar: Translations = {
             login: 'تسجيل الدخول',
             signup: 'إنشاء حساب',
         },
+        features: {
+            title: 'لماذا تختارنا؟',
+            variety: {
+                title: 'تشكيلة واسعة',
+                description: 'آلاف المنتجات في جميع الفئات',
+            },
+            shipping: {
+                title: 'توصيل سريع',
+                description: 'توصيل مجاني للطلبات فوق 100 دولار',
+            },
+            payment: {
+                title: 'دفع آمن',
+                description: 'طرق دفع متنوعة وآمنة',
+            },
+            support: {
+                title: 'دعم 24/7',
+                description: 'فريق دعم متاح طوال الوقت',
+            },
+        },
+        hero: {
+            title: 'مرحباً بك في متجرنا الإلكتروني',
+            subtitle: 'اكتشف أفضل المنتجات بأسعار رائعة',
+            cta: 'تسوق الآن',
+        },
         auth: {
             signIn: 'تسجيل الدخول',
             signUp: 'إنشاء حساب',

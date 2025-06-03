@@ -16,6 +16,30 @@ export const en: Translations = {
         login: 'LoginPage',
         signup: 'Sign Up',
     },
+    features: {
+        title: 'Why Choose Us?',
+        variety: {
+            title: 'Wide Variety',
+            description: 'Thousands of products in all categories',
+        },
+        shipping: {
+            title: 'Fast Delivery',
+            description: 'Free shipping on orders over 100 €',
+        },
+        payment: {
+            title: 'Secure Payment',
+            description: 'Multiple safe payment methods',
+        },
+        support: {
+            title: '24/7 Support',
+            description: 'Support team available around the clock',
+        },
+    },
+    hero: {
+        title: 'Welcome to Our Online Store',
+        subtitle: 'Discover the best products at amazing prices',
+        cta: 'Shop Now',
+    },
     auth: {
         signIn: 'Sign In',
         signUp: 'Sign Up',

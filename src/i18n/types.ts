@@ -13,6 +13,30 @@ export interface Translations {
         login: string;
         signup: string;
     };
+    features: {
+        title: string;
+        variety: {
+            title: string;
+            description: string;
+        };
+        shipping: {
+            title: string;
+            description: string;
+        };
+        payment: {
+            title: string;
+            description: string;
+        };
+        support: {
+            title: string;
+            description: string;
+        };
+    };
+    hero: {
+        title: string;
+        subtitle: string;
+        cta: string;
+    }
     auth: {
         signIn: string;
         signUp: string;

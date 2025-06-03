@@ -139,9 +139,6 @@ const Header: React.FC<HeaderProps> = ({
         </Box>
     );
 
-    const handleWishlistClick = () => {
-        if (onWishlistClick) onWishlistClick();
-    };
 
     return (
         <>
@@ -195,23 +192,28 @@ const Header: React.FC<HeaderProps> = ({
                                     transformOrigin={{horizontal: isRTL ? 'left' : 'right', vertical: 'top'}}
                                     anchorOrigin={{horizontal: isRTL ? 'left' : 'right', vertical: 'bottom'}}
                                 >
-                                    <MenuItem onClick={handleClose}>
+                                    <MenuItem component={Link} to="/profile" onClick={handleClose}>
                                         <ListItemIcon><Person fontSize="small"/></ListItemIcon>
                                         <ListItemText>{t.nav.profile}</ListItemText>
                                     </MenuItem>
-                                    <MenuItem onClick={handleClose}>
+
+                                    <MenuItem component={Link} to="/orders" onClick={handleClose}>
                                         <ListItemIcon><ShoppingBag fontSize="small"/></ListItemIcon>
                                         <ListItemText>{t.nav.orders}</ListItemText>
                                     </MenuItem>
-                                    <MenuItem onClick={handleWishlistClick}>
+
+                                    <MenuItem component={Link} to="/wishlist" onClick={handleClose}>
                                         <ListItemIcon><FavoriteBorder fontSize="small"/></ListItemIcon>
                                         <ListItemText>{t.nav.wishlist}</ListItemText>
                                     </MenuItem>
+
                                     <Divider/>
-                                    <MenuItem onClick={handleClose}>
+
+                                    <MenuItem component={Link} to="/settings" onClick={handleClose}>
                                         <ListItemIcon><Settings fontSize="small"/></ListItemIcon>
                                         <ListItemText>{t.nav.settings}</ListItemText>
                                     </MenuItem>
+
                                     <MenuItem onClick={signOut}>
                                         <ListItemIcon><ExitToApp fontSize="small"/></ListItemIcon>
                                         <ListItemText>{t.nav.logout}</ListItemText>

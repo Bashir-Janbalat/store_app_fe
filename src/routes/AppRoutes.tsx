@@ -15,6 +15,10 @@ import ReturnPolicyPage from "../pages/ReturnPolicyPage.tsx";
 import TermsAndConditionsPage from '../pages/TermsAndConditionsPage.tsx';
 import PrivacyPolicyPage from '../pages/PrivacyPolicyPage.tsx';
 import ShippingPage from '../pages/ShippingPage.tsx';
+import ProfilePage from '../pages/ProfilePage.tsx';
+import OrdersPage from '../pages/OrdersPage.tsx';
+import WishlistPage from '../pages/WishlistPage.tsx';
+import SettingsPage from '../pages/SettingsPage.tsx';
 
 
 const AppRoutes: React.FC = () => {
@@ -33,6 +37,13 @@ const AppRoutes: React.FC = () => {
         {path: "privacy", element: <PrivacyPolicyPage/>},
         {path: "shipping", element: <ShippingPage/>},
     ];
+
+    const userRoutes = [
+        {path: "profile", element: <ProfilePage/>},
+        {path: "orders", element: <OrdersPage/>},
+        {path: "wishlist", element: <WishlistPage/>},
+        {path: "settings", element: <SettingsPage/>},
+    ];
     const productRoutes = [
         {path: "products", element: <ProductsPage/>}
     ];
@@ -41,7 +52,7 @@ const AppRoutes: React.FC = () => {
             <Routes>
                 <Route element={<Layout/>}>
                     <Route index path="/" element={<Index/>}/>
-                    {[...authRoutes, ...staticRoutes, ...productRoutes].map(
+                    {[...authRoutes, ...staticRoutes, ...userRoutes, ...productRoutes].map(
                         ({path, element}) => (
                             <Route key={path} path={path} element={element}/>
                         )

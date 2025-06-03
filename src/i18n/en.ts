@@ -5,7 +5,7 @@ export const en: Translations = {
     nav: {
         home: 'Home',
         products: 'Products',
-        about: 'AboutPage',
+        about: 'About us',
         contact: 'Contact',
         profile: 'Profile',
         account: 'My Account',

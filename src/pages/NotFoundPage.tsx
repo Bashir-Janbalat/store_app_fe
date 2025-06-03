@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 
-const NotFound: React.FC = () => {
+const NotFoundPage: React.FC = () => {
     return (
         <Box
             sx={{
@@ -38,4 +38,4 @@ const NotFound: React.FC = () => {
     );
 };
 
-export default NotFound;
+export default NotFoundPage;

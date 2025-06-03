@@ -13,7 +13,7 @@ export const en: Translations = {
         wishlist: 'Wishlist',
         orders: 'My Orders',
         settings: 'Settings',
-        login: 'Login',
+        login: 'LoginPage',
         signup: 'Sign Up',
     },
     auth: {
@@ -27,7 +27,7 @@ export const en: Translations = {
         forgotPassword: 'Forgot Password?',
         resetPassword: 'Reset Password',
         sendResetEmail: 'Send Reset Link',
-        backToLogin: 'Back to Login',
+        backToLogin: 'Back to LoginPage',
         createAccount: 'Create Account',
         alreadyHaveAccount: 'Already have an account?',
         dontHaveAccount: "Don't have an account?",

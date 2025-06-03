@@ -19,7 +19,7 @@ import {useLanguage} from '../hooks/useLanguage.ts';
 import {useAuth} from '../hooks/useAuth.ts';
 import {handleSetError} from '../utils/error-utils.ts';
 
-const ResetPassword = () => {
+const ResetPasswordPage = () => {
     const {t} = useLanguage();
     const {resetPasswordFor} = useAuth();
     const [searchParams] = useSearchParams();
@@ -182,7 +182,7 @@ const ResetPassword = () => {
                         <Box sx={{textAlign: 'center'}}>
                             <Link to="/login" style={{textDecoration: 'none'}}>
                                 <Button startIcon={<ArrowBack/>} color="primary">
-                                    {t.auth.backToLogin || 'Back to Login'}
+                                    {t.auth.backToLogin || 'Back to LoginPage'}
                                 </Button>
                             </Link>
                         </Box>
@@ -193,4 +193,4 @@ const ResetPassword = () => {
     );
 };
 
-export default ResetPassword;
+export default ResetPasswordPage;

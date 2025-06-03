@@ -1,21 +1,21 @@
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import NotFound from '../pages/NotFound.tsx';
+import NotFoundPage from '../pages/NotFoundPage.tsx';
 import React from "react";
-import Login from "../pages/Login.tsx";
-import Register from "../pages/Register.tsx";
-import ForgotPassword from "../pages/ForgotPassword.tsx";
+import LoginPage from "../pages/LoginPage.tsx";
+import RegisterPage from "../pages/RegisterPage.tsx";
+import ForgotPasswordPage from "../pages/ForgotPasswordPage.tsx";
 import Layout from "../components/layout/Layout.tsx";
-import ResetPassword from "../pages/ResetPassword.tsx";
+import ResetPasswordPage from "../pages/ResetPasswordPage.tsx";
 import Index from "../pages/Index.tsx";
 import ProductsPage from "../pages/ProductsPage.tsx";
 
 
 const AppRoutes: React.FC = () => {
     const authRoutes = [
-        {path: "login", element: <Login/>},
-        {path: "register", element: <Register/>},
-        {path: "forgot-password", element: <ForgotPassword/>},
-        {path: "reset-password", element: <ResetPassword/>},
+        {path: "login", element: <LoginPage/>},
+        {path: "register", element: <RegisterPage/>},
+        {path: "forgot-password", element: <ForgotPasswordPage/>},
+        {path: "reset-password", element: <ResetPasswordPage/>},
     ];
     const productRoutes = [
         {path: "products", element: <ProductsPage/>},
@@ -31,7 +31,7 @@ const AppRoutes: React.FC = () => {
                         )
                     )}
                 </Route>
-                <Route path="*" element={<NotFound/>}/>
+                <Route path="*" element={<NotFoundPage/>}/>
             </Routes>
         </Router>
     )

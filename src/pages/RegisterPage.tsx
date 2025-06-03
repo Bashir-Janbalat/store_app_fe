@@ -19,7 +19,7 @@ import {useAuth} from '../hooks/useAuth.ts';
 import {useLanguage} from "../hooks/useLanguage.ts";
 import {handleSetError} from "../utils/error-utils.ts";
 
-const Register = () => {
+const RegisterPage = () => {
     const {t} = useLanguage();
     const {signUp} = useAuth();
     const navigate = useNavigate();
@@ -189,4 +189,4 @@ const Register = () => {
     );
 };
 
-export default Register;
+export default RegisterPage;

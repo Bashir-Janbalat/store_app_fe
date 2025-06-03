@@ -17,7 +17,7 @@ import {useLanguage} from "../hooks/useLanguage.ts";
 import {useAuth} from "../hooks/useAuth.ts";
 import {handleSetError} from "../utils/error-utils.ts";
 
-const ForgotPassword = () => {
+const ForgotPasswordPage = () => {
     const {t} = useLanguage();
     const {sendResetLinkFor} = useAuth();
     const [email, setEmail] = useState('');
@@ -132,4 +132,4 @@ const ForgotPassword = () => {
     );
 };
 
-export default ForgotPassword;
+export default ForgotPasswordPage;

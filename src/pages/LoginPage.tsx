@@ -20,7 +20,7 @@ import {useAuth} from "../hooks/useAuth.ts";
 import {handleSetError} from "../utils/error-utils.ts";
 
 
-const Login = () => {
+const LoginPage = () => {
     const {t} = useLanguage();
     const {signIn} = useAuth();
     const navigate = useNavigate();
@@ -149,4 +149,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default LoginPage;

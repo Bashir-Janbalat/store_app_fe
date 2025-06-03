@@ -1,6 +1,7 @@
 import {Box, Container, Divider, Grid, IconButton, Link, Typography,} from '@mui/material';
 import {Email, Facebook, Instagram, LinkedIn, LocationOn, Phone, Store, Twitter,} from '@mui/icons-material';
 import {useLanguage} from "../../hooks/useLanguage.ts";
+import {Link as RouterLink} from 'react-router-dom';
 
 const Footer = () => {
     const {t, isRTL} = useLanguage();
@@ -61,19 +62,19 @@ const Footer = () => {
                             {t.footer.customerService}
                         </Typography>
                         <Box sx={{display: 'flex', flexDirection: 'column', gap: 1}}>
-                            <Link href="#" color="grey.300" underline="none">
+                            <Link component={RouterLink} to="/faq" color="grey.300" underline="none">
                                 {t.footer.links.faq}
                             </Link>
-                            <Link href="#" color="grey.300" underline="none">
+                            <Link component={RouterLink} to="/return-policy" color="grey.300" underline="none">
                                 {t.footer.links.returnPolicy}
                             </Link>
-                            <Link href="#" color="grey.300" underline="none">
+                            <Link component={RouterLink} to='terms' color="grey.300" underline="none">
                                 {t.footer.links.terms}
                             </Link>
-                            <Link href="#" color="grey.300" underline="none">
+                            <Link component={RouterLink} to='privacy' color="grey.300" underline="none">
                                 {t.footer.links.privacy}
                             </Link>
-                            <Link href="#" color="grey.300" underline="none">
+                            <Link component={RouterLink} to='shipping' color="grey.300" underline="none">
                                 {t.footer.links.shipping}
                             </Link>
                         </Box>

@@ -5,7 +5,7 @@ export const en: Translations = {
     nav: {
         home: 'Home',
         products: 'Products',
-        about: 'About',
+        about: 'AboutPage',
         contact: 'Contact',
         profile: 'Profile',
         account: 'My Account',
@@ -82,6 +82,28 @@ export const en: Translations = {
             terms: 'Terms & Conditions',
             privacy: 'Privacy Policy',
             shipping: 'Shipping & Delivery',
+        },
+        pages: {
+            faq: {
+                title: "Frequently Asked Questions",
+                description: "Find answers to common questions about our products and services."
+            },
+            returnPolicy: {
+                title: "Return Policy",
+                description: "Read our return and refund policies before making a purchase."
+            },
+            terms: {
+                title: "Terms and Conditions",
+                description: "Please read our terms and conditions carefully before using our website."
+            },
+            privacy: {
+                title: "Privacy Policy",
+                description: "We value your privacy. Learn how we handle your data."
+            },
+            shipping: {
+                title: "Shipping & Delivery",
+                description: "Information about our shipping process, delivery times, and costs."
+            }
         },
         contact: {
             phone: '+49 165 789 789',

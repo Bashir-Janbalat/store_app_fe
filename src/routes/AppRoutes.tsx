@@ -8,6 +8,13 @@ import Layout from "../components/layout/Layout.tsx";
 import ResetPasswordPage from "../pages/ResetPasswordPage.tsx";
 import Index from "../pages/Index.tsx";
 import ProductsPage from "../pages/ProductsPage.tsx";
+import AboutPage from '../pages/AboutPage.tsx';
+import ContactPage from '../pages/ContactPage.tsx';
+import FaqPage from '../pages/FaqPage.tsx';
+import ReturnPolicyPage from "../pages/ReturnPolicyPage.tsx";
+import TermsAndConditionsPage from '../pages/TermsAndConditionsPage.tsx';
+import PrivacyPolicyPage from '../pages/PrivacyPolicyPage.tsx';
+import ShippingPage from '../pages/ShippingPage.tsx';
 
 
 const AppRoutes: React.FC = () => {
@@ -17,15 +24,24 @@ const AppRoutes: React.FC = () => {
         {path: "forgot-password", element: <ForgotPasswordPage/>},
         {path: "reset-password", element: <ResetPasswordPage/>},
     ];
+    const staticRoutes = [
+        {path: "about", element: <AboutPage/>},
+        {path: "contact", element: <ContactPage/>},
+        {path: "faq", element: <FaqPage/>},
+        {path: "return-policy", element: <ReturnPolicyPage/>},
+        {path: "terms", element: <TermsAndConditionsPage/>},
+        {path: "privacy", element: <PrivacyPolicyPage/>},
+        {path: "shipping", element: <ShippingPage/>},
+    ];
     const productRoutes = [
-        {path: "products", element: <ProductsPage/>},
+        {path: "products", element: <ProductsPage/>}
     ];
     return (
         <Router>
             <Routes>
                 <Route element={<Layout/>}>
                     <Route index path="/" element={<Index/>}/>
-                    {[...authRoutes, ...productRoutes].map(
+                    {[...authRoutes, ...staticRoutes, ...productRoutes].map(
                         ({path, element}) => (
                             <Route key={path} path={path} element={element}/>
                         )

@@ -79,12 +79,34 @@ export interface Translations {
             terms: string;
             privacy: string;
             shipping: string;
-        };
+        },
+        pages: {
+            faq: {
+                title: string,
+                description: string
+            },
+            returnPolicy: {
+                title: string,
+                description: string
+            },
+            terms: {
+                title: string,
+                description: string
+            },
+            privacy: {
+                title: string,
+                description: string
+            },
+            shipping: {
+                title: string,
+                description: string
+            }
+        }
         contact: {
             phone: string;
             email: string;
             address: string;
-        };
+        }
     };
     categories: {
         title: string;

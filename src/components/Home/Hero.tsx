@@ -10,23 +10,23 @@ const Hero: React.FC = () => {
     return (
         <Box
             sx={{
-                bgcolor: 'grey.900',
+                bgcolor: 'primary.dark',
                 color: 'white',
                 py: 10,
-                px: 2,
+                px: 10,
                 textAlign: 'center',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                minHeight: '60vh',
+                minHeight: '40vh',
                 backgroundImage: 'url(/hero-bg.jpeg)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 backdropFilter: 'brightness(0.7)',
             }}
         >
-            <Typography variant="h3" component="h1" gutterBottom sx={{fontWeight: 'bold'}}>
+            <Typography variant="h3" component="h1"  gutterBottom sx={{fontWeight: 'bold'}}>
                 {t.hero.title}
             </Typography>
             <Typography variant="h5" component="p" gutterBottom sx={{mb: 4}}>

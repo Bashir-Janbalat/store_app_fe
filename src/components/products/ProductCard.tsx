@@ -2,6 +2,7 @@ import {Button, Card, CardActions, CardContent, CardMedia, IconButton, Tooltip, 
 import {Favorite, FavoriteBorder} from '@mui/icons-material';
 import type {ProductDTO} from "../../types/product.ts";
 import {useLanguage} from "../../hooks/useLanguage.ts";
+import {Link} from 'react-router-dom';
 
 interface Props {
     product: ProductDTO;
@@ -28,12 +29,14 @@ const ProductCard = ({product, isInWishlist, onWishlistToggle, onAddToCart}: Pro
                 boxShadow: 3,
             },
         }}>
-            <CardMedia
-                component="img"
-                height="200"
-                image={imageUrl}
-                alt={altText}
-            />
+            <Link to={`/products/${product.id}`} style={{textDecoration: 'none', color: 'inherit'}}>
+                <CardMedia
+                    component="img"
+                    height="200"
+                    image={imageUrl}
+                    alt={altText}
+                />
+            </Link>
             <CardContent>
                 <Tooltip title={isLong(product.name) ? product.name : ''}>
                     <Typography

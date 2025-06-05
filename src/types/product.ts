@@ -20,7 +20,6 @@ export interface ProductDTO {
     name: string;
     sku: string;
     description?: string;
-    costPrice: number;
     sellingPrice?: number;
     categoryID: number;
     categoryName?: string;

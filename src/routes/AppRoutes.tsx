@@ -19,6 +19,7 @@ import ProfilePage from '../pages/ProfilePage.tsx';
 import OrdersPage from '../pages/OrdersPage.tsx';
 import WishlistPage from '../pages/WishlistPage.tsx';
 import SettingsPage from '../pages/SettingsPage.tsx';
+import ProductDetailsPage from "../pages/ProductDetailsPage.tsx";
 
 
 const AppRoutes: React.FC = () => {
@@ -45,7 +46,9 @@ const AppRoutes: React.FC = () => {
         {path: "settings", element: <SettingsPage/>},
     ];
     const productRoutes = [
-        {path: "products", element: <ProductsPage/>}
+        {path: "products", element: <ProductsPage/>},
+        {path: "products/:id", element: <ProductDetailsPage/>},
+
     ];
     return (
         <Router>

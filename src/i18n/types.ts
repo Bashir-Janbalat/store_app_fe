@@ -120,6 +120,9 @@ export interface Translations {
         unknownCategory: string,
         brand: string,
         unknownBrand: string,
+        supplier: string,
+        details: string;
+        similarProducts: string,
         price: string,
         addToCart: string,
         addToWishlist: string,

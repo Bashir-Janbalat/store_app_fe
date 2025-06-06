@@ -1,6 +1,9 @@
 import {Box, Button, Chip, Typography} from "@mui/material";
 import type {ProductDTO} from "../../../types/product.ts";
 import {useLanguage} from "../../../hooks/useLanguage.ts";
+import {useCart} from "../../../hooks/useCart.ts";
+import {mapProductToCartItem} from "../../../utils/cartHelpers.ts";
+import toast from "react-hot-toast";
 
 interface ProductInfoProps {
     product: ProductDTO;
@@ -8,6 +11,16 @@ interface ProductInfoProps {
 
 const ProductInfo = ({product}: ProductInfoProps) => {
     const {t} = useLanguage();
+    const {addToCart} = useCart();
+
+    const handleAddToCart = (product: ProductDTO) => {
+        const mapped = mapProductToCartItem(product);
+        if (!mapped){
+            toast.error("Invalid product data");
+            return;
+        }
+        addToCart(mapped.product, mapped.productId, mapped.unitPrice);
+    };
     return (
         <Box>
             <Typography variant="h4" gutterBottom>{product.name}</Typography>
@@ -23,7 +36,7 @@ const ProductInfo = ({product}: ProductInfoProps) => {
                 {t.product.supplier}: {product.supplierName}
             </Typography>
 
-            <Button variant="contained" color="primary" sx={{mt: 3}}>
+            <Button variant="contained" color="primary" sx={{mt: 3}} onClick={() => handleAddToCart(product)}>
                 {t.product.addToCart}
             </Button>
         </Box>

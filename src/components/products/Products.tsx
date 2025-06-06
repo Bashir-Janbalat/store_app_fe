@@ -9,6 +9,9 @@ import {useQueryToast} from "../../hooks/useQueryToast.ts";
 import ErrorFallback from "../common/ErrorFallback.tsx";
 import {useLanguage} from "../../hooks/useLanguage.ts";
 import {useSearchParams} from 'react-router-dom';
+import {useCart} from "../../hooks/useCart.ts";
+import {mapProductToCartItem} from "../../utils/cartHelpers.ts";
+import toast from "react-hot-toast";
 
 interface ProductsProps {
     selectedCategoryName: string | null;
@@ -19,6 +22,7 @@ interface ProductsProps {
 
 const Products = ({selectedCategoryName, selectedBrandName, minPrice, maxPrice}: ProductsProps) => {
     const {t} = useLanguage();
+    const {addToCart} = useCart();
     const [wishlist, setWishlist] = useState<number[]>([]);
     const [products, setProducts] = useState<ProductDTO[]>([]);
     const [page, setPage] = useState(1);
@@ -73,8 +77,13 @@ const Products = ({selectedCategoryName, selectedBrandName, minPrice, maxPrice}:
         );
     };
 
-    const handleAddToCart = (productId: number) => {
-        console.log('أضيف المنتج إلى السلة:', productId);
+    const handleAddToCart = (product: ProductDTO) => {
+        const mapped = mapProductToCartItem(product);
+        if (!mapped){
+            toast.error("Invalid product data");
+            return;
+        }
+        addToCart(mapped.product, mapped.productId, mapped.unitPrice);
     };
 
     return (

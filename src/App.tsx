@@ -2,6 +2,7 @@ import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import AppRoutes from "./routes/AppRoutes.tsx";
 import {AuthProvider} from "./context/AuthProvider.tsx";
 import {Toaster} from 'react-hot-toast';
+import {CartProvider} from "./context/CartProvider.tsx";
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -22,9 +23,11 @@ const queryClient = new QueryClient({
 function App() {
     return (
         <QueryClientProvider client={queryClient}>
-            <Toaster position="top-right" reverseOrder={false}/>
+            <Toaster position="top-center" reverseOrder={false}/>
             <AuthProvider>
-                <AppRoutes/>
+                <CartProvider>
+                    <AppRoutes/>
+                </CartProvider>
             </AuthProvider>
         </QueryClientProvider>
     );

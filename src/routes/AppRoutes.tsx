@@ -20,6 +20,7 @@ import OrdersPage from '../pages/OrdersPage.tsx';
 import WishlistPage from '../pages/WishlistPage.tsx';
 import SettingsPage from '../pages/SettingsPage.tsx';
 import ProductDetailsPage from "../pages/ProductDetailsPage.tsx";
+import CartPage from "../pages/CartPage.tsx";
 
 
 const AppRoutes: React.FC = () => {
@@ -44,6 +45,7 @@ const AppRoutes: React.FC = () => {
         {path: "orders", element: <OrdersPage/>},
         {path: "wishlist", element: <WishlistPage/>},
         {path: "settings", element: <SettingsPage/>},
+        { path: "cart", element: <CartPage /> },
     ];
     const productRoutes = [
         {path: "products", element: <ProductsPage/>},

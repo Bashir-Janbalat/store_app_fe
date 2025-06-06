@@ -1,23 +1,26 @@
 import React from 'react';
-import {Outlet} from 'react-router-dom';
+import {Outlet, useNavigate} from 'react-router-dom';
 import Header from './Header';
 import {Box} from "@mui/material";
 import Footer from "./Footer";
+import {useCart} from "../../hooks/useCart.ts";
 
 const Layout: React.FC = () => {
+    const navigate = useNavigate();
+    const {items} = useCart();
     const handleCartClick = () => {
-        console.log("cart clicked");
+        navigate("/cart");
     };
 
     const handleWishlistClick = () => {
-        console.log("wishlist clicked");
+        navigate("/wishlist");
     };
 
 
     return (
         <>
             <Box dir="ltr">
-                <Header cartItemsCount={2}
+                <Header cartItemsCount={items.length}
                         onCartClick={handleCartClick}
                         wishlistItemsCount={2}
                         onWishlistClick={handleWishlistClick}

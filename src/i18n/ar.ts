@@ -1,160 +1,169 @@
 import type {Translations} from "./types.ts";
 
 export const ar: Translations = {
-        nav: {
-            home: 'الرئيسية',
-            products: 'المنتجات',
-            about: 'معلومات عنا',
-            contact: 'اتصل بنا',
-            profile: 'الملف الشخصي',
-            account: 'حسابي',
-            logout: 'تسجيل الخروج',
-            wishlist: 'قائمة الأمنيات',
-            orders: 'طلباتي',
-            settings: 'الإعدادات',
-            login: 'تسجيل الدخول',
-            signup: 'إنشاء حساب',
+    nav: {
+        home: 'الرئيسية',
+        products: 'المنتجات',
+        about: 'معلومات عنا',
+        contact: 'اتصل بنا',
+        profile: 'الملف الشخصي',
+        account: 'حسابي',
+        logout: 'تسجيل الخروج',
+        wishlist: 'قائمة الأمنيات',
+        orders: 'طلباتي',
+        settings: 'الإعدادات',
+        login: 'تسجيل الدخول',
+        signup: 'إنشاء حساب',
+    },
+    features: {
+        title: 'لماذا تختارنا؟',
+        variety: {
+            title: 'تشكيلة واسعة',
+            description: 'آلاف المنتجات في جميع الفئات',
         },
-        features: {
-            title: 'لماذا تختارنا؟',
-            variety: {
-                title: 'تشكيلة واسعة',
-                description: 'آلاف المنتجات في جميع الفئات',
+        shipping: {
+            title: 'توصيل سريع',
+            description: 'توصيل مجاني للطلبات فوق 100 دولار',
+        },
+        payment: {
+            title: 'دفع آمن',
+            description: 'طرق دفع متنوعة وآمنة',
+        },
+        support: {
+            title: 'دعم 24/7',
+            description: 'فريق دعم متاح طوال الوقت',
+        },
+    },
+    hero: {
+        title: 'مرحباً بك في متجرنا الإلكتروني',
+        subtitle: 'اكتشف أفضل المنتجات بأسعار رائعة',
+        cta: 'تسوق الآن',
+    },
+    auth: {
+        signIn: 'تسجيل الدخول',
+        signUp: 'إنشاء حساب',
+        signOut: 'تسجيل الخروج',
+        name: 'أسم ألمستخدم',
+        email: 'البريد الإلكتروني',
+        password: 'كلمة المرور',
+        confirmPassword: 'تأكيد كلمة المرور',
+        forgotPassword: 'نسيت كلمة المرور؟',
+        resetPassword: 'إعادة تعيين كلمة المرور',
+        sendResetEmail: 'إرسال رابط الإعادة',
+        backToLogin: 'العودة لتسجيل الدخول',
+        createAccount: 'إنشاء حساب جديد',
+        alreadyHaveAccount: 'لديك حساب بالفعل؟',
+        dontHaveAccount: 'ليس لديك حساب؟',
+        enterEmail: 'أدخل بريدك الإلكتروني',
+        enterPassword: 'أدخل كلمة المرور',
+        enterConfirmPassword: 'أعد إدخال كلمة المرور',
+        resetPasswordTitle: 'إعادة تعيين كلمة المرور',
+        resetPasswordDescription: 'أدخل بريدك الإلكتروني وسنرسل لك رابط لإعادة تعيين كلمة المرور',
+        checkEmailTitle: 'تحقق من بريدك الإلكتروني',
+        checkEmailDescription: 'لقد أرسلنا رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني',
+        welcomeBack: 'مرحباً بعودتك',
+        createAccountDescription: 'إنشاء حساب جديد للاستمتاع بالتسوق',
+        resetNewPasswordDescription: 'الرجاء إدخال كلمة المرور الجديدة أدناه',
+        passwordsDoNotMatch: 'كلمات المرور غير متطابقة',
+        passwordResetSuccess: 'تمت إعادة تعيين كلمة المرور بنجاح',
+        newPassword: 'كلمة المرور الجديدة',
+        resetPasswordButton: ' إعادة تعيين كلمة المرور',
+    },
+    footer: {
+        description: 'متجرنا الإلكتروني - وجهتك المفضلة للتسوق الإلكتروني',
+        quickLinks: 'روابط سريعة',
+        customerService: 'خدمة العملاء',
+        contactInfo: 'معلومات التواصل',
+        copyright: '© 2025 متجرنا الألكتروني. جميع الحقوق محفوظة.',
+        links: {
+            faq: 'الأسئلة الشائعة',
+            returnPolicy: 'سياسة الإرجاع',
+            terms: 'الشروط والأحكام',
+            privacy: 'سياسة الخصوصية',
+            shipping: 'الشحن والتوصيل',
+        },
+        pages: {
+            faq: {
+                title: "الأسئلة الشائعة",
+                description: "اكتشف إجابات للأسئلة المتكررة حول منتجاتنا وخدماتنا."
+            },
+            returnPolicy: {
+                title: "سياسة الإرجاع",
+                description: "تعرف على سياسة الإرجاع والاسترداد قبل إجراء عملية الشراء."
+            },
+            terms: {
+                title: "الشروط والأحكام",
+                description: "يرجى قراءة الشروط والأحكام الخاصة بنا بعناية قبل استخدام الموقع."
+            },
+            privacy: {
+                title: "سياسة الخصوصية",
+                description: "نحن نحترم خصوصيتك. تعرف على كيفية تعاملنا مع بياناتك الشخصية."
             },
             shipping: {
-                title: 'توصيل سريع',
-                description: 'توصيل مجاني للطلبات فوق 100 دولار',
-            },
-            payment: {
-                title: 'دفع آمن',
-                description: 'طرق دفع متنوعة وآمنة',
-            },
-            support: {
-                title: 'دعم 24/7',
-                description: 'فريق دعم متاح طوال الوقت',
-            },
-        },
-        hero: {
-            title: 'مرحباً بك في متجرنا الإلكتروني',
-            subtitle: 'اكتشف أفضل المنتجات بأسعار رائعة',
-            cta: 'تسوق الآن',
-        },
-        auth: {
-            signIn: 'تسجيل الدخول',
-            signUp: 'إنشاء حساب',
-            signOut: 'تسجيل الخروج',
-            name: 'أسم ألمستخدم',
-            email: 'البريد الإلكتروني',
-            password: 'كلمة المرور',
-            confirmPassword: 'تأكيد كلمة المرور',
-            forgotPassword: 'نسيت كلمة المرور؟',
-            resetPassword: 'إعادة تعيين كلمة المرور',
-            sendResetEmail: 'إرسال رابط الإعادة',
-            backToLogin: 'العودة لتسجيل الدخول',
-            createAccount: 'إنشاء حساب جديد',
-            alreadyHaveAccount: 'لديك حساب بالفعل؟',
-            dontHaveAccount: 'ليس لديك حساب؟',
-            enterEmail: 'أدخل بريدك الإلكتروني',
-            enterPassword: 'أدخل كلمة المرور',
-            enterConfirmPassword: 'أعد إدخال كلمة المرور',
-            resetPasswordTitle: 'إعادة تعيين كلمة المرور',
-            resetPasswordDescription: 'أدخل بريدك الإلكتروني وسنرسل لك رابط لإعادة تعيين كلمة المرور',
-            checkEmailTitle: 'تحقق من بريدك الإلكتروني',
-            checkEmailDescription: 'لقد أرسلنا رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني',
-            welcomeBack: 'مرحباً بعودتك',
-            createAccountDescription: 'إنشاء حساب جديد للاستمتاع بالتسوق',
-            resetNewPasswordDescription: 'الرجاء إدخال كلمة المرور الجديدة أدناه',
-            passwordsDoNotMatch: 'كلمات المرور غير متطابقة',
-            passwordResetSuccess: 'تمت إعادة تعيين كلمة المرور بنجاح',
-            newPassword: 'كلمة المرور الجديدة',
-            resetPasswordButton: ' إعادة تعيين كلمة المرور',
-        },
-        footer: {
-            description: 'متجرنا الإلكتروني - وجهتك المفضلة للتسوق الإلكتروني',
-            quickLinks: 'روابط سريعة',
-            customerService: 'خدمة العملاء',
-            contactInfo: 'معلومات التواصل',
-            copyright: '© 2025 متجرنا الألكتروني. جميع الحقوق محفوظة.',
-            links: {
-                faq: 'الأسئلة الشائعة',
-                returnPolicy: 'سياسة الإرجاع',
-                terms: 'الشروط والأحكام',
-                privacy: 'سياسة الخصوصية',
-                shipping: 'الشحن والتوصيل',
-            },
-            pages: {
-                faq: {
-                    title: "الأسئلة الشائعة",
-                    description: "اكتشف إجابات للأسئلة المتكررة حول منتجاتنا وخدماتنا."
-                },
-                returnPolicy: {
-                    title: "سياسة الإرجاع",
-                    description: "تعرف على سياسة الإرجاع والاسترداد قبل إجراء عملية الشراء."
-                },
-                terms: {
-                    title: "الشروط والأحكام",
-                    description: "يرجى قراءة الشروط والأحكام الخاصة بنا بعناية قبل استخدام الموقع."
-                },
-                privacy: {
-                    title: "سياسة الخصوصية",
-                    description: "نحن نحترم خصوصيتك. تعرف على كيفية تعاملنا مع بياناتك الشخصية."
-                },
-                shipping: {
-                    title: "الشحن والتوصيل",
-                    description: "معلومات عن عمليات الشحن، أوقات التوصيل، والتكاليف."
-                }
-            },
-            contact: {
-                phone: '+49 165 789 789',
-                email: 'info@store.com',
-                address: 'برلين، ألمانيا',
+                title: "الشحن والتوصيل",
+                description: "معلومات عن عمليات الشحن، أوقات التوصيل، والتكاليف."
             }
         },
-        categories: {
-            title: 'تسوق حسب الفئة',
-        },
-        brands: {
-            title: 'تسوق حسب العلامة التجارية',
-        },
-        product: {
-            title: 'المنتجات',
-            category: "الفئة",
-            unknownCategory: "غير محددة",
-            brand: "الماركة",
-            unknownBrand: "غير محددة",
-            supplier: "المورد",
-            details: "تفاصيل المنتج",
-            similarProducts: 'منتجات مشابهة',
-            price: "السعر",
-            addToCart: "أضف إلى السلة",
-            addToWishlist: "أضف إلى الأمنيات",
-            removeFromWishlist: "إزالة من الأمنيات",
-        },
-        featuredProducts: {
-            title: 'المنتجات المميزة',
-        },
-        common: {
-            storeName: 'متجرنا الإلكتروني',
-            searchPlaceholder: 'ابحث عن منتج...',
-        },
-        error: {
-            message: "حدث خطأ ما.",
-            retry: "حاول مجددًا",
-            imageAlt: "صورة خطأ الورشة المعطلة",
-            retryFail: "حدث خطأ أثناء إعادة المحاولة."
-        },
-        loading: {
-            message: "جاري تحميل البيانات...",
-            retry: "جارٍ إعادة المحاولة..."
-        },
-        success: {
-            loaded: "تم تحميل البيانات بنجاح."
-        },
-        filter: {
-            title: "الفلاتر",
-            price: "السعر",
-            applyFilters: "تطبيق الفلاتر",
-            reset: "إعادة تعيين",
-        },
-    }
-;
+        contact: {
+            phone: '+49 165 789 789',
+            email: 'info@store.com',
+            address: 'برلين، ألمانيا',
+        }
+    },
+    categories: {
+        title: 'تسوق حسب الفئة',
+    },
+    brands: {
+        title: 'تسوق حسب العلامة التجارية',
+    },
+    product: {
+        title: 'المنتجات',
+        category: "الفئة",
+        unknownCategory: "غير محددة",
+        brand: "الماركة",
+        unknownBrand: "غير محددة",
+        supplier: "المورد",
+        details: "تفاصيل المنتج",
+        similarProducts: 'منتجات مشابهة',
+        price: "السعر",
+        addToCart: "أضف إلى السلة",
+        addToWishlist: "أضف إلى الأمنيات",
+        removeFromWishlist: "إزالة من الأمنيات",
+    },
+    featuredProducts: {
+        title: 'المنتجات المميزة',
+    },
+    common: {
+        storeName: 'متجرنا الإلكتروني',
+        searchPlaceholder: 'ابحث عن منتج...',
+    },
+    error: {
+        message: "حدث خطأ ما.",
+        retry: "حاول مجددًا",
+        imageAlt: "صورة خطأ الورشة المعطلة",
+        retryFail: "حدث خطأ أثناء إعادة المحاولة."
+    },
+    loading: {
+        message: "جاري تحميل البيانات...",
+        retry: "جارٍ إعادة المحاولة..."
+    },
+    success: {
+        loaded: "تم تحميل البيانات بنجاح."
+    },
+    filter: {
+        title: "الفلاتر",
+        price: "السعر",
+        applyFilters: "تطبيق الفلاتر",
+        reset: "إعادة تعيين",
+    },
+    cart: {
+        title: "سلة المشتريات",
+        emptyCart: "سلة المشتريات فارغة",
+        emptyCartDescription: "لا يوجد أي منتجات في السلة بعد.",
+        quantity: "الكمية",
+        remove: "إزالة",
+        total: "الإجمالي",
+        clearCart: "تفريغ السلة",
+        addToWishList: "أضف ألى قائمة الأمنيات",
+    },
+}

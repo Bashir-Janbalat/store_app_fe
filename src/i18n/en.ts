@@ -157,5 +157,15 @@ export const en: Translations = {
         applyFilters: "Apply Filters",
         reset: "Reset",
     },
+    cart: {
+        title: "Shopping Cart",
+        emptyCart: "Your cart is empty ",
+        emptyCartDescription: "You haven't added any items to your cart yet.",
+        quantity: "Quantity",
+        remove: "Remove",
+        total: "Total",
+        clearCart: "Clear Cart",
+        addToWishList: "Add to wishlist",
+    }
 }
 

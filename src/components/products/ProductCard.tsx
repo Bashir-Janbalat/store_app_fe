@@ -1,5 +1,5 @@
 import {Button, Card, CardActions, CardContent, CardMedia, IconButton, Tooltip, Typography,} from '@mui/material';
-import {Favorite, FavoriteBorder} from '@mui/icons-material';
+import {AddShoppingCart, Favorite, FavoriteBorder} from '@mui/icons-material';
 import type {ProductDTO} from "../../types/product.ts";
 import {useLanguage} from "../../hooks/useLanguage.ts";
 import {Link} from 'react-router-dom';
@@ -8,7 +8,7 @@ interface Props {
     product: ProductDTO;
     isInWishlist: boolean;
     onWishlistToggle: (productId: number) => void;
-    onAddToCart: (productId: number) => void;
+    onAddToCart: (product: ProductDTO) => void;
 }
 
 const ProductCard = ({product, isInWishlist, onWishlistToggle, onAddToCart}: Props) => {
@@ -78,7 +78,8 @@ const ProductCard = ({product, isInWishlist, onWishlistToggle, onAddToCart}: Pro
                     size="small"
                     variant="contained"
                     color="primary"
-                    onClick={() => onAddToCart(product.id!)}
+                    endIcon={<AddShoppingCart/>}
+                    onClick={() => onAddToCart(product)}
                 >
                     {t.product.addToCart}
                 </Button>

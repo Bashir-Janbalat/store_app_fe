@@ -8,10 +8,14 @@ import LoadingSkeleton from "../common/LoadingSkeleton.tsx";
 import {useQueryToast} from "../../hooks/useQueryToast.ts";
 import ErrorFallback from "../common/ErrorFallback.tsx";
 import {useLanguage} from "../../hooks/useLanguage.ts";
+import {useCart} from "../../hooks/useCart.ts";
+import {mapProductToCartItem} from "../../utils/cartHelpers.ts";
+import toast from 'react-hot-toast';
 
 
 const FeaturedProducts = () => {
     const {t} = useLanguage();
+    const {addToCart} = useCart();
     const [wishlist, setWishlist] = useState<number[]>([]);
     const [products, setProducts] = useState<ProductDTO[]>([]);
     const [page, setPage] = useState(1);
@@ -51,8 +55,13 @@ const FeaturedProducts = () => {
         );
     };
 
-    const handleAddToCart = (productId: number) => {
-        console.log('أضيف المنتج إلى السلة:', productId);
+    const handleAddToCart = (product: ProductDTO) => {
+        const mapped = mapProductToCartItem(product);
+        if (!mapped){
+            toast.error("Invalid product data");
+            return;
+        }
+        addToCart(mapped.product, mapped.productId, mapped.unitPrice);
     };
 
     return (

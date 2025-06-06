@@ -154,4 +154,14 @@ export interface Translations {
         applyFilters: string,
         reset: string,
     };
+    cart: {
+        title: string;
+        emptyCart: string;
+        emptyCartDescription: string;
+        quantity: string;
+        remove: string;
+        total: string;
+        clearCart: string;
+        addToWishList: string;
+    }
 }

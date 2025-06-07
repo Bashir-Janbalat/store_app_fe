@@ -13,7 +13,7 @@ export const en: Translations = {
         wishlist: 'Wishlist',
         orders: 'My Orders',
         settings: 'Settings',
-        login: 'LoginPage',
+        login: 'Sign In',
         signup: 'Sign Up',
     },
     features: {

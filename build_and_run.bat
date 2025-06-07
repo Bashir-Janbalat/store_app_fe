@@ -16,8 +16,8 @@ REM Warten kurz, damit der Server Zeit zum Hochfahren hat
 timeout /t 3 > nul
 
 REM Browser öffnen
-start http://localhost:3000
+start http://localhost:4000
 
-echo Frontend lueuft auf http://localhost:3000
+echo Frontend lueuft auf http://localhost:4000
 endlocal
 pause

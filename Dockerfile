@@ -21,7 +21,7 @@ RUN npm run build
 RUN npm install -g serve
 
 # فتح المنفذ 3000
-EXPOSE 3000
+EXPOSE 4000
 
 # تشغيل التطبيق باستخدام serve
-CMD ["serve", "-s", "dist", "-l", "3000"]
+CMD ["serve", "-s", "dist", "-l", "4000"]

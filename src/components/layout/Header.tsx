@@ -168,19 +168,19 @@ const Header: React.FC<HeaderProps> = ({
                                 {language === 'ar' ? <Language/> : <Translate/>}
                             </IconButton>
                         </Tooltip>
+                        <IconButton color="inherit" onClick={onWishlistClick}>
+                            <Badge badgeContent={wishlistItemsCount} color="error">
+                                <FavoriteBorder/>
+                            </Badge>
+                        </IconButton>
+                        <IconButton color="inherit" onClick={onCartClick}>
+                            <Badge badgeContent={cartItemsCount} color="error">
+                                <ShoppingCart/>
+                            </Badge>
+                        </IconButton>
                         {/* Auth */}
                         {user ? (
                             <>
-                                <IconButton color="inherit" onClick={onWishlistClick}>
-                                    <Badge badgeContent={wishlistItemsCount} color="error">
-                                        <FavoriteBorder/>
-                                    </Badge>
-                                </IconButton>
-                                <IconButton color="inherit" onClick={onCartClick}>
-                                    <Badge badgeContent={cartItemsCount} color="error">
-                                        <ShoppingCart/>
-                                    </Badge>
-                                </IconButton>
                                 <IconButton color="inherit" onClick={handleMenu}>
                                     <AccountCircle/>
                                 </IconButton>

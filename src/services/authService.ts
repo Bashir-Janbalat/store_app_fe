@@ -1,15 +1,18 @@
 import storeApi from '../api/storeApi.ts';
-import type {PasswordResetRequest, SignInResponse, SignUp} from "../types/auth.ts";
+import type {JwtPayload, PasswordResetRequest, SignUp} from "../types/auth.ts";
 import {getDetailedApiError} from "../utils/error-utils.ts";
+import {getSessionId, hasSessionId } from '../utils/session-utils.ts';
 
-
-export const signInUser = async (email: string, password: string): Promise<SignInResponse> => {
+export const signInUser = async (email: string, password: string): Promise<void> => {
     try {
-        const response = await storeApi.post('/auth/login', {
+        const baseUrl = '/auth/login';
+        const sessionId = hasSessionId() ? getSessionId() : null;
+        const url = sessionId ? `${baseUrl}?sessionId=${sessionId}` : baseUrl;
+
+        await storeApi.post(url, {
             email,
             password,
         });
-        return response.data as SignInResponse;
     } catch (error) {
         throw getDetailedApiError(error);
     }
@@ -42,3 +45,21 @@ export const resetPassword = async (request: PasswordResetRequest): Promise<numb
         throw getDetailedApiError(error);
     }
 }
+
+export const fetchCurrentUser = async (): Promise<JwtPayload> => {
+    try {
+        const response = await storeApi.get('/auth/me');  // endpoint يعيد بيانات المستخدم الحالي
+        return response.data as JwtPayload;
+    } catch (error) {
+        throw getDetailedApiError(error);
+    }
+};
+
+
+export const signOutUser = async (): Promise<void> => {
+    try {
+        await storeApi.post('/auth/logout');
+    } catch (error) {
+        throw getDetailedApiError(error);
+    }
+};

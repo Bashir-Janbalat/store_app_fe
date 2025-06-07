@@ -18,6 +18,7 @@ import {useLanguage} from "../../hooks/useLanguage.ts";
 const CartSummary = () => {
     const {t} = useLanguage();
     const {items, removeFromCart, clearCart, updateQuantity} = useCart();
+    const MAX_QUANTITY = 10;
 
     const total = items.reduce((sum, item) => sum + (item.unitPrice * item.quantity), 0);
 
@@ -82,7 +83,7 @@ const CartSummary = () => {
                                                 sx={{minWidth: 32, height: 32, p: 0}}
                                                 variant="outlined"
                                                 size="small"
-                                                onClick={() => updateQuantity(item.productId, Math.min(10, item.quantity + 1))}
+                                                onClick={() => updateQuantity(item.productId, Math.min(MAX_QUANTITY, item.quantity + 1))}
                                             >
                                                 +
                                             </Button>

@@ -3,12 +3,10 @@ export interface SignInResponse {
 }
 
 export interface JwtPayload {
-    sub: string;
-    roles: { authority: string }[];
-    iat: number;
-    exp: number;
     id: number;
+    email: string;
     name: string;
+    roles: string[];
 }
 
 export interface SignUp {

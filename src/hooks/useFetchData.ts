@@ -2,15 +2,9 @@ import {useQuery} from '@tanstack/react-query';
 import storeApi from "../api/storeApi.ts";
 import inventoryApi from "../api/inventoryApi.ts";
 import {ApiType} from "../types/common.ts";
+import { getSessionId } from '../utils/session-utils.ts';
 
-function getSessionId(): string {
-    let sessionId = localStorage.getItem("sessionId");
-    if (!sessionId) {
-        sessionId = crypto.randomUUID();
-        localStorage.setItem("sessionId", sessionId);
-    }
-    return sessionId;
-}
+
 
 export function useFetchData<T, P extends Record<string, unknown> | undefined = undefined>(
     api: ApiType,
@@ -22,16 +16,11 @@ export function useFetchData<T, P extends Record<string, unknown> | undefined = 
     return useQuery<T, Error>({
         queryKey: [key, params],
         queryFn: async () => {
-            const token = localStorage.getItem("token");
-            let finalUrl = url;
-
-            if (!token && !url.includes("sessionId")) {
-                const sessionId = getSessionId();
-                const separator = url.includes("?") ? "&" : "?";
-                finalUrl = `${url}${separator}sessionId=${sessionId}`;
-            }
-
-            const res = await axiosClient.get<T>(finalUrl, {params});
+            const sessionId = getSessionId();
+            const urlWithSession = url.includes("?")
+                ? `${url}&sessionId=${sessionId}`
+                : `${url}?sessionId=${sessionId}`;
+            const res = await axiosClient.get<T>(urlWithSession, {params: params});
             return res.data;
         },
     });

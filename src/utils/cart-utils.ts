@@ -1,4 +1,4 @@
-import type { ProductDTO } from "../types/product";
+import type {ProductDTO} from "../types/product";
 import type {CartItem} from "../types/cart.ts";
 
 

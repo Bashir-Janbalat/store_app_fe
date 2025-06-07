@@ -2,7 +2,7 @@ import {Box, Button, Chip, Typography} from "@mui/material";
 import type {ProductDTO} from "../../../types/product.ts";
 import {useLanguage} from "../../../hooks/useLanguage.ts";
 import {useCart} from "../../../hooks/useCart.ts";
-import {mapProductToCartItem} from "../../../utils/cartHelpers.ts";
+import {mapProductToCartItem} from "../../../utils/cart-utils.ts";
 import toast from "react-hot-toast";
 
 interface ProductInfoProps {

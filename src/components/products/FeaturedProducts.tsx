@@ -9,7 +9,7 @@ import {useQueryToast} from "../../hooks/useQueryToast.ts";
 import ErrorFallback from "../common/ErrorFallback.tsx";
 import {useLanguage} from "../../hooks/useLanguage.ts";
 import {useCart} from "../../hooks/useCart.ts";
-import {mapProductToCartItem} from "../../utils/cartHelpers.ts";
+import {mapProductToCartItem} from "../../utils/cart-utils.ts";
 import toast from 'react-hot-toast';
 
 

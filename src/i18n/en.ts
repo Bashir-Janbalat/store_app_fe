@@ -165,7 +165,13 @@ export const en: Translations = {
         remove: "Remove",
         total: "Total",
         clearCart: "Clear Cart",
-        addToWishList: "Add to wishlist",
+    },
+    wishlist: {
+        title: "Wishlist items",
+        emptyWishlist: "Your Wishlist is empty ",
+        emptyWishlistDescription: "You haven't added any items to your Wishlist yet.",
+        remove: "Remove",
+        clearWishlist: "Clear Wishlist",
     }
 }
 

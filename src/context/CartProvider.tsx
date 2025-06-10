@@ -52,6 +52,7 @@ export const CartProvider = ({children}: { children: ReactNode }) => {
         api: ApiType.STORE,
         refetchKey: cartKey,
         buildUrlFn: (url, payload) => `${url}&productId=${payload.productId}`,
+        sendPayload: false,
         onSuccess: () => {
             toast.success("Item removed from cart");
         },
@@ -65,6 +66,7 @@ export const CartProvider = ({children}: { children: ReactNode }) => {
         url: "/cart/clear",
         api: ApiType.STORE,
         refetchKey: cartKey,
+        sendPayload: false,
         onSuccess: () => {
             toast.success("Cart cleared");
         },
@@ -79,7 +81,8 @@ export const CartProvider = ({children}: { children: ReactNode }) => {
         } else {
             setItems([]);
         }
-    }, [data, user]);
+    }, [data]);
+    
 
     if (isLoading) return <LoadingSkeleton/>;
     if (isError) return <ErrorFallback onRetry={retryWithToast}/>;
@@ -97,7 +100,7 @@ export const CartProvider = ({children}: { children: ReactNode }) => {
                         : item
                 );
             } else {
-                return [...prevItems, {productId, quantity, unitPrice, subTotal: unitPrice * quantity, product}];
+                return [...prevItems, {productId, quantity, unitPrice, product}];
             }
         });
         addToCartMutation.mutate({

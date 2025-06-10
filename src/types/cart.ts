@@ -1,8 +1,4 @@
-interface ProductInfo {
-    name: string;
-    description?: string;
-    imageUrl: string;
-}
+import type { ProductInfo } from "./product";
 
 export interface CartItem {
     productId: number;

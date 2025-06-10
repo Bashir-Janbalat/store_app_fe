@@ -32,3 +32,9 @@ export interface ProductDTO {
     stocks: StockDTO[];
     productAttributes: ProductAttributeDTO[];
 }
+
+export interface ProductInfo {
+    name: string;
+    description?: string;
+    imageUrl: string;
+}

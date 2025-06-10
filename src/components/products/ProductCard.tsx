@@ -1,6 +1,6 @@
 import {Button, Card, CardActions, CardContent, CardMedia, IconButton, Tooltip, Typography,} from '@mui/material';
 import {AddShoppingCart, Favorite, FavoriteBorder} from '@mui/icons-material';
-import type {ProductDTO} from "../../types/product.ts";
+import type {ImageDTO, ProductDTO} from "../../types/product.ts";
 import {useLanguage} from "../../hooks/useLanguage.ts";
 import {Link} from 'react-router-dom';
 
@@ -8,7 +8,7 @@ interface Props {
     product: ProductDTO;
     isInWishlist: boolean;
     onWishlistToggle: (productId: number) => void;
-    onAddToCart: (product: ProductDTO) => void;
+    onAddToCart: (id: number, name: string, description: string, sellingPrice: number, images: ImageDTO[]) => void;
 }
 
 const ProductCard = ({product, isInWishlist, onWishlistToggle, onAddToCart}: Props) => {
@@ -20,6 +20,7 @@ const ProductCard = ({product, isInWishlist, onWishlistToggle, onAddToCart}: Pro
     const isLong = (text?: string) => (text ? text.length > 30 : false);
 
     return (
+
         <Card sx={{
             width: 300,
             m: 1,
@@ -28,15 +29,14 @@ const ProductCard = ({product, isInWishlist, onWishlistToggle, onAddToCart}: Pro
                 transform: 'translateY(-2px)',
                 boxShadow: 3,
             },
-        }}>
-            <Link to={`/products/${product.id}`} style={{textDecoration: 'none', color: 'inherit'}}>
-                <CardMedia
-                    component="img"
-                    height="200"
-                    image={imageUrl}
-                    alt={altText}
-                />
-            </Link>
+        }}><Link to={`/products/${product.id}`} style={{textDecoration: 'none', color: 'inherit'}}>
+            <CardMedia
+                component="img"
+                height="200"
+                image={imageUrl}
+                alt={altText}
+            />
+
             <CardContent>
                 <Tooltip title={isLong(product.name) ? product.name : ''}>
                     <Typography
@@ -72,14 +72,14 @@ const ProductCard = ({product, isInWishlist, onWishlistToggle, onAddToCart}: Pro
                     {t.product.price}: ${price?.toString()}
                 </Typography>
             </CardContent>
-
+        </Link>
             <CardActions sx={{display: 'flex', justifyContent: 'space-between'}}>
                 <Button
                     size="small"
                     variant="contained"
                     color="primary"
                     endIcon={<AddShoppingCart/>}
-                    onClick={() => onAddToCart(product)}
+                    onClick={() => onAddToCart(product.id!, product.name, product.description!, product.sellingPrice!, product.images)}
                 >
                     {t.product.addToCart}
                 </Button>
@@ -94,6 +94,7 @@ const ProductCard = ({product, isInWishlist, onWishlistToggle, onAddToCart}: Pro
                 </Tooltip>
             </CardActions>
         </Card>
+
     );
 }
 export default ProductCard;

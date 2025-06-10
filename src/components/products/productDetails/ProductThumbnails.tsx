@@ -1,9 +1,7 @@
-import {Box, IconButton} from "@mui/material";
-import {ArrowDownward, ArrowUpward} from "@mui/icons-material";
-import {useKeenSlider} from "keen-slider/react";
-import "keen-slider/keen-slider.min.css";
-
-import type {ImageDTO} from "../../../types/product.ts";
+import { Box, Grid, IconButton, Stack } from "@mui/material";
+import { ArrowUpward, ArrowDownward } from "@mui/icons-material";
+import { useState } from "react";
+import type { ImageDTO } from "../../../types/product.ts";
 
 interface ProductImagesProps {
     images: ImageDTO[];
@@ -13,88 +11,76 @@ interface ProductImagesProps {
 
 const maxSlides = 5;
 
-const ProductThumbnails = ({images, selectedIndex, onSelect}: ProductImagesProps) => {
-    const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
-        loop: false,
-        vertical: true,
-        slides: {
-            perView: Math.min(images.length, maxSlides),
-            spacing: 10,
-        }
-    });
+const ProductThumbnails = ({ images, selectedIndex, onSelect }: ProductImagesProps) => {
+    const [startIndex, setStartIndex] = useState(0);
 
-    const handlePrev = () => {
-        instanceRef.current?.prev();
+    const handleScrollUp = () => {
+        setStartIndex((prev) => Math.max(prev - 1, 0));
     };
 
-    const handleNext = () => {
-        instanceRef.current?.next();
+    const handleScrollDown = () => {
+        setStartIndex((prev) => Math.min(prev + 1, images.length - maxSlides));
     };
+
+    const visibleImages = images.slice(startIndex, startIndex + maxSlides);
+
+    const isScrollable = images.length > maxSlides;
 
     return (
-        <Box sx={{width: 100, height: 300, position: "relative"}}>
-            <Box ref={sliderRef} className="keen-slider" sx={{height: "100%"}}>
-                {images.map((img, index) => (
-                    <Box
-                        key={img.id ?? index}
-                        className="keen-slider__slide"
-                        onClick={() => {
-                            onSelect(index);
-                            instanceRef.current?.moveToIdx(index);
-                        }}
-                        sx={{
-                            border: selectedIndex === index ? "2px solid #1976d2" : "1px solid #ccc",
-                            borderRadius: 1,
-                            overflow: "hidden",
-                            cursor: "pointer",
-                            width: 80,
-                            height: 80,
-                            ml: 1,
-                            mr: 1,
-                        }}
-                    >
-                        <img
-                            src={img.imageUrl}
-                            alt={img.altText ?? "alt text"}
-                            loading="lazy"
-                            style={{
-                                width: "100%",
-                                height: "100%",
-                                objectFit: "cover",
-                                display: "block",
-                            }}
-                        />
-                    </Box>
-                ))}
-            </Box>
-
-            {images.length > maxSlides && (
-                <Box
-                    sx={{
-                        position: "absolute",
-                        top: "50%",
-                        right: -40,
-                        transform: "translateY(-50%)",
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: 1,
-                    }}
-                >
+        <Box sx={{ width: 100, height: 300, position: "relative" }}>
+            {isScrollable && (
+                <Box sx={{ position: "absolute", top: 0, right: -40 }}>
                     <IconButton
-                        aria-label="previous"
+                        aria-label="Scroll up"
                         size="small"
-                        onClick={handlePrev}
-                        color="primary"
+                        onClick={handleScrollUp}
+                        disabled={startIndex === 0}
                     >
-                        <ArrowUpward/>
+                        <ArrowUpward />
                     </IconButton>
+                </Box>
+            )}
+
+            <Stack spacing={2} sx={{ height: "100%",mr:1 }}>
+                {visibleImages.map((img, index) => {
+                    const actualIndex = startIndex + index;
+                    return (
+                        <Grid
+                            key={img.id ?? actualIndex}
+                            onClick={() => onSelect(actualIndex)}
+                            sx={{
+                                border: selectedIndex === actualIndex ? "2px solid" : "1px solid",
+                                borderColor: selectedIndex === actualIndex ? "primary.main" : "grey.400",
+                                borderRadius: 1,
+                                overflow: "hidden",
+                                cursor: "pointer",
+                            }}
+                        >
+                            <img
+                                src={img.imageUrl}
+                                alt={img.altText || "Product image"}
+                                loading="lazy"
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    objectFit: "cover",
+                                    display: "block",
+                                }}
+                            />
+                        </Grid>
+                    );
+                })}
+            </Stack>
+
+            {isScrollable && (
+                <Box sx={{ position: "absolute", bottom: 0, right: -40 }}>
                     <IconButton
-                        aria-label="next"
+                        aria-label="Scroll down"
                         size="small"
-                        onClick={handleNext}
-                        color="primary"
+                        onClick={handleScrollDown}
+                        disabled={startIndex + maxSlides >= images.length}
                     >
-                        <ArrowDownward/>
+                        <ArrowDownward />
                     </IconButton>
                 </Box>
             )}

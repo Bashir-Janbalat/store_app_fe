@@ -4,10 +4,12 @@ import Header from './Header';
 import Footer from './Footer';
 import {Box} from "@mui/material";
 import {useCart} from "../../hooks/useCart.ts";
+import { useWishlist } from '../../hooks/useWishlist.ts';
 
 const Layout: React.FC = () => {
     const navigate = useNavigate();
     const {items} = useCart();
+    const {items: wishlistItems} = useWishlist();
 
     const handleCartClick = () => navigate("/cart");
     const handleWishlistClick = () => navigate("/wishlist");
@@ -24,7 +26,7 @@ const Layout: React.FC = () => {
                 <Header
                     cartItemsCount={items.length}
                     onCartClick={handleCartClick}
-                    wishlistItemsCount={2}
+                    wishlistItemsCount={wishlistItems.length}
                     onWishlistClick={handleWishlistClick}
                 />
             </Box>

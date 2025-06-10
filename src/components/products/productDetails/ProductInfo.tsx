@@ -1,9 +1,11 @@
 import {Box, Button, Chip, Typography} from "@mui/material";
 import type {ProductDTO} from "../../../types/product.ts";
 import {useLanguage} from "../../../hooks/useLanguage.ts";
-import {useCart} from "../../../hooks/useCart.ts";
-import {mapProductToCartItem} from "../../../utils/cart-utils.ts";
-import toast from "react-hot-toast";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import {useAddToCart} from "../../../hooks/useAddToCart.ts";
+import {useWishlistActions} from "../../../hooks/useWishlistActions.ts";
 
 interface ProductInfoProps {
     product: ProductDTO;
@@ -11,16 +13,11 @@ interface ProductInfoProps {
 
 const ProductInfo = ({product}: ProductInfoProps) => {
     const {t} = useLanguage();
-    const {addToCart} = useCart();
+    const { handleAddToCart } = useAddToCart();
+    const { isInWishlist, handleToggleWishlist } = useWishlistActions();
 
-    const handleAddToCart = (product: ProductDTO) => {
-        const mapped = mapProductToCartItem(product);
-        if (!mapped){
-            toast.error("Invalid product data");
-            return;
-        }
-        addToCart(mapped.product, mapped.productId, mapped.unitPrice);
-    };
+    const inWishlist = isInWishlist(product.id);
+
     return (
         <Box>
             <Typography variant="h4" gutterBottom>{product.name}</Typography>
@@ -36,8 +33,25 @@ const ProductInfo = ({product}: ProductInfoProps) => {
                 {t.product.supplier}: {product.supplierName}
             </Typography>
 
-            <Button variant="contained" color="primary" sx={{mt: 3}} onClick={() => handleAddToCart(product)}>
+
+            <Button
+                variant="contained"
+                color="primary"
+                startIcon={<ShoppingCartIcon/>}
+                sx={{mt: 3}}
+                onClick={() => handleAddToCart(product.id!, product.name, product.description!, product.sellingPrice!, product.images)}
+            >
                 {t.product.addToCart}
+            </Button>
+
+            <Button
+                variant={inWishlist ? "contained" : "outlined"}
+                color="secondary"
+                startIcon={inWishlist ? <FavoriteIcon/> : <FavoriteBorderIcon/>}
+                sx={{mt: 3, ml: 2}}
+                onClick={() => handleToggleWishlist(product)}
+            >
+                {inWishlist? t.product.removeFromWishlist : t.product.addToWishlist}
             </Button>
         </Box>
     );

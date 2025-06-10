@@ -162,6 +162,12 @@ export interface Translations {
         remove: string;
         total: string;
         clearCart: string;
-        addToWishList: string;
+    },
+    wishlist: {
+        title: string;
+        emptyWishlist: string;
+        emptyWishlistDescription: string;
+        remove: string;
+        clearWishlist: string;
     }
 }

@@ -9,9 +9,8 @@ import {useQueryToast} from "../../hooks/useQueryToast.ts";
 import ErrorFallback from "../common/ErrorFallback.tsx";
 import {useLanguage} from "../../hooks/useLanguage.ts";
 import {useSearchParams} from 'react-router-dom';
-import {useCart} from "../../hooks/useCart.ts";
-import {mapProductToCartItem} from "../../utils/cart-utils.ts";
-import toast from "react-hot-toast";
+import {useAddToCart} from "../../hooks/useAddToCart.ts";
+import {useWishlistActions} from "../../hooks/useWishlistActions.ts";
 
 interface ProductsProps {
     selectedCategoryName: string | null;
@@ -22,8 +21,8 @@ interface ProductsProps {
 
 const Products = ({selectedCategoryName, selectedBrandName, minPrice, maxPrice}: ProductsProps) => {
     const {t} = useLanguage();
-    const {addToCart} = useCart();
-    const [wishlist, setWishlist] = useState<number[]>([]);
+    const { handleAddToCart } = useAddToCart();
+    const { isInWishlist, handleToggleWishlist } = useWishlistActions();
     const [products, setProducts] = useState<ProductDTO[]>([]);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
@@ -69,23 +68,6 @@ const Products = ({selectedCategoryName, selectedBrandName, minPrice, maxPrice}:
     if (isError) return <ErrorFallback onRetry={retryWithToast}/>;
 
 
-    const toggleWishlist = (productId: number) => {
-        setWishlist(prev =>
-            prev.includes(productId)
-                ? prev.filter(id => id !== productId)
-                : [...prev, productId]
-        );
-    };
-
-    const handleAddToCart = (product: ProductDTO) => {
-        const mapped = mapProductToCartItem(product);
-        if (!mapped){
-            toast.error("Invalid product data");
-            return;
-        }
-        addToCart(mapped.product, mapped.productId, mapped.unitPrice);
-    };
-
     return (
         <Container>
             <Typography variant="h5" textAlign="center">
@@ -97,8 +79,8 @@ const Products = ({selectedCategoryName, selectedBrandName, minPrice, maxPrice}:
                           justifyContent={'center'}>
                         <ProductCard
                             product={product}
-                            isInWishlist={wishlist.includes(product.id!)}
-                            onWishlistToggle={toggleWishlist}
+                            isInWishlist={isInWishlist(product.id)}
+                            onWishlistToggle={() => handleToggleWishlist(product)}
                             onAddToCart={handleAddToCart}
                         />
                     </Grid>

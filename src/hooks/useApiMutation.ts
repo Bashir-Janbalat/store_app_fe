@@ -13,6 +13,7 @@ interface UseApiMutationOptions<T, P> {
     onSuccess?: (data: T) => void;
     onError?: (error: Error) => void;
     buildUrlFn?: (url: string, payload: P) => string;
+    sendPayload?: boolean;
 }
 
 export function useApiMutation<T, P>({
@@ -22,7 +23,8 @@ export function useApiMutation<T, P>({
                                          api,
                                          onSuccess,
                                          onError,
-                                         buildUrlFn
+                                         buildUrlFn,
+                                         sendPayload
                                      }: UseApiMutationOptions<T, P>) {
     const axiosClient = api === ApiType.INVENTORY ? inventoryApi : storeApi;
     const queryClient = useQueryClient();
@@ -33,18 +35,26 @@ export function useApiMutation<T, P>({
             let finalUrl = url.includes("?")
                 ? `${url}&sessionId=${sessionId}`
                 : `${url}?sessionId=${sessionId}`;
-            
+
             if (buildUrlFn) {
                 finalUrl = buildUrlFn(finalUrl, payload);
             }
 
+            const shouldSendPayload = sendPayload ?? true;
+
             switch (method) {
                 case "post":
-                    return (await axiosClient.post<T>(finalUrl, payload)).data;
+                    return shouldSendPayload
+                        ? (await axiosClient.post<T>(finalUrl, payload)).data
+                        : (await axiosClient.post<T>(finalUrl)).data;
+
                 case "put":
-                    return (await axiosClient.put<T>(finalUrl, payload)).data;
+                    return shouldSendPayload
+                        ? (await axiosClient.put<T>(finalUrl, payload)).data
+                        : (await axiosClient.put<T>(finalUrl)).data;
+
                 case "delete":
-                    return (await axiosClient.delete<T>(finalUrl, payload ? {data: payload} : undefined)).data;
+                    return (await axiosClient.delete<T>(finalUrl, shouldSendPayload && payload ? {data: payload} : undefined)).data;
             }
         },
         onSuccess: async (data) => {

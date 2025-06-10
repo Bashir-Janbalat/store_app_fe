@@ -164,6 +164,12 @@ export const ar: Translations = {
         remove: "إزالة",
         total: "الإجمالي",
         clearCart: "تفريغ السلة",
-        addToWishList: "أضف ألى قائمة الأمنيات",
     },
+    wishlist: {
+        title: "قائمة الأمنيات",
+        emptyWishlist: "قائمة الأمنيات فارعة ",
+        emptyWishlistDescription: "لا يوجد أي منتجات في السلة بعد.",
+        remove: "إزالة",
+        clearWishlist: "تفريغ قائمة الأمنيات",
+    }
 }

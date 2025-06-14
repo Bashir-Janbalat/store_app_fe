@@ -169,5 +169,13 @@ export interface Translations {
         emptyWishlistDescription: string;
         remove: string;
         clearWishlist: string;
-    }
+    },
+    address: {
+        title: string;
+        default: string,
+        type: {
+            billing: string,
+            shipping: string,
+        }
+    },
 }

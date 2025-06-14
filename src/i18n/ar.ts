@@ -171,5 +171,13 @@ export const ar: Translations = {
         emptyWishlistDescription: "لا يوجد أي منتجات في السلة بعد.",
         remove: "إزالة",
         clearWishlist: "تفريغ قائمة الأمنيات",
-    }
+    },
+    address: {
+        title: 'العناوين الخاصة بك',
+        default: "افتراضي",
+        type: {
+            billing: "عنوان الفاتورة",
+            shipping: "عنوان الشحن"
+        }
+    },
 }

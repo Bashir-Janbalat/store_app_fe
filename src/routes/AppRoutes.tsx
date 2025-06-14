@@ -22,6 +22,7 @@ import SettingsPage from '../pages/SettingsPage.tsx';
 import ProductDetailsPage from "../pages/ProductDetailsPage.tsx";
 import CartPage from "../pages/CartPage.tsx";
 import ProtectedRoute from '../components/common/ProtectedRoute.tsx';
+import AddressesPage from '../pages/AddressesPage.tsx';
 
 
 const AppRoutes: React.FC = () => {
@@ -45,6 +46,7 @@ const AppRoutes: React.FC = () => {
         {path: "wishlist", element: <WishlistPage/>},
         {path: "cart", element: <CartPage/>},
         {path: "profile", element: <ProtectedRoute><ProfilePage/></ProtectedRoute>},
+        {path: "addresses", element: <ProtectedRoute><AddressesPage/></ProtectedRoute>},
         {path: "orders", element: <ProtectedRoute><OrdersPage/></ProtectedRoute>},
         {path: "settings", element: <ProtectedRoute><SettingsPage/></ProtectedRoute>},
 

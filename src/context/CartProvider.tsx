@@ -77,8 +77,8 @@ export const CartProvider = ({children}: { children: ReactNode }) => {
     });
 
     useEffect(() => {
-        if (Array.isArray(data)) {
-            setItems(data.items);
+        if (data) {
+            setItems(data.itemDTOS);
             setCartId(data.cartId);
         } else {
             setItems([]);

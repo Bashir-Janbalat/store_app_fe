@@ -32,6 +32,7 @@ import {
     Translate,
 } from '@mui/icons-material';
 import SearchIcon from '@mui/icons-material/Search';
+import HomeIcon from '@mui/icons-material/Home';
 import {useLanguage} from "../../hooks/useLanguage.ts";
 import {useIsMobile} from "../../hooks/useIsMobile.ts";
 import {useAuth} from "../../hooks/useAuth.ts";
@@ -200,6 +201,10 @@ const Header: React.FC<HeaderProps> = ({
                                     <MenuItem component={Link} to="/orders" onClick={handleClose}>
                                         <ListItemIcon><ShoppingBag fontSize="small"/></ListItemIcon>
                                         <ListItemText>{t.nav.orders}</ListItemText>
+                                    </MenuItem>
+                                    <MenuItem component={Link} to="/addresses" onClick={handleClose}>
+                                        <ListItemIcon><HomeIcon fontSize="small"/></ListItemIcon>
+                                        <ListItemText>{t.address.title}</ListItemText>
                                     </MenuItem>
 
                                     <MenuItem component={Link} to="/wishlist" onClick={handleClose}>

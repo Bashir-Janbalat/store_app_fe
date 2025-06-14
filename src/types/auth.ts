@@ -1,7 +1,3 @@
-export interface SignInResponse {
-    accessToken: string;
-}
-
 export interface JwtPayload {
     id: number;
     email: string;

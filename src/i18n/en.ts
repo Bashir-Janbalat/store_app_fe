@@ -172,6 +172,15 @@ export const en: Translations = {
         emptyWishlistDescription: "You haven't added any items to your Wishlist yet.",
         remove: "Remove",
         clearWishlist: "Clear Wishlist",
-    }
+    },
+    address: {
+        title: 'Your Addresses',
+        default: "Default",
+        type: {
+            billing: "Billing",
+            shipping: "Shipping"
+        }
+    },
+
 }
 

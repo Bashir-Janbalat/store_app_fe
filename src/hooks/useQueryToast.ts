@@ -11,7 +11,7 @@ interface UseToastHandlerOptions {
 
 export function useQueryToast<T>(queryResult: UseQueryResult<T, Error>, options: UseToastHandlerOptions = {}) {
     const {t} = useLanguage();
-    const {isError, isSuccess, refetch,} = queryResult;
+    const {isError, isSuccess, refetch} = queryResult;
 
     useEffect(() => {
         if (isError && options.errorMessage) {

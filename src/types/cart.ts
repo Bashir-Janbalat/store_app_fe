@@ -2,7 +2,7 @@ import type { ProductInfo } from "./product";
 
 export interface CartDTO {
     cartId: number;
-    items: CartItem[];
+    itemDTOS: CartItem[];
 }
 
 export interface CartItem {

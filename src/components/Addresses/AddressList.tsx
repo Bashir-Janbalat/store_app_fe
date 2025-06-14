@@ -27,7 +27,6 @@ const AddressList: React.FC = () => {
         refetchKey: queryKey,
         addPathVariables: (url, payload) => `${url}/${payload.id}`,
         sendPayload: false,
-        sendSession: false,
         onSuccess: () => toast.success('Adresse erfolgreich gelöscht'),
         onError: (error) => toast.error('Fehler beim Löschen der Adresse: ' + error.message),
     });

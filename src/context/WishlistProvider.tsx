@@ -49,7 +49,7 @@ export const WishlistProvider = ({children}: { children: ReactNode }) => {
         api: ApiType.STORE,
         refetchKey: wishlistKey,
         sendPayload: false,
-        buildUrlFn: (url, payload) => `${url}&productId=${payload.productId}`,
+        buildUrlFn: (url, payload) => `${url}?productId=${payload.productId}`,
         onSuccess: () => {
             toast.success("Item removed from wishlist");
         },

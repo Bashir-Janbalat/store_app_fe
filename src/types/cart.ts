@@ -1,5 +1,10 @@
 import type { ProductInfo } from "./product";
 
+export interface CartDTO {
+    cartId: number;
+    items: CartItem[];
+}
+
 export interface CartItem {
     productId: number;
     quantity: number;
@@ -8,6 +13,7 @@ export interface CartItem {
 }
 
 export interface CartContextType {
+    cartId: number | undefined;
     items: CartItem[];
     addToCart: (product: {
         name: string;

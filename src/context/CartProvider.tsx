@@ -1,5 +1,5 @@
 import {type ReactNode, useEffect, useState} from "react";
-import type {AddToCartRequest, CartItem, UpdateCartRequest} from "../types/cart.ts";
+import type {AddToCartRequest, CartDTO, CartItem, UpdateCartRequest} from "../types/cart.ts";
 import {CartContext} from "./CartContext.tsx";
 import {toast} from "react-hot-toast";
 import {useAuth} from "../hooks/useAuth.ts";
@@ -13,11 +13,12 @@ import {getSessionId} from "../utils/session-utils.ts";
 
 
 export const CartProvider = ({children}: { children: ReactNode }) => {
+    const [cartId, setCartId] = useState<number | undefined>(undefined);
     const [items, setItems] = useState<CartItem[]>([]);
     const {user} = useAuth();
     const cartKey = user ? `cart:${user.id}` : `cart:${getSessionId()}`;
 
-    const query = useFetchData<CartItem[]>(ApiType.STORE, cartKey, `/cart/items`);
+    const query = useFetchData<CartDTO>(ApiType.STORE, cartKey, `/cart`);
     const {data, isLoading, isError, retryWithToast} = useQueryToast(query, {showLoading: true});
 
     const addToCartMutation = useApiMutation<CartItem[], AddToCartRequest>({
@@ -77,12 +78,14 @@ export const CartProvider = ({children}: { children: ReactNode }) => {
 
     useEffect(() => {
         if (Array.isArray(data)) {
-            setItems(data);
+            setItems(data.items);
+            setCartId(data.cartId);
         } else {
             setItems([]);
+            setCartId(undefined);
         }
     }, [data]);
-    
+
 
     if (isLoading) return <LoadingSkeleton/>;
     if (isError) return <ErrorFallback onRetry={retryWithToast}/>;
@@ -137,7 +140,7 @@ export const CartProvider = ({children}: { children: ReactNode }) => {
 
 
     return (
-        <CartContext.Provider value={{items, addToCart, removeFromCart, clearCart, updateQuantity}}>
+        <CartContext.Provider value={{cartId, items, addToCart, removeFromCart, clearCart, updateQuantity}}>
             {children}
         </CartContext.Provider>
     );

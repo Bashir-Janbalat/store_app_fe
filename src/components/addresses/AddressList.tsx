@@ -1,6 +1,5 @@
 import React from 'react';
 import {Grid, Typography} from '@mui/material';
-import AddressCard from './AddressCard';
 import type {Address} from "../../types/customer.ts";
 import {useFetchData} from "../../hooks/useFetchData.ts";
 import {ApiType} from "../../types/common.ts";
@@ -10,6 +9,7 @@ import {toast} from "react-hot-toast";
 import LoadingSkeleton from "../common/LoadingSkeleton.tsx";
 import ErrorFallback from "../common/ErrorFallback.tsx";
 import {useLanguage} from '../../hooks/useLanguage.ts';
+import AddressCard from "./AddressCard.tsx";
 
 const queryKey = 'addresses';
 

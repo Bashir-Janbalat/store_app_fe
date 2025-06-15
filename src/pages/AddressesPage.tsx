@@ -1,5 +1,5 @@
 import {Container} from '@mui/material';
-import AddressList from "../components/Addresses/AddressList.tsx";
+import AddressList from "../components/addresses/AddressList.tsx";
 
 
 const AddressesPage = () => {

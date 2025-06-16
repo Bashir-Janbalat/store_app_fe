@@ -137,6 +137,10 @@ export const en: Translations = {
     common: {
         storeName: 'Our Online Store',
         searchPlaceholder: 'Search products...',
+        edit: "Edit",
+        delete: "Delete",
+        save: 'Save',
+        cancel: 'Cancel',
     },
     error: {
         message: "Something went wrong.",
@@ -175,10 +179,30 @@ export const en: Translations = {
     },
     address: {
         title: 'Your Addresses',
+        edit: 'Edit Address',
+        editSuccess: 'Address updated successfully',
+        editError: 'Error updating address: ',
+        create: "Add New Address",
+        createSuccess: "Address created successfully",
+        createError: "Error creating address: ",
         default: "Default",
+        deleteSuccess: "Address deleted successfully",
+        deleteError: "Error deleting address: ",
+        addressLine: 'Address Line',
+        city: 'City',
+        state: 'State',
+        postalCode: 'Postal Code',
+        country: 'Country',
+        noFormData : "No data in the form",
+        fillAllRequiredFields: 'Please fill all required fields',
         type: {
-            billing: "Billing",
-            shipping: "Shipping"
+            title:'Address Type',
+            billing: "Billing ",
+            shipping: "Shipping ",
+            defaultSetSuccess: "Default address set successfully",
+            defaultSetError: "Failed to set default address: ",
+            setAsDefaultBilling: "Set as Default Billing",
+            setAsDefaultShipping: "Set as Default Shipping",
         }
     },
 

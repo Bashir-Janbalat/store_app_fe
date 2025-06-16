@@ -1,4 +1,4 @@
-type AddressType = 'BILLING' | 'SHIPPING';
+export type AddressType = 'BILLING' | 'SHIPPING';
 
 export type Address = {
     id: number;

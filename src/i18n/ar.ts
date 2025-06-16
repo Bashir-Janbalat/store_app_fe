@@ -136,6 +136,10 @@ export const ar: Translations = {
     common: {
         storeName: 'متجرنا الإلكتروني',
         searchPlaceholder: 'ابحث عن منتج...',
+        edit: "تعديل",
+        delete: "حذف",
+        save: 'حفظ',
+        cancel: 'إلغاء',
     },
     error: {
         message: "حدث خطأ ما.",
@@ -174,10 +178,30 @@ export const ar: Translations = {
     },
     address: {
         title: 'العناوين الخاصة بك',
+        edit: 'تعديل العنوان',
+        editSuccess: 'تم تعديل العنوان بنجاح',
+        editError: 'حدث خطأ أثناء تعديل العنوان: ',
+        create: "إضافة عنوان جديد",
+        createSuccess: "تم إضافة العنوان بنجاح",
+        createError: "حدث خطأ أثناء إضافة العنوان: ",
         default: "افتراضي",
+        deleteSuccess: "تم حذف العنوان بنجاح",
+        deleteError: "حدث خطأ أثناء حذف العنوان: ",
+        addressLine: 'العنوان',
+        city: 'المدينة',
+        state: 'الولاية',
+        postalCode: 'الرمز البريدي',
+        country: 'البلد',
+        noFormData: 'لا توجد بيانات في النموذج',
+        fillAllRequiredFields: 'يرجى ملء جميع الحقول المطلوبة',
         type: {
+            title:'نوع العنوان',
             billing: "عنوان الفاتورة",
-            shipping: "عنوان الشحن"
+            shipping: "عنوان الشحن",
+            defaultSetSuccess: "تم تعيين العنوان كافتراضي بنجاح",
+            defaultSetError: "فشل في تعيين العنوان كافتراضي: ",
+            setAsDefaultBilling: "تعيين كعنوان فوترة افتراضي",
+            setAsDefaultShipping: "تعيين كعنوان شحن افتراضي",
         }
     },
 }

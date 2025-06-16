@@ -134,6 +134,10 @@ export interface Translations {
     common: {
         searchPlaceholder: string;
         storeName: string;
+        delete: string;
+        edit: string;
+        save: string,
+        cancel: string,
     };
     error: {
         message: string;
@@ -172,10 +176,30 @@ export interface Translations {
     },
     address: {
         title: string;
+        edit: string;
+        editSuccess: string;
+        editError: string;
+        create: string;
+        createSuccess: string,
+        createError: string,
         default: string,
+        deleteSuccess: string,
+        deleteError: string,
+        addressLine: string,
+        city: string,
+        state: string,
+        postalCode: string,
+        country: string,
+        noFormData: string;
+        fillAllRequiredFields: string;
         type: {
+            title: string,
             billing: string,
             shipping: string,
+            defaultSetSuccess: string;
+            defaultSetError: string;
+            setAsDefaultBilling: string;
+            setAsDefaultShipping: string;
         }
     },
 }

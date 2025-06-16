@@ -1,0 +1,33 @@
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Extract tag name
+        run: |
+          echo "TAG_NAME=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+          echo "Tag = ${GITHUB_REF#refs/tags/}"
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build Docker image
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/store_app_fe:${TAG_NAME} .
+          docker tag ${{ secrets.DOCKER_USERNAME }}/store_app_fe:${TAG_NAME} ${{ secrets.DOCKER_USERNAME }}/store_app_fe:latest
+
+      - name: Push Docker image to Docker Hub
+        run: |
+          docker push ${{ secrets.DOCKER_USERNAME }}/store_app_fe:${TAG_NAME}
+          docker push ${{ secrets.DOCKER_USERNAME }}/store_app_fe:latest

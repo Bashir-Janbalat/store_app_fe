@@ -1,5 +1,10 @@
-import axios from 'axios';
-import Cookies from 'js-cookie'
+import axios, {AxiosError, type InternalAxiosRequestConfig} from 'axios';
+import Cookies from 'js-cookie';
+
+
+interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
+    _retry?: boolean;
+}
 
 const storeApi = axios.create({
     baseURL: import.meta.env.VITE_API_BASE_URL_STORE,
@@ -17,12 +22,61 @@ storeApi.interceptors.request.use(
         }
         return config;
     },
-    (error) => Promise.reject(error)
+    (error: unknown) => Promise.reject(error)
 );
+
+let isRefreshing = false;
+let failedQueue: {
+    resolve: (value?: unknown) => void;
+    reject: (reason?: unknown) => void;
+}[] = [];
+
+const processQueue = (error: unknown): void => {
+    failedQueue.forEach((prom) => {
+        if (error) {
+            prom.reject(error);
+        } else {
+            prom.resolve();
+        }
+    });
+    failedQueue = [];
+};
+
+const refreshAccessToken = async (): Promise<void> => {
+    console.log("Refreshing token...");
+    await storeApi.post('/auth/refresh-token');
+};
 
 storeApi.interceptors.response.use(
     (response) => response,
-    (error) => {
+    async (error: AxiosError) => {
+        const originalRequest = error.config as CustomAxiosRequestConfig;
+
+        if (error.response?.status === 401 && !originalRequest._retry) {
+            if (isRefreshing) {
+                return new Promise((resolve, reject) => {
+                    failedQueue.push({resolve, reject});
+                })
+                    .then(() => storeApi(originalRequest))
+                    .catch((err) => Promise.reject(err));
+            }
+
+            originalRequest._retry = true;
+            isRefreshing = true;
+
+            try {
+                await refreshAccessToken();
+                processQueue(null);
+                return storeApi(originalRequest);
+            } catch (err) {
+                console.error("Token refresh failed:", err);
+                processQueue(err);
+                return Promise.reject(err);
+            } finally {
+                isRefreshing = false;
+            }
+        }
+
         return Promise.reject(error);
     }
 );

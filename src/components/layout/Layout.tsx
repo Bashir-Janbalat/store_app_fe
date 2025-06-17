@@ -24,9 +24,9 @@ const Layout: React.FC = () => {
         >
             <Box dir="ltr">
                 <Header
-                    cartItemsCount={items.length}
+                    cartItemsCount={items?.length || 0}
                     onCartClick={handleCartClick}
-                    wishlistItemsCount={wishlistItems.length}
+                    wishlistItemsCount={wishlistItems?.length || 0}
                     onWishlistClick={handleWishlistClick}
                 />
             </Box>

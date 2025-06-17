@@ -58,7 +58,7 @@ const Products = ({selectedCategoryName, selectedBrandName, minPrice, maxPrice}:
     }, [selectedCategoryName, selectedBrandName, productName, minPrice, maxPrice]);
 
     useEffect(() => {
-        if (data) {
+        if (data && Array.isArray(data.content)) {
             setProducts(data.content);
             setTotalPages(data.totalPages ?? 1);
         }

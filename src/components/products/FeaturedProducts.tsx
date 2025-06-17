@@ -36,7 +36,7 @@ const FeaturedProducts = () => {
 
 
     useEffect(() => {
-        if (data) {
+        if (data && Array.isArray(data.content)) {
             setProducts(data.content);
             setTotalPages(data.totalPages ?? 1);
         }

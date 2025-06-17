@@ -4,7 +4,10 @@ import Cookies from 'js-cookie';
 
 interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
     _retry?: boolean;
+    _retryCount?: number;
 }
+
+const MAX_RETRY_COUNT = 3;
 
 const storeApi = axios.create({
     baseURL: import.meta.env.VITE_API_BASE_URL_STORE,
@@ -52,7 +55,14 @@ storeApi.interceptors.response.use(
     async (error: AxiosError) => {
         const originalRequest = error.config as CustomAxiosRequestConfig;
 
-        if (error.response?.status === 401 && !originalRequest._retry) {
+        if (error.response?.status === 401 && !originalRequest._retry &&  !originalRequest.url?.includes('/auth/login')) {
+            originalRequest._retryCount = (originalRequest._retryCount || 0) + 1;
+
+            if (originalRequest._retryCount > MAX_RETRY_COUNT) {
+                console.warn("Max retry limit reached");
+                return Promise.reject(error);
+            }
+
             if (isRefreshing) {
                 return new Promise((resolve, reject) => {
                     failedQueue.push({resolve, reject});

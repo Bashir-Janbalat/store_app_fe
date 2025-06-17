@@ -24,7 +24,10 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/store_app_fe:${TAG_NAME} .
+          docker build \
+            --build-arg VITE_API_BASE_URL_STORE=${{ secrets.VITE_API_BASE_URL_STORE }} \
+            --build-arg VITE_API_BASE_URL_INVENTORY=${{ secrets.VITE_API_BASE_URL_INVENTORY }} \
+            -t ${{ secrets.DOCKER_USERNAME }}/store_app_fe:${TAG_NAME} .
           docker tag ${{ secrets.DOCKER_USERNAME }}/store_app_fe:${TAG_NAME} ${{ secrets.DOCKER_USERNAME }}/store_app_fe:latest
 
       - name: Push Docker image to Docker Hub

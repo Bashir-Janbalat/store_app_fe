@@ -42,8 +42,8 @@ const AppRoutes: React.FC = () => {
         {path: "terms", element: <TermsAndConditionsPage/>},
         {path: "privacy", element: <PrivacyPolicyPage/>},
         {path: "shipping", element: <ShippingPage/>},
-        { path: "payment-success", element: <PaymentSuccessPage /> },
-        { path: "payment-cancel", element: <PaymentCancelPage /> },
+        {path: "payment-success", element: <ProtectedRoute><PaymentSuccessPage/></ProtectedRoute>},
+        {path: "payment-cancel", element: <ProtectedRoute> <PaymentCancelPage/> </ProtectedRoute>},
     ];
 
     const userRoutes = [

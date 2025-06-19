@@ -1,4 +1,4 @@
-import {useMutation, useQueryClient} from "@tanstack/react-query";
+import {useMutation, type UseMutationResult, useQueryClient} from "@tanstack/react-query";
 import storeApi from "../api/storeApi";
 import inventoryApi from "../api/inventoryApi";
 import {ApiType} from "../types/common";
@@ -26,7 +26,7 @@ export function useApiMutation<T, P>({
                                          buildUrlFn,
                                          addPathVariables,
                                          sendPayload,
-                                     }: UseApiMutationOptions<T, P>) {
+                                     }: UseApiMutationOptions<T, P>): UseMutationResult<T, Error, P> {
     const axiosClient = api === ApiType.INVENTORY ? inventoryApi : storeApi;
     const queryClient = useQueryClient();
 
@@ -63,5 +63,6 @@ export function useApiMutation<T, P>({
             onSuccess?.(data);
         },
         onError,
+
     });
 }

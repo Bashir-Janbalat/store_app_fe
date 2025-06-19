@@ -18,59 +18,17 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import {Link, useNavigate} from 'react-router-dom';
 import {useWishlistActions} from "../../hooks/useWishlistActions.ts";
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
-import {useApiMutation} from "../../hooks/useApiMutation.ts";
-import {ApiType} from "../../types/common.ts";
-import {toast} from "react-hot-toast";
-import type {OrderResponseCreatedDTO} from "../../types/OrderDTO.ts";
-import {useAuth} from "../../hooks/useAuth.ts";
 
 const CartSummary = () => {
     const {t} = useLanguage();
-    const {user} = useAuth();
-    const {cartId, items, removeFromCart, clearCart, updateQuantity} = useCart();
+    const {items, removeFromCart, clearCart, updateQuantity} = useCart();
     const MAX_QUANTITY = 100;
     const {isInWishlist, handleToggleWishlist} = useWishlistActions();
     const navigate = useNavigate();
 
 
-    const createOrder = useApiMutation<OrderResponseCreatedDTO, { cartId: number, customerId: number }>({
-        method: 'post',
-        url: '/orders',
-        api: ApiType.STORE,
-        sendPayload: true,
-        onSuccess: (orderResponse) => {
-            createStripeSession.mutate({orderId: orderResponse.orderId})
-        },
-        onError: (err) => toast.error(t.address.createError + err.message),
-    });
-    const createStripeSession = useApiMutation<string, { orderId: number }>({
-        method: 'post',
-        url: '/checkout/create-session',
-        api: ApiType.STORE,
-        sendPayload: false,
-        buildUrlFn: (url, payload) => `${url}?orderId=${payload.orderId}`,
-        onSuccess: (sessionUrl) => {
-            if (sessionUrl.startsWith("http")) {
-                window.location.href = sessionUrl;
-            } else {
-                toast.error(t.payment.invalidLink);
-            }
-        },
-        onError: () => {
-            toast.error(t.payment.sessionCreationFailed);
-        }
-    });
-
     const handleCheckout = async () => {
-        if (!user) {
-            navigate("/login?redirectUrl=/cart");
-            return;
-        }
-        if (!cartId) {
-            toast.error(t.cart.noCartIdError);
-            return;
-        }
-        createOrder.mutate({cartId, customerId: user.id});
+        navigate("/checkout");
     };
 
 

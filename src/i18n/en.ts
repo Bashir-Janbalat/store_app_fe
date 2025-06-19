@@ -171,7 +171,7 @@ export const en: Translations = {
         remove: "Remove",
         total: "Total",
         clearCart: "Clear Cart",
-        checkout: "Checkout",
+        checkout: "Proceed to Checkout",
         noCartIdError: "Cannot proceed with checkout without a cart ID."
     },
     wishlist: {
@@ -187,6 +187,8 @@ export const en: Translations = {
         editSuccess: 'Address updated successfully',
         editError: 'Error updating address: ',
         create: "Add New Address",
+        createBillingAddress: "Create Billing Address",
+        createShippingAddress: "Create Shipping Address",
         createSuccess: "Address created successfully",
         createError: "Error creating address: ",
         default: "Default",
@@ -199,6 +201,7 @@ export const en: Translations = {
         country: 'Country',
         noFormData: "No data in the form",
         fillAllRequiredFields: 'Please fill all required fields',
+        mustSetDefault: "Please set default billing and shipping addresses.",
         type: {
             title: 'Address Type',
             billing: "Billing ",
@@ -209,7 +212,14 @@ export const en: Translations = {
             setAsDefaultShipping: "Set as Default Shipping",
         }
     },
+    checkout: {
+        title: "Checkout",
+        checkout: "Proceed to Payment",
+        processingOrder: "Processing order..."
+    },
     payment: {
+        title: "Available Payment Methods",
+        description: "You can pay using credit cards (Visa, MasterCard), or through PayPal, Google Pay, Apple Pay, and other supported methods.",
         successTitle: "Payment Successful",
         successMessage: "Thank you! Your payment was successful.",
         successWithSession: "Thank you! Your payment was successful. Session ID: {{sessionId}}",

@@ -25,6 +25,7 @@ import ProtectedRoute from '../components/common/ProtectedRoute.tsx';
 import AddressesPage from '../pages/AddressesPage.tsx';
 import PaymentSuccessPage from '../pages/PaymentSuccessPage.tsx';
 import PaymentCancelPage from '../pages/PaymentCancelPage.tsx';
+import CheckoutPage from "../pages/CheckoutPage.tsx";
 
 
 const AppRoutes: React.FC = () => {
@@ -49,6 +50,7 @@ const AppRoutes: React.FC = () => {
     const userRoutes = [
         {path: "wishlist", element: <WishlistPage/>},
         {path: "cart", element: <CartPage/>},
+        {path: "checkout", element: <CheckoutPage/>},
         {path: "profile", element: <ProtectedRoute><ProfilePage/></ProtectedRoute>},
         {path: "addresses", element: <ProtectedRoute><AddressesPage/></ProtectedRoute>},
         {path: "orders", element: <ProtectedRoute><OrdersPage/></ProtectedRoute>},

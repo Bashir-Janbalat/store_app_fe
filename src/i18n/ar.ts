@@ -170,7 +170,7 @@ export const ar: Translations = {
         remove: "إزالة",
         total: "الإجمالي",
         clearCart: "تفريغ السلة",
-        checkout: "الدفع",
+        checkout: "المتابعة إلى الدفع",
         noCartIdError: "لا يمكن إتمام الطلب بدون معرف السلة."
     },
     wishlist: {
@@ -186,6 +186,8 @@ export const ar: Translations = {
         editSuccess: 'تم تعديل العنوان بنجاح',
         editError: 'حدث خطأ أثناء تعديل العنوان: ',
         create: "إضافة عنوان جديد",
+        createBillingAddress: "إنشاء عنوان فوترة",
+        createShippingAddress: "إنشاء عنوان شحن",
         createSuccess: "تم إضافة العنوان بنجاح",
         createError: "حدث خطأ أثناء إضافة العنوان: ",
         default: "افتراضي",
@@ -198,8 +200,9 @@ export const ar: Translations = {
         country: 'البلد',
         noFormData: 'لا توجد بيانات في النموذج',
         fillAllRequiredFields: 'يرجى ملء جميع الحقول المطلوبة',
+        mustSetDefault: "يرجى تعيين عناوين الفوترة والشحن الافتراضية.",
         type: {
-            title:'نوع العنوان',
+            title: 'نوع العنوان',
             billing: "عنوان الفاتورة",
             shipping: "عنوان الشحن",
             defaultSetSuccess: "تم تعيين العنوان كافتراضي بنجاح",
@@ -208,7 +211,14 @@ export const ar: Translations = {
             setAsDefaultShipping: "تعيين كعنوان شحن افتراضي",
         }
     },
+    checkout: {
+        title: "الدفع",
+        checkout: "المتابعة للدفع",
+        processingOrder: "جاري معالجة الطلب..."
+    },
     payment: {
+        title: "طرق الدفع المتاحة",
+        description: "يمكنك الدفع باستخدام البطاقات الائتمانية (Visa، MasterCard)، أو عبر PayPal، Google Pay، Apple Pay، وغيرها من الطرق.",
         successTitle: "تمت العملية بنجاح",
         successMessage: "شكرًا لك! تم الدفع بنجاح.",
         successWithSession: "شكرًا لك! تم الدفع بنجاح. رقم الجلسة: {{sessionId}}",

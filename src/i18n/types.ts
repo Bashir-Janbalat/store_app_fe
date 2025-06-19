@@ -184,6 +184,8 @@ export interface Translations {
         editSuccess: string;
         editError: string;
         create: string;
+        createBillingAddress: string;
+        createShippingAddress: string;
         createSuccess: string,
         createError: string,
         default: string,
@@ -196,6 +198,7 @@ export interface Translations {
         country: string,
         noFormData: string;
         fillAllRequiredFields: string;
+        mustSetDefault: string;
         type: {
             title: string,
             billing: string,
@@ -206,7 +209,14 @@ export interface Translations {
             setAsDefaultShipping: string;
         }
     },
+    checkout: {
+        title: string;
+        checkout: string;
+        processingOrder: string;
+    },
     payment: {
+        title: string;
+        description: string;
         successTitle: string,
         successMessage: string,
         successWithSession: string,
@@ -216,5 +226,6 @@ export interface Translations {
         cancelError: string,
         invalidLink: string,
         sessionCreationFailed: string,
-    }
+    },
+
 }

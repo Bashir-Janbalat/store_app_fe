@@ -1,5 +1,5 @@
 import React from 'react';
-import {Box, Button, Card, CardContent, Chip, Grid, IconButton, Stack, Tooltip, Typography} from '@mui/material';
+import {Button, Card, CardContent, Chip, Grid, Stack, Tooltip, Typography} from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import type {Address, AddressType} from "../../types/customer.ts";
@@ -19,55 +19,83 @@ const AddressCard: React.FC<Props> = ({address, onEdit, onDelete, onSetDefault})
 
     const isDefaultBilling = address.defaultAddress && address.addressType === billing;
     const isDefaultShipping = address.defaultAddress && address.addressType === shipping;
-
     return (
-        <Card variant="outlined" sx={{borderRadius: 2, p: 2}}>
+        <Card variant="outlined" sx={{
+            borderRadius: 3,
+            p: 0,
+            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+            transition: 'all 0.3s ease-in-out',
+            border: '1px solid',
+            borderColor: 'divider',
+            '&:hover': {
+                boxShadow: '0 8px 25px rgba(0,0,0,0.15)',
+                transform: 'translateY(-2px)',
+                borderColor: 'primary.main',
+            }
+        }}>
             <CardContent>
                 <Grid container justifyContent="space-between" alignItems="center">
-                    <Grid size={{xs: 10}}>
-                        <Stack spacing={0.5}>
-                            <Typography variant="h5" fontWeight="bold">
-                                {address.addressLine}, {address.postalCode} {address.city}
-                            </Typography>
-                            <Typography variant="h6" color="text.secondary">
-                                {address.state}, {address.country}
-                            </Typography>
+                    <Grid sx={{xs: 12}}>
+                        <Stack direction="row" justifyContent="space-between" alignItems="center" flexWrap="wrap"
+                               spacing={2}>
+                            {/* العنوان */}
+                            <Stack>
+                                <Typography variant="h5" fontWeight="medium" color="text.primary">
+                                    {address.addressLine}
+                                </Typography>
+                                <Typography variant="h5" fontWeight="medium" color="text.secondary">
+                                    {address.city}, {address.state} {address.postalCode}
+                                </Typography>
+                                <Typography variant="h5" color="text.secondary">
+                                    {address.country}
+                                </Typography>
+                            </Stack>
+                            {/* الشفرات */}
+                            <Stack direction="row" flexWrap="wrap" justifyContent="flex-end" sx={{flexShrink: 0}}>
+                                {address.defaultAddress && (
+                                    <Chip
+                                        label={t.address.default}
+                                        size="medium"
+                                        color="success"
+                                        sx={{mr: 0.5}}
+                                    />
+                                )}
+                                <Chip
+                                    label={t.address.type[address.addressType.toLowerCase() as 'billing' | 'shipping']}
+                                    size="medium"
+                                    color={address.addressType.toLowerCase() === 'billing' ? 'primary' : 'info'}
+                                />
+                            </Stack>
                         </Stack>
                     </Grid>
-                    <Grid>
-                        <Box sx={{pt: 2}}>
-                            {address.defaultAddress && (
-                                <Chip
-                                    label={t.address.default}
-                                    size="medium"
-                                    color="success"
-                                    sx={{mr: 0.5}}
-                                />
-                            )}
-                            <Chip
-                                label={t.address.type[address.addressType.toLowerCase() as 'billing' | 'shipping']}
-                                size="medium"
-                                color={'primary'}
-                            />
-                        </Box>
-                    </Grid>
                 </Grid>
-                <Stack direction="row" spacing={1} mt={2} flexWrap="wrap" justifyContent="flex-end">
+                <Stack direction="row" spacing={1} mt={2} flexWrap="wrap" justifyContent="flex-start">
                     <Tooltip title={t.common.edit} arrow>
-                        <IconButton onClick={() => onEdit(address)} color="primary">
-                            <EditIcon/>
-                        </IconButton>
+                        <Button
+                            size="medium"
+                            startIcon={<EditIcon/>}
+                            onClick={() => onEdit(address)}
+                            variant="outlined"
+                        >
+                            {t.common.edit}
+                        </Button>
                     </Tooltip>
                     <Tooltip title={t.common.delete} arrow>
-                        <IconButton onClick={() => onDelete(address.id)} color="error">
-                            <DeleteIcon/>
-                        </IconButton>
+                        <Button
+                            size="medium"
+                            startIcon={<DeleteIcon/>}
+                            onClick={() => onDelete(address.id)}
+                            variant="outlined"
+                            color="error"
+                        >
+                            {t.common.delete}
+                        </Button>
                     </Tooltip>
                 </Stack>
                 <Stack direction="row" spacing={1} mt={2} flexWrap="wrap" justifyContent="flex-end">
                     {!isDefaultBilling && (
                         <Button
-                            size="small"
+                            size="medium"
                             variant="outlined"
                             onClick={() => onSetDefault(address.id, 'BILLING')}
                         >
@@ -76,7 +104,7 @@ const AddressCard: React.FC<Props> = ({address, onEdit, onDelete, onSetDefault})
                     )}
                     {!isDefaultShipping && (
                         <Button
-                            size="small"
+                            size="medium"
                             variant="outlined"
                             onClick={() => onSetDefault(address.id, 'SHIPPING')}
                         >

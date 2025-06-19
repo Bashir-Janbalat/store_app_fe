@@ -140,6 +140,8 @@ export const ar: Translations = {
         delete: "حذف",
         save: 'حفظ',
         cancel: 'إلغاء',
+        goHome: "العودة إلى الصفحة الرئيسية",
+        backToCart: "العودة إلى السلة",
     },
     error: {
         message: "حدث خطأ ما.",
@@ -168,6 +170,8 @@ export const ar: Translations = {
         remove: "إزالة",
         total: "الإجمالي",
         clearCart: "تفريغ السلة",
+        checkout: "الدفع",
+        noCartIdError: "لا يمكن إتمام الطلب بدون معرف السلة."
     },
     wishlist: {
         title: "قائمة الأمنيات",
@@ -204,4 +208,15 @@ export const ar: Translations = {
             setAsDefaultShipping: "تعيين كعنوان شحن افتراضي",
         }
     },
+    payment: {
+        successTitle: "تمت العملية بنجاح",
+        successMessage: "شكرًا لك! تم الدفع بنجاح.",
+        successWithSession: "شكرًا لك! تم الدفع بنجاح. رقم الجلسة: {{sessionId}}",
+        cancelTitle: "تم إلغاء الدفع",
+        cancelMessage: "لم تكتمل عملية الدفع. يرجى المحاولة مرة أخرى.",
+        cancelSuccess: "تم إلغاء الطلب بنجاح",
+        cancelError: "فشل إلغاء الطلب",
+        invalidLink: "الرابط غير صالح",
+        sessionCreationFailed: "فشل إنشاء جلسة الدفع"
+    }
 }

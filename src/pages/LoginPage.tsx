@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link, useNavigate, useSearchParams} from 'react-router-dom';
 import {
     Alert,
     Avatar,
@@ -29,6 +29,8 @@ const LoginPage = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const [searchParams] = useSearchParams();
+    const redirectUrl = searchParams.get('redirectUrl') || '/';
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -37,7 +39,7 @@ const LoginPage = () => {
 
         try {
             await signIn(email, password);
-            navigate('/');
+            navigate(redirectUrl);
         } catch (error: unknown) {
             handleSetError(error, setError);
         } finally {

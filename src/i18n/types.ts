@@ -138,6 +138,8 @@ export interface Translations {
         edit: string;
         save: string,
         cancel: string,
+        goHome: string,
+        backToCart: string,
     };
     error: {
         message: string;
@@ -166,6 +168,8 @@ export interface Translations {
         remove: string;
         total: string;
         clearCart: string;
+        checkout: string;
+        noCartIdError: string;
     },
     wishlist: {
         title: string;
@@ -202,4 +206,15 @@ export interface Translations {
             setAsDefaultShipping: string;
         }
     },
+    payment: {
+        successTitle: string,
+        successMessage: string,
+        successWithSession: string,
+        cancelTitle: string,
+        cancelMessage: string,
+        cancelSuccess: string,
+        cancelError: string,
+        invalidLink: string,
+        sessionCreationFailed: string,
+    }
 }

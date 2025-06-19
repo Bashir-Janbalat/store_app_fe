@@ -23,6 +23,8 @@ import ProductDetailsPage from "../pages/ProductDetailsPage.tsx";
 import CartPage from "../pages/CartPage.tsx";
 import ProtectedRoute from '../components/common/ProtectedRoute.tsx';
 import AddressesPage from '../pages/AddressesPage.tsx';
+import PaymentSuccessPage from '../pages/PaymentSuccessPage.tsx';
+import PaymentCancelPage from '../pages/PaymentCancelPage.tsx';
 
 
 const AppRoutes: React.FC = () => {
@@ -40,6 +42,8 @@ const AppRoutes: React.FC = () => {
         {path: "terms", element: <TermsAndConditionsPage/>},
         {path: "privacy", element: <PrivacyPolicyPage/>},
         {path: "shipping", element: <ShippingPage/>},
+        { path: "payment-success", element: <PaymentSuccessPage /> },
+        { path: "payment-cancel", element: <PaymentCancelPage /> },
     ];
 
     const userRoutes = [

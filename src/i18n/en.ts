@@ -141,6 +141,8 @@ export const en: Translations = {
         delete: "Delete",
         save: 'Save',
         cancel: 'Cancel',
+        goHome: "Go to Home",
+        backToCart: "Back to Cart"
     },
     error: {
         message: "Something went wrong.",
@@ -169,6 +171,8 @@ export const en: Translations = {
         remove: "Remove",
         total: "Total",
         clearCart: "Clear Cart",
+        checkout: "Checkout",
+        noCartIdError: "Cannot proceed with checkout without a cart ID."
     },
     wishlist: {
         title: "Wishlist items",
@@ -193,10 +197,10 @@ export const en: Translations = {
         state: 'State',
         postalCode: 'Postal Code',
         country: 'Country',
-        noFormData : "No data in the form",
+        noFormData: "No data in the form",
         fillAllRequiredFields: 'Please fill all required fields',
         type: {
-            title:'Address Type',
+            title: 'Address Type',
             billing: "Billing ",
             shipping: "Shipping ",
             defaultSetSuccess: "Default address set successfully",
@@ -205,6 +209,16 @@ export const en: Translations = {
             setAsDefaultShipping: "Set as Default Shipping",
         }
     },
-
+    payment: {
+        successTitle: "Payment Successful",
+        successMessage: "Thank you! Your payment was successful.",
+        successWithSession: "Thank you! Your payment was successful. Session ID: {{sessionId}}",
+        cancelTitle: "Payment Cancelled",
+        cancelMessage: "Your payment was not completed. Please try again.",
+        cancelSuccess: "Order cancelled successfully",
+        cancelError: "Failed to cancel order",
+        invalidLink: "Invalid session link",
+        sessionCreationFailed: "Failed to create payment session",
+    },
 }
 

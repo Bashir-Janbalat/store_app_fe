@@ -142,7 +142,9 @@ export const en: Translations = {
         save: 'Save',
         cancel: 'Cancel',
         goHome: "Go to Home",
-        backToCart: "Back to Cart"
+        backToCart: "Back to Cart",
+        yes: "Yes",
+        no: "No"
     },
     error: {
         message: "Something went wrong.",
@@ -215,7 +217,8 @@ export const en: Translations = {
     checkout: {
         title: "Checkout",
         checkout: "Proceed to Payment",
-        processingOrder: "Processing order..."
+        processingOrder: "Processing order...",
+        wantInvoice: "Do you want an invoice?"
     },
     payment: {
         title: "Available Payment Methods",

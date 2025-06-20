@@ -23,6 +23,7 @@ const CheckoutPage: React.FC = () => {
     const navigate = useNavigate();
     const initialTotal = items.reduce((sum, item) => sum + item.unitPrice * item.quantity, 0);
     const [total, setTotal] = useState<number>(initialTotal);
+    const [wantInvoice, setWantInvoice] = useState<boolean | null>(null);
 
     useEffect(() => {
         if (!user) {
@@ -34,15 +35,26 @@ const CheckoutPage: React.FC = () => {
     const query = useFetchData<Address[]>(ApiType.STORE, queryKey, `/addresses`);
     const {data: addresses, isLoading, isError, retryWithToast} = useQueryToast(query, {showLoading: true,});
 
-    const createOrder = useApiMutation<OrderResponseCreatedDTO, { cartId: number, customerId: number }>({
+    const createOrder = useApiMutation<OrderResponseCreatedDTO, { billingAddressId?: number }>({
         method: 'post',
         url: '/orders',
         api: ApiType.STORE,
-        sendPayload: true,
+        sendPayload: false,
+        buildUrlFn: (url, payload) => {
+            if (wantInvoice && payload.billingAddressId) {
+                const params = new URLSearchParams();
+                params.set("billingAddressId", payload.billingAddressId.toString());
+                return `${url}?${params.toString()}`;
+            }
+            return url;
+        },
         onSuccess: (orderResponse) => {
             setTotal(orderResponse.totalAmount);
-            createStripeSession.mutate({orderId: orderResponse.orderId});
-
+            if (orderResponse.orderId) {
+                createStripeSession.mutate({orderId: orderResponse.orderId});
+            } else {
+                toast.error(t.payment.sessionCreationFailed);
+            }
         },
         onError: (err) => toast.error(t.address.createError + err.message),
     });
@@ -52,7 +64,14 @@ const CheckoutPage: React.FC = () => {
         url: "/checkout/create-session",
         api: ApiType.STORE,
         sendPayload: false,
-        buildUrlFn: (url, payload) => `${url}?orderId=${payload.orderId}`,
+        buildUrlFn: (url, payload) => {
+            if (!payload.orderId) {
+                throw new Error("Missing orderId when creating Stripe session");
+            }
+            const params = new URLSearchParams();
+            params.set("orderId", payload.orderId.toString());
+            return `${url}?${params.toString()}`;
+        },
         onSuccess: (sessionUrl) => {
             if (sessionUrl.startsWith("http")) {
                 window.location.href = sessionUrl;
@@ -83,11 +102,17 @@ const CheckoutPage: React.FC = () => {
             toast.error(t.cart.noCartIdError);
             return;
         }
-        if (!billingAddress || !shippingAddress) {
+        if (!shippingAddress) {
             toast.error(t.address.mustSetDefault);
             return;
         }
-        createOrder.mutate({cartId, customerId: user.id});
+        if (wantInvoice === true && !billingAddress) {
+            toast.error(t.address.mustSetDefault);
+            return;
+        }
+        createOrder.mutate({
+            ...(wantInvoice && billingAddress ? {billingAddressId: billingAddress.id} : {})
+        });
     };
 
     const renderAddress = (type: AddressType, address: Address | undefined) => (
@@ -106,9 +131,7 @@ const CheckoutPage: React.FC = () => {
                     </>
                 ) : (
                     <Button variant="outlined" onClick={() => navigate("/addresses")}>
-                        {type === "BILLING"
-                            ? t.address.createBillingAddress
-                            : t.address.createShippingAddress}
+                        {type === "BILLING" ? t.address.createBillingAddress : t.address.createShippingAddress}
                     </Button>
                 )}
             </CardContent>
@@ -123,8 +146,18 @@ const CheckoutPage: React.FC = () => {
             </Typography>
 
             {renderAddress("SHIPPING", shippingAddress)}
-            {renderAddress("BILLING", billingAddress)}
-
+            {wantInvoice === null && (
+                <Box display="flex" gap={2} my={2}>
+                    <Typography>{t.checkout.wantInvoice}</Typography>
+                    <Button variant="contained" onClick={() => setWantInvoice(true)}>
+                        {t.common.yes}
+                    </Button>
+                    <Button variant="outlined" onClick={() => setWantInvoice(false)}>
+                        {t.common.no}
+                    </Button>
+                </Box>
+            )}
+            {wantInvoice === true && renderAddress("BILLING", billingAddress)}
 
             <Divider sx={{my: 2}}/>
 
@@ -136,14 +169,14 @@ const CheckoutPage: React.FC = () => {
                     variant="contained"
                     color="primary"
                     disabled={
-                        createOrder.isPending || !billingAddress || !shippingAddress || items.length === 0
+                        createOrder.isPending || !shippingAddress || items.length === 0
                     }
                     onClick={handleCheckout}
                 >
                     {createOrder.isPending ? t.checkout.processingOrder : t.checkout.checkout}
                 </Button>
             </Box>
-            <PaymentMethods />
+            <PaymentMethods/>
         </Box>
     );
 };

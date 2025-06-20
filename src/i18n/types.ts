@@ -136,10 +136,12 @@ export interface Translations {
         storeName: string;
         delete: string;
         edit: string;
-        save: string,
-        cancel: string,
-        goHome: string,
-        backToCart: string,
+        save: string;
+        cancel: string;
+        goHome: string;
+        backToCart: string;
+        yes: string;
+        no: string;
     };
     error: {
         message: string;
@@ -213,6 +215,7 @@ export interface Translations {
         title: string;
         checkout: string;
         processingOrder: string;
+        "wantInvoice": string;
     },
     payment: {
         title: string;

@@ -142,6 +142,8 @@ export const ar: Translations = {
         cancel: 'إلغاء',
         goHome: "العودة إلى الصفحة الرئيسية",
         backToCart: "العودة إلى السلة",
+        yes: "نعم",
+        no: "لا"
     },
     error: {
         message: "حدث خطأ ما.",
@@ -214,7 +216,8 @@ export const ar: Translations = {
     checkout: {
         title: "الدفع",
         checkout: "المتابعة للدفع",
-        processingOrder: "جاري معالجة الطلب..."
+        processingOrder: "جاري معالجة الطلب...",
+        wantInvoice: "هل تريد إنشاء فاتورة؟"
     },
     payment: {
         title: "طرق الدفع المتاحة",

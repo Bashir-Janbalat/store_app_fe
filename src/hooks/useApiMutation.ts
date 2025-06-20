@@ -32,11 +32,14 @@ export function useApiMutation<T, P>({
 
     return useMutation<T, Error, P>({
         mutationFn: async (payload: P) => {
+            let finalUrl = url;
+
             if (addPathVariables) {
-                url = addPathVariables(url, payload);
+                finalUrl = addPathVariables(finalUrl, payload);
             }
+
             if (buildUrlFn) {
-                url = buildUrlFn(url, payload);
+                finalUrl = buildUrlFn(finalUrl, payload);
             }
 
             const shouldSendPayload = sendPayload ?? true;
@@ -44,16 +47,19 @@ export function useApiMutation<T, P>({
             switch (method) {
                 case "post":
                     return shouldSendPayload
-                        ? (await axiosClient.post<T>(url, payload)).data
-                        : (await axiosClient.post<T>(url)).data;
+                        ? (await axiosClient.post<T>(finalUrl, payload)).data
+                        : (await axiosClient.post<T>(finalUrl)).data;
 
                 case "put":
                     return shouldSendPayload
-                        ? (await axiosClient.put<T>(url, payload)).data
-                        : (await axiosClient.put<T>(url)).data;
+                        ? (await axiosClient.put<T>(finalUrl, payload)).data
+                        : (await axiosClient.put<T>(finalUrl)).data;
 
                 case "delete":
-                    return (await axiosClient.delete<T>(url, shouldSendPayload && payload ? {data: payload} : undefined)).data;
+                    return (await axiosClient.delete<T>(finalUrl, shouldSendPayload && payload ? {data: payload} : undefined)).data;
+
+                default:
+                    throw new Error(`Unsupported method: ${method}`);
             }
         },
         onSuccess: async (data) => {

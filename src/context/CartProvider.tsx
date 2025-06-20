@@ -52,7 +52,11 @@ export const CartProvider = ({children}: { children: ReactNode }) => {
         url: "/cart/remove",
         api: ApiType.STORE,
         refetchKey: cartKey,
-        buildUrlFn: (url, payload) => `${url}?productId=${payload.productId}`,
+        buildUrlFn: (url, payload) => {
+            const params = new URLSearchParams();
+            params.append("productId", String(payload.productId));
+            return `${url}?${params.toString()}`;
+        },
         sendPayload: false,
         onSuccess: () => {
             toast.success("Item removed from cart");

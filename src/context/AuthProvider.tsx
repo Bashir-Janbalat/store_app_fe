@@ -10,6 +10,7 @@ import {
 } from "../services/authService.ts";
 import type {JwtPayload, PasswordResetRequest, SignUp} from "../types/auth.ts";
 import {isLoggedIn, removeLoggedIn, resetSessionId, saveLoggedIn} from "../utils/session-utils.ts";
+import {setLogoutHandler} from "../api/storeApi.ts";
 
 interface AuthProviderProps {
     children: ReactNode;
@@ -31,6 +32,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
         } else {
             setUser(null);
         }
+    }, []);
+
+    useEffect(() => {
+        setLogoutHandler(async () => {
+            await signOut();
+        });
     }, []);
 
     const signIn = async (email: string, password: string) => {

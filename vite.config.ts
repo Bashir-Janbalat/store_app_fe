@@ -12,6 +12,9 @@ export default defineConfig({
         target: 'esnext',
         minify: 'esbuild',
     },
+    esbuild: {
+        sourcemap: true,  // بدل 'inline' لضمان عمل IntelliJ
+    },
     server: {
         host: true,          // يسمح لأي IP (مطلوب داخل Docker)
         port: 4000,          // يطابق منفذ Docker

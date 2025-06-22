@@ -9,7 +9,8 @@ interface OrderItemDTO {
     productInfo?: ProductInfo;
 }
 
-export interface OrderDTO {
+export interface Order {
+    id: number;
     customerId: number;
     cartId: number | undefined;
     shippingAddressId: number;

@@ -233,5 +233,23 @@ export const en: Translations = {
         invalidLink: "Invalid session link",
         sessionCreationFailed: "Failed to create payment session",
     },
+    ordersList: {
+        title: "Orders List",
+        noOrders: "No orders available",
+        statusLabel: "Order Status"
+    },
+    orderCard: {
+        orderNumber: "Order #",
+        products: "Products:",
+        quantityPrice: "Qty: ",
+        total: "Total ",
+    },
+    orderStatus: {
+        PENDING: "Pending",
+        PROCESSING: "Processing",
+        SHIPPED: "Shipped",
+        DELIVERED: "Delivered",
+        CANCELLED: "Cancelled"
+    }
 }
 

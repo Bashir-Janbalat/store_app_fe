@@ -231,5 +231,24 @@ export const ar: Translations = {
         cancelError: "فشل إلغاء الطلب",
         invalidLink: "الرابط غير صالح",
         sessionCreationFailed: "فشل إنشاء جلسة الدفع"
+    },
+    ordersList: {
+        title: "قائمة الطلبات",
+        noOrders: "لا توجد طلبات متاحة",
+        statusLabel: "حالة الطلب"
+    },
+    orderCard: {
+        orderNumber: "طلب رقم #",
+        products: "المنتجات:",
+        quantityPrice: "الكمية: ",
+        total: "المجموع الكلي ",
+    },
+    orderStatus: {
+        PENDING: "قيد الانتظار",
+        PROCESSING: "جارٍ المعالجة",
+        SHIPPED: "تم الشحن",
+        DELIVERED: "تم التوصيل",
+        CANCELLED: "تم الإلغاء"
     }
+
 }

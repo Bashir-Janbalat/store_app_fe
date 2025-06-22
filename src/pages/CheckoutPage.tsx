@@ -10,7 +10,7 @@ import {useFetchData} from "../hooks/useFetchData.ts";
 import {useQueryToast} from "../hooks/useQueryToast.ts";
 import LoadingSkeleton from "../components/common/LoadingSkeleton.tsx";
 import ErrorFallback from "../components/common/ErrorFallback.tsx";
-import type {OrderResponseCreatedDTO} from "../types/orderDTO.ts";
+import type {OrderResponseCreatedDTO} from "../types/order.ts";
 import type {Address, AddressType} from "../types/customer.ts";
 import {useCart} from "../hooks/useCart.ts";
 import PaymentMethods from "../components/common/PaymentMethods.tsx";

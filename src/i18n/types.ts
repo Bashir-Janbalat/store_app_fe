@@ -230,5 +230,22 @@ export interface Translations {
         invalidLink: string,
         sessionCreationFailed: string,
     },
-
+    "ordersList": {
+        title: string,
+        noOrders: string,
+        statusLabel: string,
+    },
+    orderCard: {
+        orderNumber: string,
+        products: string,
+        quantityPrice: string,
+        total: string,
+    },
+    orderStatus: {
+        PENDING: string,
+        PROCESSING: string,
+        SHIPPED: string,
+        DELIVERED: string,
+        CANCELLED: string
+    }
 }

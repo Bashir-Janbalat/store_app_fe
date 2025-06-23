@@ -23,7 +23,7 @@ const queryKey = 'orders';
 
 const OrdersList: React.FC = () => {
     const {t} = useLanguage();
-    const [orderStatus, setOrderStatus] = useState<Order['status']>('PENDING');
+    const [orderStatus, setOrderStatus] = useState<Order['status']>('PROCESSING');
     const [orders, setOrders] = useState<Order[]>([]);
 
 
@@ -58,7 +58,6 @@ const OrdersList: React.FC = () => {
                             label={t.ordersList.statusLabel}
                             onChange={handleStatusChange}
                         >
-                            <MenuItem value="PENDING">{t.orderStatus.PENDING}</MenuItem>
                             <MenuItem value="PROCESSING">{t.orderStatus.PROCESSING}</MenuItem>
                             <MenuItem value="SHIPPED">{t.orderStatus.SHIPPED}</MenuItem>
                             <MenuItem value="DELIVERED">{t.orderStatus.DELIVERED}</MenuItem>

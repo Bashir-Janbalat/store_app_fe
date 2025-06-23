@@ -1,55 +1,57 @@
-import React from 'react';
-import {Box, Button, Typography} from '@mui/material';
-import {useNavigate} from 'react-router-dom';
-import {useLanguage} from "../../hooks/useLanguage.ts";
+import { Box, Typography, Button, Container } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { useLanguage } from '../../hooks/useLanguage';
 
-const Hero: React.FC = () => {
-    const navigate = useNavigate();
+const Hero = () => {
     const {t} = useLanguage();
-
     return (
         <Box
             sx={{
-                bgcolor: 'primary.dark',
+                minHeight: '55vh',
+                background: 'linear-gradient(to right, #2196F3 30%, #9C27B0 90%)',
                 color: 'white',
-                py: 10,
-                px: 10,
-                textAlign: 'center',
                 display: 'flex',
-                flexDirection: 'column',
                 alignItems: 'center',
-                justifyContent: 'center',
-                minHeight: '40vh',
-                backgroundImage: 'url(/hero-bg.jpeg)',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                backdropFilter: 'brightness(0.7)',
+                py: 6,
+                overflow: 'hidden',
             }}
         >
-            <Typography variant="h3" component="h1"  gutterBottom sx={{fontWeight: 'bold'}}>
-                {t.hero.title}
-            </Typography>
-            <Typography variant="h5" component="p" gutterBottom sx={{mb: 4}}>
-                {t.hero.subtitle}
-            </Typography>
-            <Button
-                variant="contained"
-                color="primary"
-                size="large"
-                onClick={() => navigate('/products')}
-                sx={{
-                    bgcolor: 'white',
-                    color: 'grey.900',
-                    fontWeight: 'bold',
-                    px: 4,
-                    py: 1.5,
-                    '&:hover': {
-                        bgcolor: 'grey.100',
-                    },
-                }}
-            >
-                {t.hero.cta}
-            </Button>
+            <Container>
+                <Box
+                    sx={{
+                        animation: 'slideFade 1s ease-out forwards',
+                        '@keyframes slideFade': {
+                            '0%': { opacity: 0, transform: 'translateY(20px)' },
+                            '100%': { opacity: 1, transform: 'translateY(0)' },
+                        },
+                    }}
+                >
+                    <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 2 }}>
+                        {t.hero.title}
+                    </Typography>
+                    <Typography variant="body1" sx={{ mb: 3 }}>
+                        {t.hero.subtitle}
+                    </Typography>
+                    <Button
+                        component={Link}
+                        to="/products"
+                        variant="contained"
+                        size="large"
+                        sx={{
+                            backgroundColor: 'white',
+                            color: '#9C27B0',
+                            fontWeight: 'bold',
+                            transition: 'transform 0.3s ease',
+                            '&:hover': {
+                                transform: 'scale(1.05)',
+                                backgroundColor: '#f5f5f5',
+                            },
+                        }}
+                    >
+                        {t.hero.cta}
+                    </Button>
+                </Box>
+            </Container>
         </Box>
     );
 };

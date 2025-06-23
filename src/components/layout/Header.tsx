@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import {
     AppBar,
     Badge,
@@ -17,7 +18,6 @@ import {
     Tooltip,
     Typography,
 } from '@mui/material';
-import {Link, useNavigate} from 'react-router-dom';
 import {
     AccountCircle,
     ExitToApp,
@@ -30,12 +30,12 @@ import {
     ShoppingCart,
     Store,
     Translate,
+    Search as SearchIcon,
+    Home as HomeIcon,
 } from '@mui/icons-material';
-import SearchIcon from '@mui/icons-material/Search';
-import HomeIcon from '@mui/icons-material/Home';
-import {useLanguage} from "../../hooks/useLanguage.ts";
 import {useIsMobile} from "../../hooks/useIsMobile.ts";
-import {useAuth} from "../../hooks/useAuth.ts";
+import { useAuth } from '../../hooks/useAuth.ts';
+import { useLanguage } from '../../hooks/useLanguage.ts';
 
 interface HeaderProps {
     cartItemsCount: number;
@@ -52,15 +52,11 @@ const Header: React.FC<HeaderProps> = ({
                                        }) => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [drawerOpen, setDrawerOpen] = useState(false);
-    const isMobile = useIsMobile();
-    const {t, isRTL, language, toggleLanguage} = useLanguage();
-    const {user, signOut} = useAuth();
-    const navigate = useNavigate();
     const [searchValue, setSearchValue] = useState('');
-
-    useEffect(() => {
-        setAnchorEl(null);
-    }, [user]);
+    const isMobile = useIsMobile();
+    const { t, isRTL, language, toggleLanguage } = useLanguage();
+    const { user, signOut } = useAuth();
+    const navigate = useNavigate();
 
     const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -83,48 +79,45 @@ const Header: React.FC<HeaderProps> = ({
     const NavLinks = (
         <Box
             sx={{
-                flex: 1,
                 display: 'flex',
                 flexDirection: isMobile ? 'column' : 'row',
-                justifyContent: isMobile ? 'flex-start' : 'center',
-                alignItems: isMobile ? 'flex-start' : 'center',
+                alignItems: 'center',
                 gap: 2,
                 p: isMobile ? 2 : 0,
             }}
         >
-            <TextField
-                size="small"
-                placeholder={t.common.searchPlaceholder ?? "Search..."}
-                value={searchValue}
-                onChange={(e) => setSearchValue(e.target.value)}
-                onKeyDown={handleSearchKeyDown}
-                variant="outlined"
-                sx={{
-                    flex: 1,
-                    maxWidth: 500,
-                    bgcolor: 'rgba(255,255,255,0.1)',
-                    mx: 2,
-                    input: {color: 'white'},
-                    '& .MuiOutlinedInput-notchedOutline': {
-                        borderColor: 'rgba(255,255,255,0.5)',
-                    },
-                    '&:hover .MuiOutlinedInput-notchedOutline': {
-                        borderColor: 'white',
-                    },
-                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                        borderColor: 'white',
-                    },
-                }}
-                slotProps={{
-                    input: {
+            {isMobile && (
+                <TextField
+                    size="small"
+                    placeholder={t.common.searchPlaceholder}
+                    value={searchValue}
+                    onChange={(e) => setSearchValue(e.target.value)}
+                    onKeyDown={handleSearchKeyDown}
+                    variant="outlined"
+                    fullWidth
+                    sx={{
+                        mb: 2,
+                        '& .MuiOutlinedInput-root': {
+                            '& fieldset': {
+                                borderColor: 'rgba(0, 0, 0, 0.23)',
+                            },
+                            '&:hover fieldset': {
+                                borderColor: 'primary.main',
+                            },
+                            '&.Mui-focused fieldset': {
+                                borderColor: 'primary.main',
+                            },
+                        },
+                    }}
+                    InputProps={{
                         startAdornment: (
                             <InputAdornment position="start">
-                                <SearchIcon sx={{color: 'white'}}/>
+                                <SearchIcon />
                             </InputAdornment>
                         )
-                    }
-                }}
-            />
+                    }}
+                />
+            )}
             <Button color="inherit" component={Link} to="/">
                 {t.nav.home}
             </Button>
@@ -140,97 +133,231 @@ const Header: React.FC<HeaderProps> = ({
         </Box>
     );
 
-
     return (
         <>
-            <AppBar position="static" sx={{bgcolor: 'primary', color: 'white'}}>
-                <Toolbar sx={{justifyContent: 'space-between', alignItems: 'center'}}>
+            <AppBar position="sticky" sx={{ backgroundColor: 'white', color: 'text.primary', boxShadow: 1 }}>
+                <Toolbar sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
                     {/* Left: Logo/Menu */}
-                    <Box sx={{display: 'flex', alignItems: 'center', gap: 1}}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                         {isMobile && (
-                            <IconButton color="inherit" onClick={toggleDrawer}>
-                                <MenuIcon/>
+                            <IconButton
+                                color="inherit"
+                                onClick={toggleDrawer}
+                                sx={{ color: 'primary.main' }}
+                            >
+                                <MenuIcon />
                             </IconButton>
                         )}
-                        <Store/>
-                        <Typography variant="h6" noWrap>
+                        <Box sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 1,
+                            background: 'linear-gradient(45deg, #2196F3 30%, #9C27B0 90%)',
+                            borderRadius: 2,
+                            p: 1
+                        }}>
+                            <Store sx={{ color: 'white' }} />
+                        </Box>
+                        <Typography
+                            variant="h6"
+                            noWrap
+                            sx={{
+                                background: 'linear-gradient(45deg, #2196F3 30%, #9C27B0 90%)',
+                                WebkitBackgroundClip: 'text',
+                                WebkitTextFillColor: 'transparent',
+                                fontWeight: 'bold'
+                            }}
+                        >
                             {t.common.storeName}
                         </Typography>
                     </Box>
 
-                    {/* Middle: NavLinks */}
-                    {!isMobile && NavLinks}
+                    {/* Middle: Search for Desktop */}
+                    {!isMobile && (
+                        <Box sx={{ flex: 1, maxWidth: 500, mx: 4 }}>
+                            <TextField
+                                size="small"
+                                placeholder={t.common.searchPlaceholder}
+                                value={searchValue}
+                                onChange={(e) => setSearchValue(e.target.value)}
+                                onKeyDown={handleSearchKeyDown}
+                                variant="outlined"
+                                fullWidth
+                                sx={{
+                                    backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                                    '& .MuiOutlinedInput-root': {
+                                        '& fieldset': {
+                                            borderColor: 'rgba(0, 0, 0, 0.12)',
+                                        },
+                                        '&:hover fieldset': {
+                                            borderColor: 'primary.main',
+                                        },
+                                        '&.Mui-focused fieldset': {
+                                            borderColor: 'primary.main',
+                                        },
+                                    },
+                                }}
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <SearchIcon sx={{ color: 'text.secondary' }} />
+                                        </InputAdornment>
+                                    )
+                                }}
+                            />
+                        </Box>
+                    )}
+
+                    {/* Desktop Navigation */}
+                    {!isMobile && (
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                            <Button
+                                color="inherit"
+                                component={Link}
+                                to="/"
+                                sx={{ color: 'text.primary', '&:hover': { color: 'primary.main' } }}
+                            >
+                                {t.nav.home}
+                            </Button>
+                            <Button
+                                color="inherit"
+                                component={Link}
+                                to="/products"
+                                sx={{ color: 'text.primary', '&:hover': { color: 'primary.main' } }}
+                            >
+                                {t.nav.products}
+                            </Button>
+                            <Button
+                                color="inherit"
+                                component={Link}
+                                to="/about"
+                                sx={{ color: 'text.primary', '&:hover': { color: 'primary.main' } }}
+                            >
+                                {t.nav.about}
+                            </Button>
+                            <Button
+                                color="inherit"
+                                component={Link}
+                                to="/contact"
+                                sx={{ color: 'text.primary', '&:hover': { color: 'primary.main' } }}
+                            >
+                                {t.nav.contact}
+                            </Button>
+                        </Box>
+                    )}
 
                     {/* Right: Icons */}
-                    <Box sx={{display: 'flex', alignItems: 'center', gap: 2}}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                         {/* Toggle Language */}
-                        <Tooltip title={language === 'ar' ? 'en' : 'ar'}>
-                            <IconButton color="inherit" onClick={toggleLanguage} sx={{ml: 1}}>
-                                {language === 'ar' ? <Language/> : <Translate/>}
+                        <Tooltip title={language === 'ar' ? 'English' : 'العربية'}>
+                            <IconButton
+                                color="inherit"
+                                onClick={toggleLanguage}
+                                sx={{ color: 'text.secondary', '&:hover': { color: 'primary.main' } }}
+                            >
+                                {language === 'ar' ? <Language /> : <Translate />}
                             </IconButton>
                         </Tooltip>
-                        <IconButton color="inherit" onClick={onWishlistClick}>
-                            <Badge badgeContent={wishlistItemsCount} color="error">
-                                <FavoriteBorder/>
-                            </Badge>
-                        </IconButton>
-                        <IconButton color="inherit" onClick={onCartClick}>
-                            <Badge badgeContent={cartItemsCount} color="error">
-                                <ShoppingCart/>
-                            </Badge>
-                        </IconButton>
+
+                        {/* Wishlist */}
+                        <Tooltip title={t.nav.wishlist}>
+                            <IconButton
+                                color="inherit"
+                                onClick={onWishlistClick}
+                                sx={{ color: 'text.secondary', '&:hover': { color: 'error.main' } }}
+                            >
+                                <Badge badgeContent={wishlistItemsCount} color="error">
+                                    <FavoriteBorder />
+                                </Badge>
+                            </IconButton>
+                        </Tooltip>
+
+                        {/* Cart */}
+                        <Tooltip title={t.nav.orders}>
+                            <IconButton
+                                color="inherit"
+                                onClick={onCartClick}
+                                sx={{ color: 'text.secondary', '&:hover': { color: 'primary.main' } }}
+                            >
+                                <Badge badgeContent={cartItemsCount} color="primary">
+                                    <ShoppingCart />
+                                </Badge>
+                            </IconButton>
+                        </Tooltip>
+
                         {/* Auth */}
                         {user ? (
                             <>
-                                <IconButton color="inherit" onClick={handleMenu}>
-                                    <AccountCircle/>
-                                </IconButton>
+                                <Tooltip title={t.nav.profile}>
+                                    <IconButton
+                                        color="inherit"
+                                        onClick={handleMenu}
+                                        sx={{ color: 'text.secondary', '&:hover': { color: 'primary.main' } }}
+                                    >
+                                        <AccountCircle />
+                                    </IconButton>
+                                </Tooltip>
                                 <Menu
                                     anchorEl={anchorEl}
                                     open={Boolean(anchorEl)}
                                     onClose={handleClose}
-                                    sx={{mt: 1}}
-                                    transformOrigin={{horizontal: isRTL ? 'left' : 'right', vertical: 'top'}}
-                                    anchorOrigin={{horizontal: isRTL ? 'left' : 'right', vertical: 'bottom'}}
+                                    sx={{ mt: 1 }}
+                                    transformOrigin={{ horizontal: isRTL ? 'left' : 'right', vertical: 'top' }}
+                                    anchorOrigin={{ horizontal: isRTL ? 'left' : 'right', vertical: 'bottom' }}
                                 >
                                     <MenuItem component={Link} to="/profile" onClick={handleClose}>
-                                        <ListItemIcon><Person fontSize="small"/></ListItemIcon>
+                                        <ListItemIcon><Person fontSize="small" /></ListItemIcon>
                                         <ListItemText>{t.nav.profile}</ListItemText>
                                     </MenuItem>
 
                                     <MenuItem component={Link} to="/orders" onClick={handleClose}>
-                                        <ListItemIcon><ShoppingBag fontSize="small"/></ListItemIcon>
+                                        <ListItemIcon><ShoppingBag fontSize="small" /></ListItemIcon>
                                         <ListItemText>{t.nav.orders}</ListItemText>
                                     </MenuItem>
+
                                     <MenuItem component={Link} to="/addresses" onClick={handleClose}>
-                                        <ListItemIcon><HomeIcon fontSize="small"/></ListItemIcon>
+                                        <ListItemIcon><HomeIcon fontSize="small" /></ListItemIcon>
                                         <ListItemText>{t.address.title}</ListItemText>
                                     </MenuItem>
 
                                     <MenuItem component={Link} to="/wishlist" onClick={handleClose}>
-                                        <ListItemIcon><FavoriteBorder fontSize="small"/></ListItemIcon>
+                                        <ListItemIcon><FavoriteBorder fontSize="small" /></ListItemIcon>
                                         <ListItemText>{t.nav.wishlist}</ListItemText>
                                     </MenuItem>
 
-                                    <Divider/>
+                                    <Divider />
 
                                     <MenuItem component={Link} to="/settings" onClick={handleClose}>
-                                        <ListItemIcon><Settings fontSize="small"/></ListItemIcon>
+                                        <ListItemIcon><Settings fontSize="small" /></ListItemIcon>
                                         <ListItemText>{t.nav.settings}</ListItemText>
                                     </MenuItem>
 
-                                    <MenuItem onClick={signOut}>
-                                        <ListItemIcon><ExitToApp fontSize="small"/></ListItemIcon>
+                                    <MenuItem onClick={signOut} sx={{ color: 'error.main' }}>
+                                        <ListItemIcon><ExitToApp fontSize="small" color="error" /></ListItemIcon>
                                         <ListItemText>{t.nav.logout}</ListItemText>
                                     </MenuItem>
                                 </Menu>
                             </>
                         ) : (
-                            <Box sx={{display: 'flex', gap: 1, ml: 2}}>
-                                <Button color="inherit" onClick={() => navigate('/login')}>
+                            <Box sx={{ display: 'flex', gap: 1, ml: 1 }}>
+                                <Button
+                                    color="inherit"
+                                    onClick={() => navigate('/login')}
+                                    sx={{ color: 'text.secondary', '&:hover': { color: 'primary.main' } }}
+                                >
                                     {t.nav.login}
                                 </Button>
-                                <Button color="inherit" onClick={() => navigate('/register')}>
+                                <Button
+                                    variant="contained"
+                                    onClick={() => navigate('/register')}
+                                    sx={{
+                                        background: 'linear-gradient(45deg, #2196F3 30%, #9C27B0 90%)',
+                                        boxShadow: '0 3px 5px 2px rgba(33, 203, 243, .3)',
+                                        '&:hover': {
+                                            background: 'linear-gradient(45deg, #1976D2 30%, #7B1FA2 90%)',
+                                        }
+                                    }}
+                                >
                                     {t.nav.signup}
                                 </Button>
                             </Box>
@@ -240,13 +367,15 @@ const Header: React.FC<HeaderProps> = ({
             </AppBar>
 
             {/* Drawer for Mobile Nav */}
-            {isMobile && drawerOpen && (
-                <Drawer open={drawerOpen} onClose={toggleDrawer}>
-                    <Box sx={{width: 250}} role="presentation" onClick={toggleDrawer}>
-                        {NavLinks}
-                    </Box>
-                </Drawer>
-            )}
+            <Drawer
+                open={drawerOpen}
+                onClose={toggleDrawer}
+                anchor={isRTL ? 'right' : 'left'}
+            >
+                <Box sx={{ width: 280 }} role="presentation" onClick={toggleDrawer}>
+                    {NavLinks}
+                </Box>
+            </Drawer>
         </>
     );
 };

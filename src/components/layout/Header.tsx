@@ -320,11 +320,6 @@ const Header: React.FC<HeaderProps> = ({
                                         <ListItemText>{t.address.title}</ListItemText>
                                     </MenuItem>
 
-                                    <MenuItem component={Link} to="/wishlist" onClick={handleClose}>
-                                        <ListItemIcon><FavoriteBorder fontSize="small" /></ListItemIcon>
-                                        <ListItemText>{t.nav.wishlist}</ListItemText>
-                                    </MenuItem>
-
                                     <Divider />
 
                                     <MenuItem component={Link} to="/settings" onClick={handleClose}>

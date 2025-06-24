@@ -6,9 +6,10 @@ import {
     sendResetLink,
     signInUser,
     signOutUser,
-    signupUser
+    signupUser,
+    updateUserProfile
 } from "../services/authService.ts";
-import type {JwtPayload, PasswordResetRequest, SignUp} from "../types/auth.ts";
+import type {JwtPayload, PasswordResetRequest, SignUp, UpdateProfileInput} from "../types/auth.ts";
 import {isLoggedIn, removeLoggedIn, resetSessionId, saveLoggedIn} from "../utils/session-utils.ts";
 import {setLogoutHandler} from "../api/storeApi.ts";
 
@@ -66,6 +67,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
         return status;
     };
 
+    const updateProfile = async (profile: UpdateProfileInput) => {
+        const updated = await updateUserProfile(profile);
+        setUser(updated);
+    };
+
     const sendResetLinkFor = async (email: string) => {
         return await sendResetLink(email);
     };
@@ -76,7 +82,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
 
     return (
         <AuthContext.Provider
-            value={{user, signIn, signUp, signOut, sendResetLinkFor, resetPasswordFor}}
+            value={{user, signIn, signUp, signOut, updateProfile, sendResetLinkFor, resetPasswordFor}}
         >
             {children}
         </AuthContext.Provider>

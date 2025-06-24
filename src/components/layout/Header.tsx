@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, {useState} from 'react';
+import {Link, useNavigate} from 'react-router-dom';
 import {
     AppBar,
     Badge,
@@ -22,20 +22,20 @@ import {
     AccountCircle,
     ExitToApp,
     FavoriteBorder,
+    Home as HomeIcon,
     Language,
     Menu as MenuIcon,
     Person,
+    Search as SearchIcon,
     Settings,
     ShoppingBag,
     ShoppingCart,
     Store,
     Translate,
-    Search as SearchIcon,
-    Home as HomeIcon,
 } from '@mui/icons-material';
 import {useIsMobile} from "../../hooks/useIsMobile.ts";
-import { useAuth } from '../../hooks/useAuth.ts';
-import { useLanguage } from '../../hooks/useLanguage.ts';
+import {useAuth} from '../../hooks/useAuth.ts';
+import {useLanguage} from '../../hooks/useLanguage.ts';
 
 interface HeaderProps {
     cartItemsCount: number;
@@ -54,8 +54,8 @@ const Header: React.FC<HeaderProps> = ({
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [searchValue, setSearchValue] = useState('');
     const isMobile = useIsMobile();
-    const { t, isRTL, language, toggleLanguage } = useLanguage();
-    const { user, signOut } = useAuth();
+    const {t, isRTL, language, toggleLanguage} = useLanguage();
+    const {user, signOut} = useAuth();
     const navigate = useNavigate();
 
     const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -109,13 +109,16 @@ const Header: React.FC<HeaderProps> = ({
                             },
                         },
                     }}
-                    InputProps={{
-                        startAdornment: (
-                            <InputAdornment position="start">
-                                <SearchIcon />
-                            </InputAdornment>
-                        )
-                    }}
+                    slotProps={{
+                        input: {
+                            startAdornment: (
+                                <InputAdornment position="start">
+                                    <SearchIcon/>
+                                </InputAdornment>
+                            )
+                        }
+                    }
+                    }
                 />
             )}
             <Button color="inherit" component={Link} to="/">
@@ -135,17 +138,17 @@ const Header: React.FC<HeaderProps> = ({
 
     return (
         <>
-            <AppBar position="sticky" sx={{ backgroundColor: 'white', color: 'text.primary', boxShadow: 1 }}>
-                <Toolbar sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
+            <AppBar position="sticky" sx={{backgroundColor: 'white', color: 'text.primary', boxShadow: 1}}>
+                <Toolbar sx={{justifyContent: 'space-between', alignItems: 'center'}}>
                     {/* Left: Logo/Menu */}
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    <Box sx={{display: 'flex', alignItems: 'center', gap: 1}}>
                         {isMobile && (
                             <IconButton
                                 color="inherit"
                                 onClick={toggleDrawer}
-                                sx={{ color: 'primary.main' }}
+                                sx={{color: 'primary.main'}}
                             >
-                                <MenuIcon />
+                                <MenuIcon/>
                             </IconButton>
                         )}
                         <Box sx={{
@@ -156,7 +159,7 @@ const Header: React.FC<HeaderProps> = ({
                             borderRadius: 2,
                             p: 1
                         }}>
-                            <Store sx={{ color: 'white' }} />
+                            <Store sx={{color: 'white'}}/>
                         </Box>
                         <Typography
                             variant="h6"
@@ -174,7 +177,7 @@ const Header: React.FC<HeaderProps> = ({
 
                     {/* Middle: Search for Desktop */}
                     {!isMobile && (
-                        <Box sx={{ flex: 1, maxWidth: 500, mx: 4 }}>
+                        <Box sx={{flex: 1, maxWidth: 500, mx: 4}}>
                             <TextField
                                 size="small"
                                 placeholder={t.common.searchPlaceholder}
@@ -197,25 +200,28 @@ const Header: React.FC<HeaderProps> = ({
                                         },
                                     },
                                 }}
-                                InputProps={{
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <SearchIcon sx={{ color: 'text.secondary' }} />
-                                        </InputAdornment>
-                                    )
-                                }}
+                                slotProps={{
+                                    input: {
+                                        startAdornment: (
+                                            <InputAdornment position="start">
+                                                <SearchIcon sx={{color: 'text.secondary'}}/>
+                                            </InputAdornment>
+                                        )
+                                    }
+                                }
+                                }
                             />
                         </Box>
                     )}
 
                     {/* Desktop Navigation */}
                     {!isMobile && (
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                        <Box sx={{display: 'flex', alignItems: 'center', gap: 2}}>
                             <Button
                                 color="inherit"
                                 component={Link}
                                 to="/"
-                                sx={{ color: 'text.primary', '&:hover': { color: 'primary.main' } }}
+                                sx={{color: 'text.primary', '&:hover': {color: 'primary.main'}}}
                             >
                                 {t.nav.home}
                             </Button>
@@ -223,7 +229,7 @@ const Header: React.FC<HeaderProps> = ({
                                 color="inherit"
                                 component={Link}
                                 to="/products"
-                                sx={{ color: 'text.primary', '&:hover': { color: 'primary.main' } }}
+                                sx={{color: 'text.primary', '&:hover': {color: 'primary.main'}}}
                             >
                                 {t.nav.products}
                             </Button>
@@ -231,7 +237,7 @@ const Header: React.FC<HeaderProps> = ({
                                 color="inherit"
                                 component={Link}
                                 to="/about"
-                                sx={{ color: 'text.primary', '&:hover': { color: 'primary.main' } }}
+                                sx={{color: 'text.primary', '&:hover': {color: 'primary.main'}}}
                             >
                                 {t.nav.about}
                             </Button>
@@ -239,7 +245,7 @@ const Header: React.FC<HeaderProps> = ({
                                 color="inherit"
                                 component={Link}
                                 to="/contact"
-                                sx={{ color: 'text.primary', '&:hover': { color: 'primary.main' } }}
+                                sx={{color: 'text.primary', '&:hover': {color: 'primary.main'}}}
                             >
                                 {t.nav.contact}
                             </Button>
@@ -247,15 +253,15 @@ const Header: React.FC<HeaderProps> = ({
                     )}
 
                     {/* Right: Icons */}
-                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                    <Box sx={{display: 'flex', alignItems: 'center', gap: 1}}>
                         {/* Toggle Language */}
                         <Tooltip title={language === 'ar' ? 'English' : 'العربية'}>
                             <IconButton
                                 color="inherit"
                                 onClick={toggleLanguage}
-                                sx={{ color: 'text.secondary', '&:hover': { color: 'primary.main' } }}
+                                sx={{color: 'text.secondary', '&:hover': {color: 'primary.main'}}}
                             >
-                                {language === 'ar' ? <Language /> : <Translate />}
+                                {language === 'ar' ? <Language/> : <Translate/>}
                             </IconButton>
                         </Tooltip>
 
@@ -264,10 +270,10 @@ const Header: React.FC<HeaderProps> = ({
                             <IconButton
                                 color="inherit"
                                 onClick={onWishlistClick}
-                                sx={{ color: 'text.secondary', '&:hover': { color: 'error.main' } }}
+                                sx={{color: 'text.secondary', '&:hover': {color: 'error.main'}}}
                             >
                                 <Badge badgeContent={wishlistItemsCount} color="error">
-                                    <FavoriteBorder />
+                                    <FavoriteBorder/>
                                 </Badge>
                             </IconButton>
                         </Tooltip>
@@ -277,10 +283,10 @@ const Header: React.FC<HeaderProps> = ({
                             <IconButton
                                 color="inherit"
                                 onClick={onCartClick}
-                                sx={{ color: 'text.secondary', '&:hover': { color: 'primary.main' } }}
+                                sx={{color: 'text.secondary', '&:hover': {color: 'primary.main'}}}
                             >
                                 <Badge badgeContent={cartItemsCount} color="primary">
-                                    <ShoppingCart />
+                                    <ShoppingCart/>
                                 </Badge>
                             </IconButton>
                         </Tooltip>
@@ -292,53 +298,53 @@ const Header: React.FC<HeaderProps> = ({
                                     <IconButton
                                         color="inherit"
                                         onClick={handleMenu}
-                                        sx={{ color: 'text.secondary', '&:hover': { color: 'primary.main' } }}
+                                        sx={{color: 'text.secondary', '&:hover': {color: 'primary.main'}}}
                                     >
-                                        <AccountCircle />
+                                        <AccountCircle/>
                                     </IconButton>
                                 </Tooltip>
                                 <Menu
                                     anchorEl={anchorEl}
                                     open={Boolean(anchorEl)}
                                     onClose={handleClose}
-                                    sx={{ mt: 1 }}
-                                    transformOrigin={{ horizontal: isRTL ? 'left' : 'right', vertical: 'top' }}
-                                    anchorOrigin={{ horizontal: isRTL ? 'left' : 'right', vertical: 'bottom' }}
+                                    sx={{mt: 1}}
+                                    transformOrigin={{horizontal: isRTL ? 'left' : 'right', vertical: 'top'}}
+                                    anchorOrigin={{horizontal: isRTL ? 'left' : 'right', vertical: 'bottom'}}
                                 >
                                     <MenuItem component={Link} to="/profile" onClick={handleClose}>
-                                        <ListItemIcon><Person fontSize="small" /></ListItemIcon>
+                                        <ListItemIcon><Person fontSize="small"/></ListItemIcon>
                                         <ListItemText>{t.nav.profile}</ListItemText>
                                     </MenuItem>
 
                                     <MenuItem component={Link} to="/orders" onClick={handleClose}>
-                                        <ListItemIcon><ShoppingBag fontSize="small" /></ListItemIcon>
+                                        <ListItemIcon><ShoppingBag fontSize="small"/></ListItemIcon>
                                         <ListItemText>{t.nav.orders}</ListItemText>
                                     </MenuItem>
 
                                     <MenuItem component={Link} to="/addresses" onClick={handleClose}>
-                                        <ListItemIcon><HomeIcon fontSize="small" /></ListItemIcon>
+                                        <ListItemIcon><HomeIcon fontSize="small"/></ListItemIcon>
                                         <ListItemText>{t.address.title}</ListItemText>
                                     </MenuItem>
 
-                                    <Divider />
+                                    <Divider/>
 
                                     <MenuItem component={Link} to="/settings" onClick={handleClose}>
-                                        <ListItemIcon><Settings fontSize="small" /></ListItemIcon>
+                                        <ListItemIcon><Settings fontSize="small"/></ListItemIcon>
                                         <ListItemText>{t.nav.settings}</ListItemText>
                                     </MenuItem>
 
-                                    <MenuItem onClick={signOut} sx={{ color: 'error.main' }}>
-                                        <ListItemIcon><ExitToApp fontSize="small" color="error" /></ListItemIcon>
+                                    <MenuItem onClick={signOut} sx={{color: 'error.main'}}>
+                                        <ListItemIcon><ExitToApp fontSize="small" color="error"/></ListItemIcon>
                                         <ListItemText>{t.nav.logout}</ListItemText>
                                     </MenuItem>
                                 </Menu>
                             </>
                         ) : (
-                            <Box sx={{ display: 'flex', gap: 1, ml: 1 }}>
+                            <Box sx={{display: 'flex', gap: 1, ml: 1}}>
                                 <Button
                                     color="inherit"
                                     onClick={() => navigate('/login')}
-                                    sx={{ color: 'text.secondary', '&:hover': { color: 'primary.main' } }}
+                                    sx={{color: 'text.secondary', '&:hover': {color: 'primary.main'}}}
                                 >
                                     {t.nav.login}
                                 </Button>
@@ -367,7 +373,7 @@ const Header: React.FC<HeaderProps> = ({
                 onClose={toggleDrawer}
                 anchor={isRTL ? 'right' : 'left'}
             >
-                <Box sx={{ width: 280 }} role="presentation" onClick={toggleDrawer}>
+                <Box sx={{width: 280}} role="presentation" onClick={toggleDrawer}>
                     {NavLinks}
                 </Box>
             </Drawer>

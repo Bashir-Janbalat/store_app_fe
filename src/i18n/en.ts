@@ -69,6 +69,10 @@ export const en: Translations = {
         passwordResetSuccess: 'Password has been reset successfully',
         newPassword: 'New Password',
         resetPasswordButton: 'Confirm Password',
+        phone: "Phone Number",
+        phoneInvalid: "Invalid phone number",
+        errorOccurredSendingRequest: "An error occurred while sending the request.",
+        updatedSuccessfully: "Profile updated successfully",
     },
     footer: {
         description: 'Our e-store - your favorite e-shopping destination',
@@ -144,7 +148,9 @@ export const en: Translations = {
         goHome: "Go to Home",
         backToCart: "Back to Cart",
         yes: "Yes",
-        no: "No"
+        no: "No",
+        loading: "Saving...",
+        errorOccurred: "An error occurred. Please try again",
     },
     error: {
         message: "Something went wrong.",

@@ -66,6 +66,10 @@ export interface Translations {
         passwordResetSuccess: string;
         newPassword: string;
         resetPasswordButton: string;
+        phone: string;
+        phoneInvalid: string;
+        errorOccurredSendingRequest: string;
+        updatedSuccessfully: string,
     };
     footer: {
         description: string;
@@ -142,6 +146,8 @@ export interface Translations {
         backToCart: string;
         yes: string;
         no: string;
+        loading: string;
+        errorOccurred: string;
     };
     error: {
         message: string;

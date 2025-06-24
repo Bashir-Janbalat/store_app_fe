@@ -2,6 +2,9 @@ export interface JwtPayload {
     id: number;
     email: string;
     name: string;
+    phone: string;
+    countryCode: string;
+    dialCode: string;
     roles: string[];
 }
 
@@ -15,4 +18,10 @@ export interface SignUp {
 export interface PasswordResetRequest {
     token: string;
     newPassword: string;
+}
+export interface UpdateProfileInput {
+    name: string;
+    phone: string;
+    dialCode: string;
+    countryCode: string;
 }

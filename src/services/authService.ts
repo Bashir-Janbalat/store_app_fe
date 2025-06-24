@@ -1,5 +1,5 @@
 import storeApi from '../api/storeApi.ts';
-import type {JwtPayload, PasswordResetRequest, SignUp} from "../types/auth.ts";
+import type {JwtPayload, PasswordResetRequest, SignUp, UpdateProfileInput} from "../types/auth.ts";
 import {getDetailedApiError} from "../utils/error-utils.ts";
 import {getSessionId, hasSessionId } from '../utils/session-utils.ts';
 
@@ -22,6 +22,15 @@ export const signupUser = async (user: SignUp): Promise<number> => {
     try {
         const response = await storeApi.post('/auth/signup', user);
         return response.status;
+    } catch (error) {
+        throw getDetailedApiError(error);
+    }
+};
+
+export const updateUserProfile = async (data: UpdateProfileInput): Promise<JwtPayload> => {
+    try {
+        const response = await storeApi.put('/auth/me', data);
+        return response.data as JwtPayload;
     } catch (error) {
         throw getDetailedApiError(error);
     }

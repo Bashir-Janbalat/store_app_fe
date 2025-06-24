@@ -68,6 +68,10 @@ export const ar: Translations = {
         passwordResetSuccess: 'تمت إعادة تعيين كلمة المرور بنجاح',
         newPassword: 'كلمة المرور الجديدة',
         resetPasswordButton: ' إعادة تعيين كلمة المرور',
+        phone: "رقم الهاتف",
+        phoneInvalid: "رقم الهاتف غير صالح",
+        errorOccurredSendingRequest: "حدث خطأ أثناء إرسال الطلب.",
+        updatedSuccessfully: "تم تحديث الملف الشخصي بنجاح",
     },
     footer: {
         description: 'متجرنا الإلكتروني - وجهتك المفضلة للتسوق الإلكتروني',
@@ -143,7 +147,9 @@ export const ar: Translations = {
         goHome: "العودة إلى الصفحة الرئيسية",
         backToCart: "العودة إلى السلة",
         yes: "نعم",
-        no: "لا"
+        no: "لا",
+        loading: "جاري الحفظ...",
+        errorOccurred: "حدث خطأ، حاول مرة أخرى",
     },
     error: {
         message: "حدث خطأ ما.",

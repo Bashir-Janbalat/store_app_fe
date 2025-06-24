@@ -4,7 +4,7 @@ import Header from './Header';
 import Footer from './Footer';
 import {Box} from "@mui/material";
 import {useCart} from "../../hooks/useCart.ts";
-import { useWishlist } from '../../hooks/useWishlist.ts';
+import {useWishlist} from '../../hooks/useWishlist.ts';
 
 const Layout: React.FC = () => {
     const navigate = useNavigate();
@@ -22,7 +22,12 @@ const Layout: React.FC = () => {
                 flexDirection: 'column',
             }}
         >
-            <Box dir="ltr">
+            <Box dir="ltr" sx={{
+                position: 'sticky',
+                top: 0,
+                zIndex: 1100,
+                backgroundColor: 'background.paper',
+            }}>
                 <Header
                     cartItemsCount={items?.length || 0}
                     onCartClick={handleCartClick}
@@ -34,7 +39,7 @@ const Layout: React.FC = () => {
             <Box sx={{flex: 1}}>
                 <Outlet/>
             </Box>
-            
+
             <Footer/>
         </Box>
     );

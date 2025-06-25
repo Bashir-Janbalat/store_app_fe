@@ -134,6 +134,9 @@ export const en: Translations = {
         addToCart: "Add to Cart",
         addToWishlist: "Add to Wishlist",
         removeFromWishlist: "Remove from Wishlist",
+        inStock: "In Stock",
+        outOfStock: "Out of Stock",
+        lowStock: "Low stock",
     },
     featuredProducts: {
         title: 'Featured Products',
@@ -180,7 +183,24 @@ export const en: Translations = {
         total: "Total",
         clearCart: "Clear Cart",
         checkout: "Proceed to Checkout",
-        noCartIdError: "Cannot proceed with checkout without a cart ID."
+        noCartIdError: "Cannot proceed with checkout without a cart ID.",
+        outOfStockMessage: "Reached max stock",
+        add: {
+            "success": "Added to cart",
+            "error": "Failed to add to cart"
+        },
+        update: {
+            success: "Quantity updated",
+            error: "Failed to update quantity"
+        },
+        removed: {
+            success: "Item removed from cart",
+            error: "Failed to remove item"
+        },
+        clear: {
+            success: "Cart cleared",
+            error: "Failed to clear cart"
+        },
     },
     wishlist: {
         title: "Wishlist items",

@@ -5,7 +5,7 @@ import type {ImageDTO} from "../types/product";
 export const useAddToCart = () => {
     const {addToCart} = useCart();
 
-    const handleAddToCart = (id: number, name: string, description: string, sellingPrice: number, images: ImageDTO[]) => {
+    const handleAddToCart = (name: string, images: ImageDTO[], description: string, totalStock: number, id: number, sellingPrice: number) => {
         if (!id || !sellingPrice || !images.length) {
             toast.error("Invalid product data");
             return;
@@ -15,6 +15,7 @@ export const useAddToCart = () => {
                 name: name,
                 imageUrl: images[0].imageUrl,
                 description: description,
+                totalStock: totalStock
             },
             id,
             sellingPrice

@@ -11,50 +11,58 @@ interface ProductInfoProps {
     product: ProductDTO;
 }
 
-const ProductInfo = ({product}: ProductInfoProps) => {
-    const {t} = useLanguage();
-    const { handleAddToCart } = useAddToCart();
-    const { isInWishlist, handleToggleWishlist } = useWishlistActions();
+const
+    ProductInfo = ({product}: ProductInfoProps) => {
+        const {t} = useLanguage();
+        const {handleAddToCart} = useAddToCart();
+        const {isInWishlist, handleToggleWishlist} = useWishlistActions();
 
-    const inWishlist = isInWishlist(product.id);
+        const inWishlist = isInWishlist(product.id);
 
-    return (
-        <Box>
-            <Typography variant="h4" gutterBottom>{product.name}</Typography>
-            <Typography variant="subtitle1" color="text.secondary">{product.description}</Typography>
-            <Typography variant="h5" color="primary" sx={{my: 2}}>
-                {t.product.price}: {product.sellingPrice} €
-            </Typography>
+        const totalStock = product.stocks?.reduce((sum, stock) => sum + stock.quantity, 0) ?? 0;
 
-            <Chip label={`${t.product.brand}: ${product.brandName}`} sx={{mr: 1}}/>
-            <Chip label={`${t.product.category}: ${product.categoryName}`}/>
+        return (
+            <Box>
+                <Typography variant="h4" gutterBottom>{product.name}</Typography>
+                <Typography variant="subtitle1" color="text.secondary">{product.description}</Typography>
+                <Typography variant="h5" color="primary" sx={{my: 2}}>
+                    {t.product.price}: {product.sellingPrice} €
+                </Typography>
 
-            <Typography sx={{mt: 2}}>
-                {t.product.supplier}: {product.supplierName}
-            </Typography>
+                <Chip label={`${t.product.brand}: ${product.brandName}`} sx={{mr: 1}}/>
+                <Chip label={`${t.product.category}: ${product.categoryName}`}/>
 
+                <Typography sx={{mt: 2}}>
+                    {t.product.supplier}: {product.supplierName}
+                </Typography>
+                <Typography sx={{mt: 2, fontWeight: 'bold'}}>
+                    {totalStock > 0
+                        ? `${t.product.inStock}: ${totalStock}`
+                        : t.product.outOfStock}
+                </Typography>
 
-            <Button
-                variant="contained"
-                color="primary"
-                startIcon={<ShoppingCartIcon/>}
-                sx={{mt: 3}}
-                onClick={() => handleAddToCart(product.id!, product.name, product.description!, product.sellingPrice!, product.images)}
-            >
-                {t.product.addToCart}
-            </Button>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    startIcon={<ShoppingCartIcon/>}
+                    sx={{mt: 3}}
+                    onClick={() => handleAddToCart(product.name, product.images, product.description!, totalStock, product.id!, product.sellingPrice!)}
+                    disabled={totalStock === 0}
+                >
+                    {t.product.addToCart}
+                </Button>
 
-            <Button
-                variant={inWishlist ? "contained" : "outlined"}
-                color="secondary"
-                startIcon={inWishlist ? <FavoriteIcon/> : <FavoriteBorderIcon/>}
-                sx={{mt: 3, ml: 2}}
-                onClick={() => handleToggleWishlist(product)}
-            >
-                {inWishlist? t.product.removeFromWishlist : t.product.addToWishlist}
-            </Button>
-        </Box>
-    );
-};
+                <Button
+                    variant={inWishlist ? "contained" : "outlined"}
+                    color="secondary"
+                    startIcon={inWishlist ? <FavoriteIcon/> : <FavoriteBorderIcon/>}
+                    sx={{mt: 3, ml: 2}}
+                    onClick={() => handleToggleWishlist(product)}
+                >
+                    {inWishlist ? t.product.removeFromWishlist : t.product.addToWishlist}
+                </Button>
+            </Box>
+        );
+    };
 
 export default ProductInfo;

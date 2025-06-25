@@ -133,6 +133,9 @@ export const ar: Translations = {
         addToCart: "أضف إلى السلة",
         addToWishlist: "أضف إلى الأمنيات",
         removeFromWishlist: "إزالة من الأمنيات",
+        inStock: "المتوفر في المستودع",
+        outOfStock: "غير متوفر حاليآ",
+        lowStock: "كمية محدودة",
     },
     featuredProducts: {
         title: 'المنتجات المميزة',
@@ -179,7 +182,24 @@ export const ar: Translations = {
         total: "الإجمالي",
         clearCart: "تفريغ السلة",
         checkout: "المتابعة إلى الدفع",
-        noCartIdError: "لا يمكن إتمام الطلب بدون معرف السلة."
+        noCartIdError: "لا يمكن إتمام الطلب بدون معرف السلة.",
+        outOfStockMessage: "لقد وصلت إلى الحد الأقصى للمخزون!",
+        add: {
+            success: "تمت الإضافة إلى السلة",
+            error: "فشل في الإضافة إلى السلة"
+        },
+        update: {
+            success: "تم تحديث الكمية",
+            error: "فشل في تحديث الكمية"
+        },
+        removed: {
+            success: "تمت إزالة العنصر من السلة",
+            error: "فشل في إزالة العنصر"
+        },
+        clear: {
+            success: "تم إفراغ السلة",
+            error: "فشل في إفراغ السلة"
+        }
     },
     wishlist: {
         title: "قائمة الأمنيات",

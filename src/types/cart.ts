@@ -1,4 +1,4 @@
-import type { ProductInfo } from "./product";
+import type {ProductInfo} from "./product";
 
 export interface CartDTO {
     cartId: number;
@@ -16,9 +16,10 @@ export interface CartContextType {
     cartId: number | undefined;
     items: CartItem[];
     addToCart: (product: {
-        name: string;
-        description?: string;
-        imageUrl: string
+        name: string,
+        description?: string,
+        imageUrl: string,
+        totalStock: number,
     }, productId: number, unitPrice: number, quantity?: number) => void;
     removeFromCart: (productId: number) => void;
     clearCart: () => void;

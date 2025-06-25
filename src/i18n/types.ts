@@ -131,6 +131,9 @@ export interface Translations {
         addToCart: string,
         addToWishlist: string,
         removeFromWishlist: string,
+        inStock: string,
+        outOfStock: string,
+        lowStock: string,
     };
     featuredProducts: {
         title: string;
@@ -178,6 +181,23 @@ export interface Translations {
         clearCart: string;
         checkout: string;
         noCartIdError: string;
+        outOfStockMessage:string;
+        add: {
+            "success": string,
+            "error": string
+        },
+        update: {
+            success: string,
+            error: string
+        },
+        removed: {
+            success: string,
+            error: string
+        },
+        clear: {
+            success: string,
+            error: string
+        },
     },
     wishlist: {
         title: string;

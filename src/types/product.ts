@@ -37,4 +37,5 @@ export interface ProductInfo {
     name: string;
     description?: string;
     imageUrl: string;
+    totalStock: number;
 }

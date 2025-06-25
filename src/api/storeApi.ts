@@ -16,6 +16,17 @@ const refreshClient = axios.create({
     timeout: 5000,
 });
 
+refreshClient.interceptors.request.use(
+    (config) => {
+        const csrfToken = Cookies.get('XSRF-TOKEN');
+        if (csrfToken) {
+            config.headers['X-XSRF-TOKEN'] = csrfToken;
+        }
+        return config;
+    },
+    (error: unknown) => Promise.reject(error)
+);
+
 const storeApi = axios.create({
     baseURL: import.meta.env.VITE_API_BASE_URL_STORE,
     withCredentials: true,

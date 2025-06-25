@@ -14,6 +14,7 @@ import type {OrderResponseCreatedDTO} from "../types/order.ts";
 import type {Address, AddressType} from "../types/customer.ts";
 import {useCart} from "../hooks/useCart.ts";
 import PaymentMethods from "../components/common/PaymentMethods.tsx";
+import {getDetailedApiError} from "../utils/error-utils.ts";
 
 
 const CheckoutPage: React.FC = () => {
@@ -21,7 +22,11 @@ const CheckoutPage: React.FC = () => {
     const {user} = useAuth();
     const {cartId, items} = useCart();
     const navigate = useNavigate();
-    const initialTotal = items.reduce((sum, item) => sum + item.unitPrice * item.quantity, 0);
+    const initialTotal = items.reduce((sum, item) => {
+        return item.product.totalStock > 0
+            ? sum + (item.unitPrice * item.quantity)
+            : sum;
+    }, 0);
     const [total, setTotal] = useState<number>(initialTotal);
     const [wantInvoice, setWantInvoice] = useState<boolean | null>(null);
 
@@ -33,7 +38,7 @@ const CheckoutPage: React.FC = () => {
 
     const queryKey = 'addresses';
     const query = useFetchData<Address[]>(ApiType.STORE, queryKey, `/addresses`);
-    const {data: addresses, isLoading, isError, retryWithToast} = useQueryToast(query, {showLoading: true,});
+    const {data: addresses, isLoading, isError, retryWithToast} = useQueryToast(query, {showLoading: true});
 
     const createOrder = useApiMutation<OrderResponseCreatedDTO, { billingAddressId?: number }>({
         method: 'post',
@@ -56,7 +61,10 @@ const CheckoutPage: React.FC = () => {
                 toast.error(t.payment.sessionCreationFailed);
             }
         },
-        onError: (err) => toast.error(t.address.createError + err.message),
+        onError: (err) => {
+            const detailedApiError = getDetailedApiError(err);
+            toast.error(detailedApiError.message)
+        }
     });
 
     const createStripeSession = useApiMutation<string, { orderId: number }>({

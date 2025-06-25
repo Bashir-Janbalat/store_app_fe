@@ -11,7 +11,8 @@ export interface WishlistContextType {
     addToWishlist: (product: {
         name: string;
         description?: string;
-        imageUrl: string
+        imageUrl: string;
+        totalStock: number;
     }, productId: number, unitPrice: number) => void;
     removeFromWishlist: (productId: number) => void;
     clearWishlist: () => void;

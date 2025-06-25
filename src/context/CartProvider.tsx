@@ -10,9 +10,11 @@ import {useFetchData} from "../hooks/useFetchData.ts";
 import {ApiType} from "../types/common.ts";
 import {useApiMutation} from "../hooks/useApiMutation.ts";
 import {getSessionId} from "../utils/session-utils.ts";
+import {useLanguage} from "../hooks/useLanguage.ts";
 
 
 export const CartProvider = ({children}: { children: ReactNode }) => {
+    const {t} = useLanguage();
     const [cartId, setCartId] = useState<number | undefined>(undefined);
     const [items, setItems] = useState<CartItem[]>([]);
     const {user} = useAuth();
@@ -28,10 +30,10 @@ export const CartProvider = ({children}: { children: ReactNode }) => {
         refetchKey: cartKey,
         onSuccess: (updatedItems) => {
             setItems(updatedItems);
-            toast.success("Added to cart");
+            toast.success(t.cart.add.success);
         },
         onError: (error) => {
-            toast.error("Failed to add to cart: " + error.message);
+            toast.error(t.cart.add.error + ": " + error.message);
         },
     });
 
@@ -41,10 +43,10 @@ export const CartProvider = ({children}: { children: ReactNode }) => {
         api: ApiType.STORE,
         refetchKey: cartKey,
         onSuccess: () => {
-            toast.success("Quantity updated");
+            toast.success(t.cart.update.success);
         },
         onError: (error) => {
-            toast.error("Failed to Update Quantity : " + error.message);
+            toast.error(t.cart.update.error + ": " + error.message);
         },
     });
     const removeFromCartMutation = useApiMutation<void, { productId: number }>({
@@ -59,10 +61,10 @@ export const CartProvider = ({children}: { children: ReactNode }) => {
         },
         sendPayload: false,
         onSuccess: () => {
-            toast.success("Item removed from cart");
+            toast.success(t.cart.removed.success);
         },
         onError: (error) => {
-            toast.error("Failed to remove item: : " + error.message);
+            toast.error(t.cart.removed.error+ ": " + error.message);
         },
     });
 
@@ -73,10 +75,10 @@ export const CartProvider = ({children}: { children: ReactNode }) => {
         refetchKey: cartKey,
         sendPayload: false,
         onSuccess: () => {
-            toast.success("Cart cleared");
+            toast.success(t.cart.clear.success);
         },
         onError: (error) => {
-            toast.error("Failed to clear Cart: : " + error.message);
+            toast.error(t.cart.clear.error + ": " + error.message);
         },
     });
 

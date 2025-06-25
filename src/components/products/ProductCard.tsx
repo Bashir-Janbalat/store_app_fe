@@ -112,7 +112,7 @@ const ProductCard = ({product, isInWishlist, onWishlistToggle, onAddToCart}: Pro
                         </Tooltip>
 
                         <Typography variant="subtitle1" color="primary">
-                            {t.product.price}: ${price?.toString()}
+                            {t.product.price}: {price?.toString()}{t.common.currency}
                         </Typography>
                     </CardContent>
                 </Link>

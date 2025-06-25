@@ -153,6 +153,7 @@ export const ar: Translations = {
         no: "لا",
         loading: "جاري الحفظ...",
         errorOccurred: "حدث خطأ، حاول مرة أخرى",
+        currency: " ل.س "
     },
     error: {
         message: "حدث خطأ ما.",
@@ -175,6 +176,7 @@ export const ar: Translations = {
     },
     cart: {
         title: "سلة المشتريات",
+        items: "عناصر السلة",
         emptyCart: "سلة المشتريات فارغة",
         emptyCartDescription: "لا يوجد أي منتجات في السلة بعد.",
         quantity: "الكمية",

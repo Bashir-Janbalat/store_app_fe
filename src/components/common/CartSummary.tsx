@@ -115,7 +115,7 @@ const CartSummary = () => {
                                                 <Typography className="price-text" sx={{
                                                     textDecoration: isOutOfStock ? "line-through" : "none"
                                                 }}>
-                                                    {item.unitPrice.toFixed(2)} €
+                                                    {item.unitPrice.toFixed(2)} {t.common.currency}
                                                 </Typography>
                                             </Box>
 
@@ -165,7 +165,7 @@ const CartSummary = () => {
                                                 </Tooltip>
                                                 {!isOutOfStock && (
                                                     <Typography sx={{ml: 2, mt: 1}}>
-                                                        {subTotal.toFixed(2)} €
+                                                        {subTotal.toFixed(2)} {t.common.currency}
                                                     </Typography>
                                                 )}
                                             </Box>

@@ -167,6 +167,40 @@ const CheckoutPage: React.FC = () => {
             )}
             {wantInvoice === true && renderAddress("BILLING", billingAddress)}
 
+            <Card sx={{ mb: 3 }}>
+                <CardContent>
+                    <Typography variant="h6" gutterBottom>
+                        {t.cart.items}
+                    </Typography>
+                    {items.map((item) => (
+                        <Box
+                            key={item.productId}
+                            display="flex"
+                            alignItems="center"
+                            justifyContent="space-between"
+                            mb={2}
+                        >
+                            <Box display="flex" alignItems="center" gap={2}>
+                                <img
+                                    src={item.product.imageUrl}
+                                    alt={item.product.name}
+                                    style={{ width: 60, height: 60, objectFit: "cover", borderRadius: 8 }}
+                                />
+                                <Box>
+                                    <Typography variant="subtitle1">{item.product.name}</Typography>
+                                    <Typography variant="body2" color="text.secondary">
+                                        {t.cart.quantity}: {item.quantity}
+                                    </Typography>
+                                </Box>
+                            </Box>
+                            <Typography variant="body1">
+                                {(item.unitPrice * item.quantity).toFixed(2)} {t.common.currency}
+                            </Typography>
+                        </Box>
+                    ))}
+                </CardContent>
+            </Card>
+
             <Divider sx={{my: 2}}/>
 
             <Typography variant="h6" gutterBottom>

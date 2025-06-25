@@ -26,7 +26,7 @@ const
                 <Typography variant="h4" gutterBottom>{product.name}</Typography>
                 <Typography variant="subtitle1" color="text.secondary">{product.description}</Typography>
                 <Typography variant="h5" color="primary" sx={{my: 2}}>
-                    {t.product.price}: {product.sellingPrice} €
+                    {t.product.price}: {product.sellingPrice} {t.common.currency}
                 </Typography>
 
                 <Chip label={`${t.product.brand}: ${product.brandName}`} sx={{mr: 1}}/>

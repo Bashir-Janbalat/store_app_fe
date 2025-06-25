@@ -151,6 +151,7 @@ export interface Translations {
         no: string;
         loading: string;
         errorOccurred: string;
+        currency: string;
     };
     error: {
         message: string;
@@ -173,6 +174,7 @@ export interface Translations {
     };
     cart: {
         title: string;
+        "items": string;
         emptyCart: string;
         emptyCartDescription: string;
         quantity: string;

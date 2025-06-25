@@ -154,6 +154,7 @@ export const en: Translations = {
         no: "No",
         loading: "Saving...",
         errorOccurred: "An error occurred. Please try again",
+        currency: " € "
     },
     error: {
         message: "Something went wrong.",
@@ -176,6 +177,7 @@ export const en: Translations = {
     },
     cart: {
         title: "Shopping Cart",
+        items: "Cart Items",
         emptyCart: "Your cart is empty ",
         emptyCartDescription: "You haven't added any items to your cart yet.",
         quantity: "Quantity",

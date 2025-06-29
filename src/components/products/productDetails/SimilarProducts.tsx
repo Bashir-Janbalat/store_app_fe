@@ -21,6 +21,7 @@ const SimilarProducts = ({productId}: SimilarProductsProps) => {
     const cardRef = useRef<HTMLDivElement>(null);
     const [isAtStart, setIsAtStart] = useState(true);
     const [hasReachedEnd, setHasReachedEnd] = useState(false);
+    const [canScroll, setCanScroll] = useState(false);
     const limit = 20;
 
     const scroll = useCallback((scrollOffset: number) => {
@@ -36,13 +37,30 @@ const SimilarProducts = ({productId}: SimilarProductsProps) => {
         }
     }, []);
 
-    const handleScroll = () => {
+    const checkScrollability = () => {
         if (scrollRef.current) {
-            const {scrollLeft, scrollWidth, clientWidth} = scrollRef.current;
-            setIsAtStart( scrollLeft <= 0);
+            const {scrollWidth, clientWidth, scrollLeft} = scrollRef.current;
+            setCanScroll(scrollWidth > clientWidth);
+            setIsAtStart(scrollLeft <= 1);
             setHasReachedEnd(scrollLeft + clientWidth >= scrollWidth - 1);
         }
     };
+
+    useEffect(() => {
+        checkScrollability();
+        window.addEventListener("resize", checkScrollability);
+        return () => window.removeEventListener("resize", checkScrollability);
+    }, [products]);
+
+
+    const handleScroll = () => {
+        if (scrollRef.current) {
+            const {scrollLeft, scrollWidth, clientWidth} = scrollRef.current;
+            setIsAtStart(scrollLeft <= 0);
+            setHasReachedEnd(scrollLeft + clientWidth >= scrollWidth - 1);
+        }
+    };
+
 
     const query = useFetchData<ProductDTO[], {
         limit: number,
@@ -76,9 +94,9 @@ const SimilarProducts = ({productId}: SimilarProductsProps) => {
             <Typography variant="h5" gutterBottom>{t.product.similarProducts}</Typography>
             <Box display="flex" alignItems="center" gap={1} p={2}>
                 {/* سهم إلى اليسار ← */}
-                {!isAtStart && (
+                {canScroll && !isAtStart && (
                     <IconButton onClick={() => scroll(-1)}>
-                        {isRTL ? <ArrowForwardIos /> : <ArrowBackIos />}
+                        {isRTL ? <ArrowForwardIos/> : <ArrowBackIos/>}
                     </IconButton>
                 )}
 
@@ -90,7 +108,7 @@ const SimilarProducts = ({productId}: SimilarProductsProps) => {
                         overflowX: 'auto',
                         scrollbarWidth: 'none',
                         '&::-webkit-scrollbar': {display: 'none'},
-                        m:4,
+                        m: 4,
                         direction: isRTL ? 'rtl' : 'ltr',
                     }}
                 >
@@ -133,9 +151,9 @@ const SimilarProducts = ({productId}: SimilarProductsProps) => {
                 </Box>
 
                 {/* سهم إلى اليمين → */}
-                {!hasReachedEnd && (
+                {canScroll && !hasReachedEnd && (
                     <IconButton onClick={() => scroll(1)}>
-                        {isRTL ? <ArrowBackIos /> : <ArrowForwardIos />}
+                        {isRTL ? <ArrowBackIos/> : <ArrowForwardIos/>}
                     </IconButton>
                 )}
             </Box>

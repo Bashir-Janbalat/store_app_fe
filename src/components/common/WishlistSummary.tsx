@@ -72,6 +72,7 @@ const WishlistSummary = () => {
                                                                         component="span">
                                                                 {item.product.description}
                                                             </Typography>
+                                                            <br/>
                                                             <Typography variant="caption" color="text.secondary"
                                                                         component="span">
                                                                 {t.product.inStock}: {totalStock}

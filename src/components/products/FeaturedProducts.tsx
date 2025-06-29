@@ -14,20 +14,18 @@ import {useWishlistActions} from "../../hooks/useWishlistActions.ts";
 
 const FeaturedProducts = () => {
     const {t} = useLanguage();
-    const { handleAddToCart } = useAddToCart();
-    const { isInWishlist, handleToggleWishlist } = useWishlistActions();
+    const {handleAddToCart} = useAddToCart();
+    const {isInWishlist, handleToggleWishlist} = useWishlistActions();
     const [products, setProducts] = useState<ProductDTO[]>([]);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const size = 8;
     const query =
         useFetchData<PagedResponseDTO<ProductDTO>, {
-            categoryName?: string,
-            searchBy?: string,
             page: number,
             size: number
         }>
-        (ApiType.INVENTORY, "featuredProducts", "/products", {
+        (ApiType.INVENTORY, "featuredProducts", "/products/featured", {
             page: page - 1,
             size: size
         });
@@ -53,7 +51,8 @@ const FeaturedProducts = () => {
             </Typography>
             <Grid container spacing={2} justifyContent="center">
                 {products.map((product: ProductDTO) => (
-                    <Grid size={{xs: 12, sm: 6, md: 4, lg: 3}} key={product.id} display="flex" justifyContent={'center'}>
+                    <Grid size={{xs: 12, sm: 6, md: 4, lg: 3}} key={product.id} display="flex"
+                          justifyContent={'center'}>
                         <ProductCard
                             product={product}
                             isInWishlist={isInWishlist(product.id)}

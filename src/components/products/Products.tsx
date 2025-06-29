@@ -41,7 +41,7 @@ const Products = ({selectedCategoryName, selectedBrandName, minPrice, maxPrice}:
             page: number,
             size: number
         }>
-        (ApiType.INVENTORY, "featuredProducts", "/products", {
+        (ApiType.INVENTORY, "products", "/products", {
             categoryName: selectedCategoryName || undefined,
             brandName: selectedBrandName || undefined,
             searchBy: productName || undefined,

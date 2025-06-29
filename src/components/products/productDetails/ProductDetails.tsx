@@ -41,7 +41,7 @@ const ProductDetails = () => {
                     <ProductAttributes attributes={product.productAttributes}/>
                 </Grid>
                 <Grid size={{xs: 12}}>
-                    <SimilarProducts/>
+                    <SimilarProducts productId={product.id!}/>
                 </Grid>
             </Grid>
         </Container>

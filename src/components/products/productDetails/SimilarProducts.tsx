@@ -22,7 +22,7 @@ const SimilarProducts = ({productId}: SimilarProductsProps) => {
     const [isAtStart, setIsAtStart] = useState(true);
     const [hasReachedEnd, setHasReachedEnd] = useState(false);
     const [canScroll, setCanScroll] = useState(false);
-    const limit = 20;
+    const limit = 10;
 
     const scroll = useCallback((scrollOffset: number) => {
         if (scrollRef.current && cardRef.current) {
@@ -95,7 +95,7 @@ const SimilarProducts = ({productId}: SimilarProductsProps) => {
             <Box display="flex" alignItems="center" gap={1} p={2}>
                 {/* سهم إلى اليسار ← */}
                 {canScroll && !isAtStart && (
-                    <IconButton onClick={() => scroll(-1)}>
+                    <IconButton onClick={() => scroll(-1)} onDoubleClick={e => e.stopPropagation()}>
                         {isRTL ? <ArrowForwardIos/> : <ArrowBackIos/>}
                     </IconButton>
                 )}
@@ -152,7 +152,7 @@ const SimilarProducts = ({productId}: SimilarProductsProps) => {
 
                 {/* سهم إلى اليمين → */}
                 {canScroll && !hasReachedEnd && (
-                    <IconButton onClick={() => scroll(1)}>
+                    <IconButton onClick={() => scroll(1)} onDoubleClick={e => e.stopPropagation()}>
                         {isRTL ? <ArrowBackIos/> : <ArrowForwardIos/>}
                     </IconButton>
                 )}

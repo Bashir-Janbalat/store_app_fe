@@ -171,6 +171,7 @@ export interface Translations {
         price: string,
         applyFilters: string,
         reset: string,
+        inStock: string,
     };
     cart: {
         title: string;

@@ -9,14 +9,14 @@ import FilterSidebar from '../components/filters/FilterSidebar';
 const ProductPage = () => {
     const [categoryName, setCategoryName] = useState<string | null>(null);
     const [brandName, setBrandName] = useState<string | null>(null);
-    const [priceFilter, setPriceFilter] = useState<{ minPrice: number, maxPrice: number } | null>(null);
+    const [productsFilter, setProductsFilter] = useState<{ minPrice: number, maxPrice: number,inStock?: boolean } | null>(null);
 
     return (
         <Grid container sx={{mt: 4}}>
             <Grid size={{xs: 12, md: 2}}>
                 <FilterSidebar
-                    onApply={(filters) => setPriceFilter(filters)}
-                    onReset={() => setPriceFilter(null)}
+                    onApply={(filters) => setProductsFilter(filters)}
+                    onReset={() => setProductsFilter(null)}
                 />
             </Grid>
 
@@ -27,8 +27,9 @@ const ProductPage = () => {
                     <Products
                         selectedCategoryName={categoryName}
                         selectedBrandName={brandName}
-                        minPrice={priceFilter?.minPrice}
-                        maxPrice={priceFilter?.maxPrice}
+                        minPrice={productsFilter?.minPrice}
+                        maxPrice={productsFilter?.maxPrice}
+                        inStock={productsFilter?.inStock}
                     />
                 </Box>
             </Grid>

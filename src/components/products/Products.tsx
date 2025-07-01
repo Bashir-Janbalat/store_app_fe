@@ -17,14 +17,15 @@ interface ProductsProps {
     selectedBrandName: string | null;
     minPrice?: number | null;
     maxPrice?: number | null;
+    inStock?: boolean;
 }
 
-const Products = ({selectedCategoryName, selectedBrandName, minPrice, maxPrice}: ProductsProps) => {
+const Products = ({selectedCategoryName, selectedBrandName, minPrice, maxPrice, inStock}: ProductsProps) => {
     const {t} = useLanguage();
-    const { handleAddToCart } = useAddToCart();
-    const { isInWishlist, handleToggleWishlist } = useWishlistActions();
+    const {handleAddToCart} = useAddToCart();
+    const {isInWishlist, handleToggleWishlist} = useWishlistActions();
     const [products, setProducts] = useState<ProductDTO[]>([]);
-    const [brand, setBrand] = useState<string | null >(selectedBrandName);
+    const [brand, setBrand] = useState<string | null>(selectedBrandName);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const size = 8;
@@ -39,6 +40,7 @@ const Products = ({selectedCategoryName, selectedBrandName, minPrice, maxPrice}:
             searchBy?: string,
             minPrice?: number,
             maxPrice?: number,
+            inStock?: boolean,
             page: number,
             size: number
         }>
@@ -48,6 +50,7 @@ const Products = ({selectedCategoryName, selectedBrandName, minPrice, maxPrice}:
             searchBy: productName || undefined,
             minPrice: minPrice || undefined,
             maxPrice: maxPrice || undefined,
+            inStock: inStock,
             page: page - 1,
             size: size
         });
@@ -81,7 +84,8 @@ const Products = ({selectedCategoryName, selectedBrandName, minPrice, maxPrice}:
             </Typography>
             <Grid container spacing={2} justifyContent="center">
                 {products.map((product: ProductDTO) => (
-                    <Grid size={{xs: 12, sm: 6, md: 4, lg: 3}} key={product.id} display="flex" justifyContent={'center'}>
+                    <Grid size={{xs: 12, sm: 6, md: 4, lg: 3}} key={product.id} display="flex"
+                          justifyContent={'center'}>
                         <ProductCard
                             product={product}
                             isInWishlist={isInWishlist(product.id)}

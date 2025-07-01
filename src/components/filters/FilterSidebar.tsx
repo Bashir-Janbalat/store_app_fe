@@ -1,11 +1,11 @@
 import React, {useState} from "react";
-import {Box, Button, Divider, Drawer, IconButton, Slider, Typography,} from "@mui/material";
+import {Box, Button, Checkbox, Divider, Drawer, FormControlLabel, IconButton, Slider, Typography,} from "@mui/material";
 import {Close, FilterAlt} from "@mui/icons-material";
 import {useIsMobile} from "../../hooks/useIsMobile.ts";
 import {useLanguage} from "../../hooks/useLanguage.ts";
 
 interface FilterSidebarProps {
-    onApply: (filters: { minPrice: number; maxPrice: number }) => void;
+    onApply: (filters: { minPrice: number; maxPrice: number,inStock?: boolean }) => void;
     onReset: () => void;
 }
 
@@ -13,7 +13,8 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({onApply, onReset}) => {
     const isMobile = useIsMobile();
     const {t} = useLanguage();
     const [open, setOpen] = useState(false);
-    const [priceRange, setPriceRange] = useState<number[]>([0, 1000]);
+    const [priceRange, setPriceRange] = useState<number[]>([0, 2500]);
+    const [inStock, setInStock] = useState(false);
 
     const toggleDrawer = () => setOpen(!open);
 
@@ -36,19 +37,29 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({onApply, onReset}) => {
                 onChange={(_, value) => setPriceRange(value as number[])}
                 valueLabelDisplay="auto"
                 min={0}
-                max={1500}
+                max={2500}
                 step={10}
             />
-
+            <FormControlLabel
+                control={
+                    <Checkbox
+                        checked={inStock}
+                        onChange={(e) => setInStock(e.target.checked)}
+                    />
+                }
+                label={t.filter.inStock}
+                sx={{ mt: 2 }}
+            />
             <Box mt={3} display="flex" flexDirection="column" gap={1}>
                 <Button variant="contained" onClick={() => {
-                    onApply({minPrice: priceRange[0], maxPrice: priceRange[1]});
+                    onApply({minPrice: priceRange[0], maxPrice: priceRange[1],inStock: inStock ? true : undefined,});
                     toggleDrawer();
                 }}>
                     {t.filter.applyFilters}
                 </Button>
                 <Button variant="text" onClick={() => {
                     setPriceRange([0, 1000]);
+                    setInStock(false);
                     onReset();
                 }}>
                     {t.filter.reset}

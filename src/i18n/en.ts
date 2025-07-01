@@ -174,6 +174,7 @@ export const en: Translations = {
         price: "Price",
         applyFilters: "Apply Filters",
         reset: "Reset",
+        inStock: "In Stock Only"
     },
     cart: {
         title: "Shopping Cart",

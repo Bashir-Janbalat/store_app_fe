@@ -173,6 +173,7 @@ export const ar: Translations = {
         price: "السعر",
         applyFilters: "تطبيق الفلاتر",
         reset: "إعادة تعيين",
+        inStock: "متوفر فقط",
     },
     cart: {
         title: "سلة المشتريات",

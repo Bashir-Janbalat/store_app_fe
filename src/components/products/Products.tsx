@@ -24,6 +24,7 @@ const Products = ({selectedCategoryName, selectedBrandName, minPrice, maxPrice}:
     const { handleAddToCart } = useAddToCart();
     const { isInWishlist, handleToggleWishlist } = useWishlistActions();
     const [products, setProducts] = useState<ProductDTO[]>([]);
+    const [brand, setBrand] = useState<string | null >(selectedBrandName);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const size = 8;
@@ -43,7 +44,7 @@ const Products = ({selectedCategoryName, selectedBrandName, minPrice, maxPrice}:
         }>
         (ApiType.INVENTORY, "products", "/products", {
             categoryName: selectedCategoryName || undefined,
-            brandName: selectedBrandName || undefined,
+            brandName: brand || undefined,
             searchBy: productName || undefined,
             minPrice: minPrice || undefined,
             maxPrice: maxPrice || undefined,
@@ -55,7 +56,12 @@ const Products = ({selectedCategoryName, selectedBrandName, minPrice, maxPrice}:
 
     useEffect(() => {
         setPage(1);
+        setBrand(selectedBrandName);
     }, [selectedCategoryName, selectedBrandName, productName, minPrice, maxPrice]);
+
+    useEffect(() => {
+        setBrand(null);
+    }, [selectedCategoryName]);
 
     useEffect(() => {
         if (data && Array.isArray(data.content)) {

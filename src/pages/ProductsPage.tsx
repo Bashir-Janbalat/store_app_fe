@@ -23,7 +23,7 @@ const ProductPage = () => {
             <Grid size={{xs: 12, md: 9}}>
                 <Box sx={{display: 'flex', flexDirection: 'column'}}>
                     <CategorySlider selectedCategory={categoryName} onCategorySelect={setCategoryName}/>
-                    <BrandSlider selectedBrand={brandName} onBrandSelect={setBrandName}/>
+                    <BrandSlider selectedBrand={brandName} selectedCategory={categoryName} onBrandSelect={setBrandName} />
                     <Products
                         selectedCategoryName={categoryName}
                         selectedBrandName={brandName}

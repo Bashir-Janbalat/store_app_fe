@@ -11,6 +11,10 @@ const ProductPage = () => {
     const [brandName, setBrandName] = useState<string | null>(null);
     const [productsFilter, setProductsFilter] = useState<{ minPrice: number, maxPrice: number,inStock?: boolean } | null>(null);
 
+    const handleCategorySelect = (newCategory: string | null) => {
+        setCategoryName(newCategory);
+        setBrandName(null);
+    };
     return (
         <Grid container sx={{mt: 4}}>
             <Grid size={{xs: 12, md: 2}}>
@@ -22,7 +26,7 @@ const ProductPage = () => {
 
             <Grid size={{xs: 12, md: 9}}>
                 <Box sx={{display: 'flex', flexDirection: 'column'}}>
-                    <CategorySlider selectedCategory={categoryName} onCategorySelect={setCategoryName}/>
+                    <CategorySlider selectedCategory={categoryName} onCategorySelect={handleCategorySelect}/>
                     <BrandSlider selectedBrand={brandName} selectedCategory={categoryName} onBrandSelect={setBrandName} />
                     <Products
                         selectedCategoryName={categoryName}

@@ -7,6 +7,7 @@ interface OrderItemDTO {
     unitPrice: number;
     totalPrice: number;
     productInfo?: ProductInfo;
+    canReview: boolean;
 }
 
 export interface Order {

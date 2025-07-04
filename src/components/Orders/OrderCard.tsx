@@ -1,8 +1,9 @@
 import React from "react";
 import type {Order} from "../../types/order.ts";
-import {Avatar, Box, Card, CardContent, CardHeader, Chip, Divider, Stack, Typography} from "@mui/material";
+import {Avatar, Box, Button, Card, CardContent, CardHeader, Chip, Divider, Stack, Typography} from "@mui/material";
 import {useLanguage} from "../../hooks/useLanguage.ts";
 import { Link } from "react-router-dom";
+import RateReviewIcon from '@mui/icons-material/RateReview';
 
 interface OrderCardProps {
     order: Order;
@@ -67,6 +68,21 @@ const OrderCard: React.FC<OrderCardProps> = ({order}: OrderCardProps) => {
                                 <Typography variant="caption" color="text.secondary">
                                     {t.orderCard.quantityPrice} {item.quantity} × {item.unitPrice.toFixed(2)}
                                 </Typography>
+                                {order.status === 'DELIVERED' && item.canReview && (
+                                    <Box mt={1}>
+                                        <Link to={`/products/review/${item.productId}`} style={{ textDecoration: 'none' }}>
+                                            <Button
+                                                variant="outlined"
+                                                size="small"
+                                                color="primary"
+                                                startIcon={<RateReviewIcon />}
+                                                sx={{ textTransform: 'none', borderRadius: 2 }}
+                                            >
+                                                {t.orderCard.reviewProduct}
+                                            </Button>
+                                        </Link>
+                                    </Box>
+                                )}
                             </Box>
                             <Typography variant="body2" sx={{fontWeight: 'bold'}}>
                                 €{item.totalPrice.toFixed(2)}

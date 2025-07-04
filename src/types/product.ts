@@ -39,3 +39,18 @@ export interface ProductInfo {
     imageUrl: string;
     totalStock: number;
 }
+
+export interface ProductReview {
+    id: number,
+    productId: number,
+    reviewerName: string,
+    rating: number;
+    review: string;
+    createdAt: string;
+    updatedAt: string,
+}
+
+export interface AddReviewRequest {
+    review: string;
+    rating: number;
+}

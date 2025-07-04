@@ -26,6 +26,7 @@ import AddressesPage from '../pages/AddressesPage.tsx';
 import PaymentSuccessPage from '../pages/PaymentSuccessPage.tsx';
 import PaymentCancelPage from '../pages/PaymentCancelPage.tsx';
 import CheckoutPage from "../pages/CheckoutPage.tsx";
+import ProductReviewPage from "../pages/ProductReviewPage.tsx";
 
 
 const AppRoutes: React.FC = () => {
@@ -60,6 +61,7 @@ const AppRoutes: React.FC = () => {
     const productRoutes = [
         {path: "products", element: <ProductsPage/>},
         {path: "products/:id", element: <ProductDetailsPage/>},
+        {path: "products/review/:id", element: <ProductReviewPage/>},
 
     ];
     return (

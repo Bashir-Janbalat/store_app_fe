@@ -271,6 +271,7 @@ export const ar: Translations = {
         products: "المنتجات:",
         quantityPrice: "الكمية: ",
         total: "المجموع الكلي ",
+        reviewProduct: "قيّم المنتج",
     },
     orderStatus: {
         PENDING: "قيد الانتظار",
@@ -278,6 +279,16 @@ export const ar: Translations = {
         SHIPPED: "تم الشحن",
         DELIVERED: "تم التوصيل",
         CANCELLED: "تم الإلغاء"
+    },
+    productReview: {
+        writeReview: "اكتب تقييم",
+        thankYou: "شكرًا على تقييمك!",
+        yourRating: "تقييمك",
+        yourComment: "تعليقك",
+        submitReview: "إرسال التقييم",
+        noReviewsYet: "لا توجد تقييمات لهذا المنتج بعد.",
+        userReviews: "تقييمات المستخدمين",
+        showMore: "رؤية المزيد..",
     }
 
 }

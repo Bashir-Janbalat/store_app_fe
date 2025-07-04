@@ -184,7 +184,7 @@ export interface Translations {
         clearCart: string;
         checkout: string;
         noCartIdError: string;
-        outOfStockMessage:string;
+        outOfStockMessage: string;
         add: {
             "success": string,
             "error": string
@@ -269,6 +269,7 @@ export interface Translations {
         products: string,
         quantityPrice: string,
         total: string,
+        reviewProduct: string;
     },
     orderStatus: {
         PENDING: string,
@@ -276,5 +277,15 @@ export interface Translations {
         SHIPPED: string,
         DELIVERED: string,
         CANCELLED: string
+    },
+    productReview: {
+        writeReview: string,
+        thankYou: string,
+        yourRating: string,
+        yourComment: string,
+        submitReview: string,
+        noReviewsYet: string;
+        userReviews: string;
+        showMore: string;
     }
 }

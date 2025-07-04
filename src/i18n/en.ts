@@ -272,6 +272,7 @@ export const en: Translations = {
         products: "Products:",
         quantityPrice: "Qty: ",
         total: "Total ",
+        reviewProduct: "Review Product",
     },
     orderStatus: {
         PENDING: "Pending",
@@ -279,6 +280,16 @@ export const en: Translations = {
         SHIPPED: "Shipped",
         DELIVERED: "Delivered",
         CANCELLED: "Cancelled"
+    },
+    productReview: {
+        writeReview: "Write a Review",
+        thankYou: "Thank you for your review!",
+        yourRating: "Your Rating",
+        yourComment: "Your Comment",
+        submitReview: "Submit Review",
+        noReviewsYet: "No reviews yet",
+        userReviews: "User Reviews",
+        showMore: "Show more..",
     }
 }
 

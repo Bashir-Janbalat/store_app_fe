@@ -189,8 +189,9 @@ export const en: Translations = {
         noCartIdError: "Cannot proceed with checkout without a cart ID.",
         outOfStockMessage: "Reached max stock",
         add: {
-            "success": "Added to cart",
-            "error": "Failed to add to cart"
+            success: "Added to cart",
+            error: "Failed to add to cart",
+            updated: "Item already in cart, quantity updated"
         },
         update: {
             success: "Quantity updated",
@@ -211,6 +212,12 @@ export const en: Translations = {
         emptyWishlistDescription: "You haven't added any items to your Wishlist yet.",
         remove: "Remove",
         clearWishlist: "Clear Wishlist",
+        added : "Added to wishlist",
+        addError : "Failed to add to wishlist",
+        removed : "Item removed from wishlist",
+        removeError : "Failed to remove item",
+        cleared : "Wishlist cleared",
+        clearError : "Failed to clear wishlist"
     },
     address: {
         title: 'Your Addresses',

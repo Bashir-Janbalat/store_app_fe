@@ -34,3 +34,14 @@ export function handleSetError(error: unknown, setError: (msg: string) => void) 
         setError('An unexpected error occurred');
     }
 }
+
+export function handleErrorToast(error: unknown, fallbackMessage: string, toast: (msg: string) => void) {
+    if (axios.isAxiosError(error)) {
+        const message = error.response?.data?.message ?? fallbackMessage;
+        toast(message);
+    } else if (error instanceof Error) {
+        toast(`${fallbackMessage}: ${error.message}`);
+    } else {
+        toast(fallbackMessage);
+    }
+}

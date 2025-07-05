@@ -10,8 +10,11 @@ import ErrorFallback from "../components/common/ErrorFallback.tsx";
 import {useApiMutation} from "../hooks/useApiMutation.ts";
 import toast from "react-hot-toast";
 import {WishlistContext} from "./WishlistContext.tsx";
+import {handleErrorToast} from "../utils/error-utils.ts";
+import { useLanguage } from "../hooks/useLanguage.ts";
 
 export const WishlistProvider = ({children}: { children: ReactNode }) => {
+    const { t } = useLanguage();
     const [items, setItems] = useState<WishlistItem[]>([]);
     const {user} = useAuth();
     const wishlistKey = user ? `wishlist:${user.id}` : `wishlist:${getSessionId()}`;
@@ -36,10 +39,10 @@ export const WishlistProvider = ({children}: { children: ReactNode }) => {
         refetchKey: wishlistKey,
         onSuccess: (updatedItems) => {
             setItems(updatedItems);
-            toast.success("Added to wishlist");
+            toast.success(t.wishlist.added);
         },
         onError: (error) => {
-            toast.error("Failed to add to wishlist: " + error.message);
+            handleErrorToast(error,t.wishlist.addError, toast.error);
         },
     });
 
@@ -55,10 +58,10 @@ export const WishlistProvider = ({children}: { children: ReactNode }) => {
             return `${url}?${params.toString()}`;
         },
         onSuccess: () => {
-            toast.success("Item removed from wishlist");
+            toast.success(t.wishlist.removed);
         },
         onError: (error) => {
-            toast.error("Failed to remove item: " + error.message);
+            handleErrorToast(error,t.wishlist.removeError, toast.error);
         },
     });
 
@@ -69,10 +72,10 @@ export const WishlistProvider = ({children}: { children: ReactNode }) => {
         refetchKey: wishlistKey,
         sendPayload: false,
         onSuccess: () => {
-            toast.success("Wishlist cleared");
+            toast.success(t.wishlist.cleared);
         },
         onError: (error) => {
-            toast.error("Failed to clear Wishlist: " + error.message);
+            handleErrorToast(error,t.wishlist.clearError , toast.error);
         },
     });
 

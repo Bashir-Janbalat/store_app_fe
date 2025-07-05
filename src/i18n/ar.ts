@@ -189,7 +189,8 @@ export const ar: Translations = {
         outOfStockMessage: "لقد وصلت إلى الحد الأقصى للمخزون!",
         add: {
             success: "تمت الإضافة إلى السلة",
-            error: "فشل في الإضافة إلى السلة"
+            error: "فشل في الإضافة إلى السلة",
+            updated: "العنصر موجود مسبقًا، تم تحديث الكمية"
         },
         update: {
             success: "تم تحديث الكمية",
@@ -210,6 +211,12 @@ export const ar: Translations = {
         emptyWishlistDescription: "لا يوجد أي منتجات في السلة بعد.",
         remove: "إزالة",
         clearWishlist: "تفريغ قائمة الأمنيات",
+        added : "تمت الإضافة إلى قائمة الرغبات",
+        addError: "فشل في الإضافة إلى قائمة الرغبات",
+        removed : "تم إزالة العنصر من قائمة الرغبات",
+        removeError : "فشل في إزالة العنصر",
+        cleared : "تم مسح قائمة الرغبات",
+        clearError : "فشل في مسح قائمة الرغبات"
     },
     address: {
         title: 'العناوين الخاصة بك',

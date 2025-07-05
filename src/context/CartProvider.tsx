@@ -11,6 +11,8 @@ import {ApiType} from "../types/common.ts";
 import {useApiMutation} from "../hooks/useApiMutation.ts";
 import {getSessionId} from "../utils/session-utils.ts";
 import {useLanguage} from "../hooks/useLanguage.ts";
+import { handleErrorToast } from "../utils/error-utils.ts";
+import axios from "axios";
 
 
 export const CartProvider = ({children}: { children: ReactNode }) => {
@@ -27,14 +29,7 @@ export const CartProvider = ({children}: { children: ReactNode }) => {
         method: "post",
         url: "/cart/add",
         api: ApiType.STORE,
-        refetchKey: cartKey,
-        onSuccess: (updatedItems) => {
-            setItems(updatedItems);
-            toast.success(t.cart.add.success);
-        },
-        onError: (error) => {
-            toast.error(t.cart.add.error + ": " + error.message);
-        },
+        refetchKey: cartKey
     });
 
     const updateQuantityMutation = useApiMutation<void, UpdateCartRequest>({
@@ -46,7 +41,7 @@ export const CartProvider = ({children}: { children: ReactNode }) => {
             toast.success(t.cart.update.success);
         },
         onError: (error) => {
-            toast.error(t.cart.update.error + ": " + error.message);
+            handleErrorToast(error, t.cart.update.error, toast.error);
         },
     });
     const removeFromCartMutation = useApiMutation<void, { productId: number }>({
@@ -64,7 +59,7 @@ export const CartProvider = ({children}: { children: ReactNode }) => {
             toast.success(t.cart.removed.success);
         },
         onError: (error) => {
-            toast.error(t.cart.removed.error+ ": " + error.message);
+            handleErrorToast(error, t.cart.removed.error, toast.error);
         },
     });
 
@@ -78,7 +73,7 @@ export const CartProvider = ({children}: { children: ReactNode }) => {
             toast.success(t.cart.clear.success);
         },
         onError: (error) => {
-            toast.error(t.cart.clear.error + ": " + error.message);
+            handleErrorToast(error, t.cart.clear.error, toast.error);
         },
     });
 
@@ -97,25 +92,55 @@ export const CartProvider = ({children}: { children: ReactNode }) => {
     if (isError) return <ErrorFallback onRetry={retryWithToast}/>;
 
     const addToCart = (product: CartItem["product"], productId: number, unitPrice: number, quantity = 1) => {
-        setItems((prevItems) => {
-            const existing = prevItems.find(item => item.productId === productId);
-            if (existing) {
-                return prevItems.map(item =>
+        const existing = items.find(item => item.productId === productId);
+
+        setItems(prevItems =>
+            existing
+                ? prevItems.map(item =>
                     item.productId === productId
-                        ? {
-                            ...item,
-                            quantity: item.quantity + quantity,
-                        }
+                        ? {...item, quantity: item.quantity + quantity}
                         : item
-                );
-            } else {
-                return [...prevItems, {productId, quantity, unitPrice, product}];
-            }
-        });
+                )
+                : [...prevItems, {productId, quantity, unitPrice, product}]
+        );
+
         addToCartMutation.mutate({
             productId,
             unitPrice,
             quantity,
+        }, {
+            onSuccess: () => {
+                if (existing) {
+                    toast.success(t.cart.add.updated);
+                } else {
+                    toast.success(t.cart.add.success);
+                }
+            },
+            onError: (error) => {
+                setItems(prevItems => {
+                    if (existing) {
+                        return prevItems.map(item =>
+                            item.productId === productId
+                                ? {...item, quantity: item.quantity - quantity}
+                                : item
+                        );
+                    } else {
+                        return prevItems.filter(item => item.productId !== productId);
+                    }
+                });
+                if (axios.isAxiosError(error)) {
+                    const message = error.response?.data?.message ?? t.cart.add.error;
+                    if (message.includes("Out of stock")) {
+                        toast.error(t.cart.outOfStockMessage);
+                    } else {
+                        toast.error(message);
+                    }
+                } else if (error instanceof Error) {
+                    toast.error(`${t.cart.add.error}: ${error.message}`);
+                } else {
+                    toast.error(t.cart.add.error);
+                }
+            }
         });
     };
 

@@ -186,8 +186,9 @@ export interface Translations {
         noCartIdError: string;
         outOfStockMessage: string;
         add: {
-            "success": string,
-            "error": string
+            success: string,
+            error: string,
+            updated: string,
         },
         update: {
             success: string,
@@ -208,6 +209,12 @@ export interface Translations {
         emptyWishlistDescription: string;
         remove: string;
         clearWishlist: string;
+        added: string,
+        addError: string,
+        removed: string,
+        removeError: string,
+        cleared: string,
+        clearError: string
     },
     address: {
         title: string;

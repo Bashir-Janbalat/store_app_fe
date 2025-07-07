@@ -1,4 +1,5 @@
 import Cookies from "js-cookie";
+import { v4 as uuidv4 } from 'uuid';
 
 const SESSION_COOKIE_NAME = "sessionId";
 const IS_LOGGED_IN_COOKIE = "isLoggedIn";
@@ -12,7 +13,7 @@ const cookieOptions = {
 } as const;
 
 export const generateNewSessionId = (): string => {
-    return crypto.randomUUID();
+    return uuidv4();
 };
 
 export function getSessionId(): string {

@@ -24,4 +24,5 @@ dist-ssr
 *.sw?
 
 Help
-.env
+.env.local
+.env.production

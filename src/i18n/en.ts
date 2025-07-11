@@ -11,6 +11,7 @@ export const en: Translations = {
         account: 'My Account',
         logout: 'Logout',
         wishlist: 'Wishlist',
+        cart: 'Cart',
         orders: 'My Orders',
         settings: 'Settings',
         login: 'Sign In',

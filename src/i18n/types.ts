@@ -9,6 +9,7 @@ export interface Translations {
         logout: string;
         wishlist: string;
         orders: string;
+        cart: string;
         settings: string;
         login: string;
         signup: string;

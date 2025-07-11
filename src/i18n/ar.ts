@@ -10,6 +10,7 @@ export const ar: Translations = {
         account: 'حسابي',
         logout: 'تسجيل الخروج',
         wishlist: 'قائمة الأمنيات',
+        cart: 'السلة',
         orders: 'طلباتي',
         settings: 'الإعدادات',
         login: 'تسجيل الدخول',

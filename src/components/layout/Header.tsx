@@ -121,18 +121,20 @@ const Header: React.FC<HeaderProps> = ({
                     }
                 />
             )}
-            <Button color="inherit" component={Link} to="/">
-                {t.nav.home}
-            </Button>
-            <Button color="inherit" component={Link} to="/products">
-                {t.nav.products}
-            </Button>
-            <Button color="inherit" component={Link} to="/about">
-                {t.nav.about}
-            </Button>
-            <Button color="inherit" component={Link} to="/contact">
-                {t.nav.contact}
-            </Button>
+            <Box display={"flex"} flexDirection={"column"} sx={{p: 1}} onClick={toggleDrawer}>
+                <Button color="inherit" component={Link} to="/">
+                    {t.nav.home}
+                </Button>
+                <Button color="inherit" component={Link} to="/products">
+                    {t.nav.products}
+                </Button>
+                <Button color="inherit" component={Link} to="/about">
+                    {t.nav.about}
+                </Button>
+                <Button color="inherit" component={Link} to="/contact">
+                    {t.nav.contact}
+                </Button>
+            </Box>
         </Box>
     );
 
@@ -161,18 +163,20 @@ const Header: React.FC<HeaderProps> = ({
                         }}>
                             <Store sx={{color: 'white'}}/>
                         </Box>
-                        <Typography
-                            variant="h6"
-                            noWrap
-                            sx={{
-                                background: 'linear-gradient(45deg, #2196F3 30%, #9C27B0 90%)',
-                                WebkitBackgroundClip: 'text',
-                                WebkitTextFillColor: 'transparent',
-                                fontWeight: 'bold'
-                            }}
-                        >
-                            {t.common.storeName}
-                        </Typography>
+                        {!isMobile && (
+                            <Typography
+                                variant="h6"
+                                noWrap
+                                sx={{
+                                    background: 'linear-gradient(45deg, #2196F3 30%, #9C27B0 90%)',
+                                    WebkitBackgroundClip: 'text',
+                                    WebkitTextFillColor: 'transparent',
+                                    fontWeight: 'bold'
+                                }}
+                            >
+                                {t.common.storeName}
+                            </Typography>
+                        )}
                     </Box>
 
                     {/* Middle: Search for Desktop */}
@@ -216,7 +220,7 @@ const Header: React.FC<HeaderProps> = ({
 
                     {/* Desktop Navigation */}
                     {!isMobile && (
-                        <Box sx={{display: 'flex', alignItems: 'center', gap: 2}}>
+                        <Box sx={{display: 'flex', alignItems: 'center', gap: 1}}>
                             <Button
                                 color="inherit"
                                 component={Link}
@@ -253,7 +257,7 @@ const Header: React.FC<HeaderProps> = ({
                     )}
 
                     {/* Right: Icons */}
-                    <Box sx={{display: 'flex', alignItems: 'center', gap: 1}}>
+                    <Box sx={{display: 'flex', alignItems: 'center'}}>
                         {/* Toggle Language */}
                         <Tooltip title={language === 'ar' ? 'English' : 'العربية'}>
                             <IconButton
@@ -279,7 +283,7 @@ const Header: React.FC<HeaderProps> = ({
                         </Tooltip>
 
                         {/* Cart */}
-                        <Tooltip title={t.nav.orders}>
+                        <Tooltip title={t.nav.cart}>
                             <IconButton
                                 color="inherit"
                                 onClick={onCartClick}
@@ -293,7 +297,7 @@ const Header: React.FC<HeaderProps> = ({
 
                         {/* Auth */}
                         {user ? (
-                            <>
+                            <Box sx={{display: 'flex', gap: 1, ml: 1}}>
                                 <Tooltip title={t.nav.profile}>
                                     <IconButton
                                         color="inherit"
@@ -338,7 +342,7 @@ const Header: React.FC<HeaderProps> = ({
                                         <ListItemText>{t.nav.logout}</ListItemText>
                                     </MenuItem>
                                 </Menu>
-                            </>
+                            </Box>
                         ) : (
                             <Box sx={{display: 'flex', gap: 1, ml: 1}}>
                                 <Button
@@ -365,18 +369,18 @@ const Header: React.FC<HeaderProps> = ({
                         )}
                     </Box>
                 </Toolbar>
-            </AppBar>
 
-            {/* Drawer for Mobile Nav */}
-            <Drawer
-                open={drawerOpen}
-                onClose={toggleDrawer}
-                anchor={isRTL ? 'right' : 'left'}
-            >
-                <Box sx={{width: 280}} role="presentation" onClick={toggleDrawer}>
-                    {NavLinks}
-                </Box>
-            </Drawer>
+                {/* Drawer for Mobile Nav */}
+                <Drawer
+                    open={drawerOpen}
+                    onClose={toggleDrawer}
+                    anchor={isRTL ? 'right' : 'left'}
+                >
+                    <Box sx={{width: 280}} role="presentation">
+                        {NavLinks}
+                    </Box>
+                </Drawer>
+            </AppBar>
         </>
     );
 };

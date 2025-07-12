@@ -36,7 +36,7 @@ const FeaturedProducts = () => {
 
 
     useEffect(() => {
-        window.scrollTo({top: 450, behavior: 'smooth'});
+        window.scrollTo({top: 170, behavior: 'smooth'});
         if (data && Array.isArray(data.content)) {
             setProducts(data.content);
             setTotalPages(data.totalPages ?? 1);

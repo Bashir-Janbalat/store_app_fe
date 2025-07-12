@@ -5,11 +5,15 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import {Link} from 'react-router-dom';
 import {useAddToCart} from "../../hooks/useAddToCart.ts";
+import {useIsMobile} from "../../hooks/useIsMobile.ts";
+import {getProductDescription} from "../../utils/common.ts";
 
 const WishlistSummary = () => {
     const {t} = useLanguage();
+    const isMobile = useIsMobile();
     const {items: wishlistItems, removeFromWishlist, clearWishlist} = useWishlist();
     const {handleAddToCart} = useAddToCart();
+
 
     return (
         <Box className="summary-container">
@@ -70,10 +74,10 @@ const WishlistSummary = () => {
                                                         <>
                                                             <Typography variant="body2" color="text.secondary"
                                                                         component="span">
-                                                                {item.product.description}
+                                                                {getProductDescription(item.product.description!, isMobile)}
                                                             </Typography>
                                                             <br/>
-                                                            <Typography variant="caption" color="text.secondary"
+                                                            <Typography variant="caption" color="text.primary"
                                                                         component="span">
                                                                 {t.product.inStock}: {totalStock}
                                                             </Typography>

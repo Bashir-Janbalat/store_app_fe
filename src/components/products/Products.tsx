@@ -11,6 +11,7 @@ import {useLanguage} from "../../hooks/useLanguage.ts";
 import {useSearchParams} from 'react-router-dom';
 import {useAddToCart} from "../../hooks/useAddToCart.ts";
 import {useWishlistActions} from "../../hooks/useWishlistActions.ts";
+import {useIsMobile} from "../../hooks/useIsMobile.ts";
 
 interface ProductsProps {
     selectedCategoryName: string | null;
@@ -22,6 +23,7 @@ interface ProductsProps {
 
 const Products = ({selectedCategoryName, selectedBrandName, minPrice, maxPrice, inStock}: ProductsProps) => {
     const {t} = useLanguage();
+    const isMobile = useIsMobile();
     const {handleAddToCart} = useAddToCart();
     const {isInWishlist, handleToggleWishlist} = useWishlistActions();
     const [products, setProducts] = useState<ProductDTO[]>([]);
@@ -61,6 +63,7 @@ const Products = ({selectedCategoryName, selectedBrandName, minPrice, maxPrice, 
     }, [selectedCategoryName, selectedBrandName, productName, minPrice, maxPrice, inStock]);
 
     useEffect(() => {
+        window.scrollTo({top: 80, behavior: 'smooth'});
         if (data && Array.isArray(data.content)) {
             setProducts(data.content);
             setTotalPages(data.totalPages ?? 1);
@@ -97,6 +100,7 @@ const Products = ({selectedCategoryName, selectedBrandName, minPrice, maxPrice, 
                     color="primary"
                     variant="outlined"
                     shape="rounded"
+                    size={isMobile ? "small" : "medium"}
                 />
             </Stack>
         </Container>

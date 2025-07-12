@@ -41,7 +41,7 @@ const ProductThumbnails = ({ images, selectedIndex, onSelect }: ProductImagesPro
                 </Box>
             )}
 
-            <Stack spacing={2} sx={{ height: "100%",mr:1 }}>
+            <Stack spacing={2} sx={{ height: "100%",mr:2 }}>
                 {visibleImages.map((img, index) => {
                     const actualIndex = startIndex + index;
                     return (

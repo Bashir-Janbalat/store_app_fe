@@ -40,27 +40,31 @@ const
                         ? `${t.product.inStock}: ${totalStock}`
                         : t.product.outOfStock}
                 </Typography>
+                <Box sx={{
+                    mt: 2,
+                    display: 'flex',
+                    flexDirection: {xs: 'column', sm: 'row'}, // عمودي على الشاشات الصغيرة وأفقي على الكبيرة
+                    gap: 2 // المسافة بين الأزرار
+                }}>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        startIcon={<ShoppingCartIcon/>}
+                        onClick={() => handleAddToCart(product.name, product.images, product.description!, totalStock, product.id!, product.sellingPrice!)}
+                        disabled={totalStock === 0}
+                    >
+                        {t.product.addToCart}
+                    </Button>
 
-                <Button
-                    variant="contained"
-                    color="primary"
-                    startIcon={<ShoppingCartIcon/>}
-                    sx={{mt: 3}}
-                    onClick={() => handleAddToCart(product.name, product.images, product.description!, totalStock, product.id!, product.sellingPrice!)}
-                    disabled={totalStock === 0}
-                >
-                    {t.product.addToCart}
-                </Button>
-
-                <Button
-                    variant={inWishlist ? "contained" : "outlined"}
-                    color="secondary"
-                    startIcon={inWishlist ? <FavoriteIcon/> : <FavoriteBorderIcon/>}
-                    sx={{mt: 3, ml: 2}}
-                    onClick={() => handleToggleWishlist(product)}
-                >
-                    {inWishlist ? t.product.removeFromWishlist : t.product.addToWishlist}
-                </Button>
+                    <Button
+                        variant={inWishlist ? "contained" : "outlined"}
+                        color="secondary"
+                        startIcon={inWishlist ? <FavoriteIcon/> : <FavoriteBorderIcon/>}
+                        onClick={() => handleToggleWishlist(product)}
+                    >
+                        {inWishlist ? t.product.removeFromWishlist : t.product.addToWishlist}
+                    </Button>
+                </Box>
             </Box>
         );
     };

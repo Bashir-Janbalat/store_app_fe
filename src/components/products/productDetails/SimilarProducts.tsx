@@ -9,6 +9,7 @@ import LoadingSkeleton from "../../common/LoadingSkeleton.tsx";
 import ErrorFallback from "../../common/ErrorFallback.tsx";
 import {ArrowBackIos, ArrowForwardIos} from '@mui/icons-material';
 import {Link} from "react-router-dom";
+import {useIsMobile} from "../../../hooks/useIsMobile.ts";
 
 interface SimilarProductsProps {
     productId: number;
@@ -22,6 +23,7 @@ const SimilarProducts = ({productId}: SimilarProductsProps) => {
     const [isAtStart, setIsAtStart] = useState(true);
     const [hasReachedEnd, setHasReachedEnd] = useState(false);
     const [canScroll, setCanScroll] = useState(false);
+    const isMobile = useIsMobile();
     const limit = 10;
 
     const scroll = useCallback((scrollOffset: number) => {
@@ -94,7 +96,7 @@ const SimilarProducts = ({productId}: SimilarProductsProps) => {
             <Typography variant="h5" gutterBottom>{t.product.similarProducts}</Typography>
             <Box display="flex" alignItems="center" gap={1} p={2}>
                 {/* سهم إلى اليسار ← */}
-                {canScroll && !isAtStart && (
+                {!isMobile && canScroll && !isAtStart && (
                     <IconButton onClick={() => scroll(-1)} onDoubleClick={e => e.stopPropagation()}>
                         {isRTL ? <ArrowForwardIos/> : <ArrowBackIos/>}
                     </IconButton>
@@ -151,7 +153,7 @@ const SimilarProducts = ({productId}: SimilarProductsProps) => {
                 </Box>
 
                 {/* سهم إلى اليمين → */}
-                {canScroll && !hasReachedEnd && (
+                {!isMobile && canScroll && !hasReachedEnd && (
                     <IconButton onClick={() => scroll(1)} onDoubleClick={e => e.stopPropagation()}>
                         {isRTL ? <ArrowBackIos/> : <ArrowForwardIos/>}
                     </IconButton>

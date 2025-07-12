@@ -10,10 +10,12 @@ import ErrorFallback from "../common/ErrorFallback.tsx";
 import {useLanguage} from "../../hooks/useLanguage.ts";
 import {useAddToCart} from "../../hooks/useAddToCart.ts";
 import {useWishlistActions} from "../../hooks/useWishlistActions.ts";
+import {useIsMobile} from "../../hooks/useIsMobile.ts";
 
 
 const FeaturedProducts = () => {
     const {t} = useLanguage();
+    const isMobile = useIsMobile();
     const {handleAddToCart} = useAddToCart();
     const {isInWishlist, handleToggleWishlist} = useWishlistActions();
     const [products, setProducts] = useState<ProductDTO[]>([]);
@@ -34,6 +36,7 @@ const FeaturedProducts = () => {
 
 
     useEffect(() => {
+        window.scrollTo({top: 450, behavior: 'smooth'});
         if (data && Array.isArray(data.content)) {
             setProducts(data.content);
             setTotalPages(data.totalPages ?? 1);
@@ -70,6 +73,7 @@ const FeaturedProducts = () => {
                     color="primary"
                     variant="outlined"
                     shape="rounded"
+                    size={isMobile ? "small" : "medium"}
                 />
             </Stack>
         </Container>

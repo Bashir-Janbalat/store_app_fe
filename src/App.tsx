@@ -25,7 +25,7 @@ const queryClient = new QueryClient({
 function App() {
     return (
         <QueryClientProvider client={queryClient}>
-            <Toaster position="top-center" reverseOrder={false}/>
+            <Toaster position="bottom-right" reverseOrder={false}/>
             <AuthProvider>
                 <CartProvider>
                     <WishlistProvider>

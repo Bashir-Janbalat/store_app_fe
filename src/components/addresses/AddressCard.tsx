@@ -51,7 +51,7 @@ const AddressCard: React.FC<Props> = ({address, onEdit, onDelete, onSetDefault})
                                 </Typography>
                             </Stack>
                             {/* الشفرات */}
-                            <Stack direction="row" flexWrap="wrap" justifyContent="flex-end" sx={{flexShrink: 0}}>
+                            <Stack direction="row" flexWrap="wrap" justifyContent={"flex-start"} sx={{flexShrink: 0}}>
                                 {address.defaultAddress && (
                                     <Chip
                                         label={t.address.default}
@@ -92,12 +92,13 @@ const AddressCard: React.FC<Props> = ({address, onEdit, onDelete, onSetDefault})
                         </Button>
                     </Tooltip>
                 </Stack>
-                <Stack direction="row" spacing={1} mt={2} flexWrap="wrap" justifyContent="flex-end">
+                <Stack flexDirection={{xs:"column", md:'row'}}>
                     {!isDefaultBilling && (
                         <Button
                             size="medium"
                             variant="outlined"
                             onClick={() => onSetDefault(address.id, 'BILLING')}
+                            sx={{mr: 1, mt:1}}
                         >
                             {t.address.type.setAsDefaultBilling}
                         </Button>
@@ -107,6 +108,7 @@ const AddressCard: React.FC<Props> = ({address, onEdit, onDelete, onSetDefault})
                             size="medium"
                             variant="outlined"
                             onClick={() => onSetDefault(address.id, 'SHIPPING')}
+                            sx={{mr: 1, mt:1}}
                         >
                             {t.address.type.setAsDefaultShipping}
                         </Button>

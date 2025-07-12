@@ -20,9 +20,12 @@ import {useWishlistActions} from "../../hooks/useWishlistActions.ts";
 import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 import {toast} from "react-hot-toast";
 import {useAuth} from "../../hooks/useAuth.ts";
+import {getProductDescription} from "../../utils/common.ts";
+import {useIsMobile} from "../../hooks/useIsMobile.ts";
 
 const CartSummary = () => {
     const {t} = useLanguage();
+    const isMobile = useIsMobile();
     const {user} = useAuth();
     const {items, removeFromCart, clearCart, updateQuantity} = useCart();
     const {isInWishlist, handleToggleWishlist} = useWishlistActions();
@@ -49,17 +52,16 @@ const CartSummary = () => {
             </Typography>
 
             {items.length > 0 && (
-                <Box sx={{textAlign: "end", mb: 2}}>
-                    <Button
-                        size="large"
-                        variant="contained"
-                        color="primary"
-                        onClick={handleCheckout}
-                        startIcon={<ProductionQuantityLimitsIcon/>}
-                    >
-                        {t.cart.checkout}
-                    </Button>
-                </Box>
+                <Button
+                    size="large"
+                    variant="contained"
+                    color="primary"
+                    onClick={handleCheckout}
+                    startIcon={<ProductionQuantityLimitsIcon/>}
+                    sx={{m: 2}}
+                >
+                    {t.cart.checkout}
+                </Button>
             )}
 
             {items.length === 0 ? (
@@ -87,7 +89,7 @@ const CartSummary = () => {
                                                             sx={{
                                                                 width: 64,
                                                                 height: 64,
-                                                                mr: 2,
+                                                                m: 2,
                                                                 border: "2px solid #1976d2",
                                                                 boxSizing: "border-box",
                                                                 borderRadius: 1,
@@ -108,20 +110,26 @@ const CartSummary = () => {
                                                     }
                                                     secondary={
                                                         <Typography variant="body2" color="text.secondary">
-                                                            {item.product.description}
+                                                            {getProductDescription(item.product.description!, isMobile)}
                                                         </Typography>
                                                     }
                                                 />
-                                                <Typography className="price-text" sx={{
-                                                    textDecoration: isOutOfStock ? "line-through" : "none"
-                                                }}>
-                                                    {item.unitPrice.toFixed(2)} {t.common.currency}
-                                                </Typography>
+                                                <Box
+                                                    className="price-text"
+                                                    sx={{
+                                                        textDecoration: isOutOfStock ? "line-through" : "none",
+                                                        display: 'inline-flex',
+                                                        pl: 1,
+                                                    }}
+                                                >
+                                                    <Typography>{item.unitPrice.toFixed(2)}</Typography>
+                                                    <Typography>{t.common.currency}</Typography>
+                                                </Box>
                                             </Box>
 
                                             <Box className="item-actions">
                                                 <Button
-                                                    sx={{minWidth: 25, height: 25, mt: 1}}
+                                                    sx={{minWidth: 25, height: 25}}
                                                     variant="outlined"
                                                     size="small"
                                                     onClick={() => {
@@ -133,9 +141,9 @@ const CartSummary = () => {
                                                 >
                                                     -
                                                 </Button>
-                                                <Typography sx={{px: 1, mt: 1}}>{item.quantity}</Typography>
+                                                <Typography sx={{px: 1}}>{item.quantity}</Typography>
                                                 <Button
-                                                    sx={{minWidth: 25, height: 25, mt: 1}}
+                                                    sx={{minWidth: 25, height: 25}}
                                                     variant="outlined"
                                                     size="small"
                                                     onClick={() => {
@@ -149,23 +157,30 @@ const CartSummary = () => {
                                                 >
                                                     +
                                                 </Button>
-                                                <Tooltip title={t.cart.remove}>
-                                                    <IconButton onClick={() => removeFromCart(item.productId)}>
-                                                        <DeleteIcon/>
-                                                    </IconButton>
-                                                </Tooltip>
-                                                <Tooltip title={isInWishlist(item.productId)}>
-                                                    <IconButton onClick={() => handleToggleWishlist(item)}>
-                                                        {isInWishlist(item.productId) ? (
-                                                            <FavoriteIcon color="error"/>
-                                                        ) : (
-                                                            <FavoriteBorderIcon/>
-                                                        )}
-                                                    </IconButton>
-                                                </Tooltip>
-                                                {!isOutOfStock && (
-                                                    <Typography sx={{ml: 2, mt: 1}}>
-                                                        {subTotal.toFixed(2)} {t.common.currency}
+                                                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', ml: 1 }}>
+                                                    <Tooltip title={t.cart.remove}>
+                                                        <IconButton onClick={() => removeFromCart(item.productId)}>
+                                                            <DeleteIcon/>
+                                                        </IconButton>
+                                                    </Tooltip>
+                                                    <Tooltip title={isInWishlist(item.productId)}>
+                                                        <IconButton onClick={() => handleToggleWishlist(item)}>
+                                                            {isInWishlist(item.productId) ? (
+                                                                <FavoriteIcon color="error"/>
+                                                            ) : (
+                                                                <FavoriteBorderIcon/>
+                                                            )}
+                                                        </IconButton>
+                                                    </Tooltip>
+                                                </Box>
+                                                {!isMobile && !isOutOfStock && (
+                                                    <Typography sx={{ml: 2, display: 'inline-flex'}}>
+                                                        {subTotal.toFixed(2)}
+                                                    </Typography>
+                                                )}
+                                                {!isMobile && !isOutOfStock && (
+                                                    <Typography sx={{display: 'inline-flex'}}>
+                                                        {t.common.currency}
                                                     </Typography>
                                                 )}
                                             </Box>

@@ -193,9 +193,17 @@ const CheckoutPage: React.FC = () => {
                                     </Typography>
                                 </Box>
                             </Box>
-                            <Typography variant="body1">
-                                {(item.unitPrice * item.quantity).toFixed(2)} {t.common.currency}
-                            </Typography>
+                            <Box
+                                className="price-text"
+                                sx={{
+                                    display: 'inline-flex',
+                                    justifyContent: 'end',
+                                    pl:1,
+                                }}
+                            >
+                                <Typography variant="body1">{(item.unitPrice * item.quantity).toFixed(2)}</Typography>
+                                <Typography>{t.common.currency}</Typography>
+                            </Box>
                         </Box>
                     ))}
                 </CardContent>

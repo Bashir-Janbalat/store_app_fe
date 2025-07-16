@@ -71,6 +71,9 @@ export interface Translations {
         phoneInvalid: string;
         errorOccurredSendingRequest: string;
         updatedSuccessfully: string,
+        emailNotVerified: string;
+        invalidCredentials: string;
+        authServiceUnavailable: string;
     };
     footer: {
         description: string;

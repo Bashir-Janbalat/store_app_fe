@@ -73,6 +73,9 @@ export const ar: Translations = {
         phoneInvalid: "رقم الهاتف غير صالح",
         errorOccurredSendingRequest: "حدث خطأ أثناء إرسال الطلب.",
         updatedSuccessfully: "تم تحديث الملف الشخصي بنجاح",
+        authServiceUnavailable: "خدمة التوثيق غير متوفرة. يرجى المحاولة لاحقًا.",
+        emailNotVerified: "البريد الإلكتروني غير مفعل. يرجى التحقق من عنوان بريدك الإلكتروني.",
+        invalidCredentials: "اسم المستخدم أو كلمة المرور غير صحيحة."
     },
     footer: {
         description: 'متجرنا الإلكتروني - وجهتك المفضلة للتسوق الإلكتروني',

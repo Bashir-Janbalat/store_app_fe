@@ -47,6 +47,22 @@ const LoginPage = () => {
         }
     };
 
+    const getErrorMessage = () => {
+        if (error.includes('Email not verified')) {
+            return t.auth.emailNotVerified;
+        }
+        if (error.includes('Authentication service unavailable')) {
+            return t.auth.authServiceUnavailable;
+        }
+        if (error.includes('Server not reachable')) {
+            return t.auth.authServiceUnavailable;
+        }
+        if (error.includes('Invalid username or password')) {
+            return t.auth.invalidCredentials;
+        }
+        return error;
+    };
+
     return (
         <>
             <Container maxWidth="sm" sx={{minHeight: '100vh', display: 'flex', alignItems: 'center'}}>
@@ -66,7 +82,7 @@ const LoginPage = () => {
 
                         {error && (
                             <Alert severity="error" sx={{mb: 2}}>
-                                {error}
+                                {getErrorMessage()} {/* استخدام دالة إرجاع رسالة الخطأ */}
                             </Alert>
                         )}
 
@@ -111,7 +127,6 @@ const LoginPage = () => {
                                         )
                                     }
                                 }}
-
                             />
 
                             <Box sx={{textAlign: 'right', mt: 1, mb: 2}}>

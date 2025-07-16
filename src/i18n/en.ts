@@ -74,6 +74,9 @@ export const en: Translations = {
         phoneInvalid: "Invalid phone number",
         errorOccurredSendingRequest: "An error occurred while sending the request.",
         updatedSuccessfully: "Profile updated successfully",
+        authServiceUnavailable: "Authentication service unavailable. Please try again later.",
+        emailNotVerified: "Email not verified. Please verify your email address.",
+        invalidCredentials: "Invalid username or password."
     },
     footer: {
         description: 'Our e-store - your favorite e-shopping destination',

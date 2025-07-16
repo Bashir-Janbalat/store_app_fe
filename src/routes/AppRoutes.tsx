@@ -27,6 +27,7 @@ import PaymentSuccessPage from '../pages/PaymentSuccessPage.tsx';
 import PaymentCancelPage from '../pages/PaymentCancelPage.tsx';
 import CheckoutPage from "../pages/CheckoutPage.tsx";
 import ProductReviewPage from "../pages/ProductReviewPage.tsx";
+import EmailVerificationPage from '../pages/EmailVerificationPage.tsx';
 
 
 const AppRoutes: React.FC = () => {
@@ -35,6 +36,7 @@ const AppRoutes: React.FC = () => {
         {path: "register", element: <RegisterPage/>},
         {path: "forgot-password", element: <ForgotPasswordPage/>},
         {path: "reset-password", element: <ResetPasswordPage/>},
+        {path: "verified", element: <EmailVerificationPage/>},
     ];
     const staticRoutes = [
         {path: "about", element: <AboutPage/>},

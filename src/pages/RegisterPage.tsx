@@ -44,8 +44,10 @@ const RegisterPage = () => {
         setError('');
 
         try {
-            await signUp({name, email, password});
-            navigate('/');
+            const status = await signUp({name, email, password});
+            if (status === 201) {
+                navigate('/login');
+            }
         } catch (error) {
             handleSetError(error, setError);
         } finally {

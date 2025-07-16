@@ -56,15 +56,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({children}) => {
     };
 
     const signUp = async (signUp: SignUp) => {
-        const status = await signupUser(signUp);
-
-        if (status === 201) {
-            await signInUser(signUp.email, signUp.password);
-            const userData = await fetchCurrentUser();
-            setUser(userData);
-        }
-
-        return status;
+        return await signupUser(signUp);
     };
 
     const updateProfile = async (profile: UpdateProfileInput) => {

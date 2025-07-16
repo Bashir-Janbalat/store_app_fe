@@ -18,6 +18,7 @@ import {PersonAdd, Store, Visibility, VisibilityOff} from '@mui/icons-material';
 import {useAuth} from '../hooks/useAuth.ts';
 import {useLanguage} from "../hooks/useLanguage.ts";
 import {handleSetError} from "../utils/error-utils.ts";
+import {validateEmail, validatePassword} from '../utils/validationUtils.ts';
 
 const RegisterPage = () => {
     const {t} = useLanguage();
@@ -32,8 +33,25 @@ const RegisterPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+
+    const getErrorMessage = () => {
+        if (error.includes('user with email')) {
+            setError(t.auth.userAlreadyExists.replace('{{email}}', email));
+        }
+        return error;
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        if (!validateEmail(email)) {
+            setError(t.auth.invalidEmail);
+            return;
+        }
+        if (!validatePassword(password)) {
+            setError(t.auth.invalidPassword);
+            return;
+        }
 
         if (password !== confirmPassword) {
             setError(t.auth.passwordsDoNotMatch);
@@ -73,7 +91,7 @@ const RegisterPage = () => {
 
                     {error && (
                         <Alert severity="error" sx={{mb: 2}}>
-                            {error}
+                            {getErrorMessage()}
                         </Alert>
                     )}
 

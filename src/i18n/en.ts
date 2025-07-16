@@ -76,7 +76,10 @@ export const en: Translations = {
         updatedSuccessfully: "Profile updated successfully",
         authServiceUnavailable: "Authentication service unavailable. Please try again later.",
         emailNotVerified: "Email not verified. Please verify your email address.",
-        invalidCredentials: "Invalid username or password."
+        invalidCredentials: "Invalid username or password.",
+        invalidEmail: "Invalid email address.",
+        invalidPassword: "Password must be at least 8 characters long, contain an uppercase letter, a lowercase letter, and a special character (like `@`, `#`, `$`).",
+        userAlreadyExists: "User with email '{{email}}' already exists."
     },
     footer: {
         description: 'Our e-store - your favorite e-shopping destination',

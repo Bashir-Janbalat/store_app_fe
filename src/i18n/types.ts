@@ -74,6 +74,9 @@ export interface Translations {
         emailNotVerified: string;
         invalidCredentials: string;
         authServiceUnavailable: string;
+        invalidEmail: string,
+        invalidPassword: string,
+        userAlreadyExists: string,
     };
     footer: {
         description: string;

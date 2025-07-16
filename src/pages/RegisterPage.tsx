@@ -38,6 +38,16 @@ const RegisterPage = () => {
         if (error.includes('user with email')) {
             setError(t.auth.userAlreadyExists.replace('{{email}}', email));
         }
+
+        if (error.includes('Email not verified')) {
+            return t.auth.emailNotVerified;
+        }
+        if (error.includes('Authentication service unavailable')) {
+            return t.auth.authServiceUnavailable;
+        }
+        if (error.includes('Server not reachable')) {
+            return t.auth.authServiceUnavailable;
+        }
         return error;
     };
 

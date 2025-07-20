@@ -36,6 +36,7 @@ import {
 import {useIsMobile} from "../../hooks/useIsMobile.ts";
 import {useAuth} from '../../hooks/useAuth.ts';
 import {useLanguage} from '../../hooks/useLanguage.ts';
+import {debounce} from 'lodash';
 
 interface HeaderProps {
     cartItemsCount: number;
@@ -69,11 +70,16 @@ const Header: React.FC<HeaderProps> = ({
     const toggleDrawer = () => {
         setDrawerOpen(prev => !prev);
     };
-
-    const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter') {
-            navigate(`/products?productName=${encodeURIComponent(searchValue)}`);
+    const handleSearch = debounce((value: string) => {
+        if (value.trim()) {
+            navigate(`/products?productName=${encodeURIComponent(value)}`);
         }
+    }, 1000);
+
+    const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setSearchValue(value);
+        handleSearch(value);
     };
 
     const NavLinks = (
@@ -91,8 +97,7 @@ const Header: React.FC<HeaderProps> = ({
                     size="small"
                     placeholder={t.common.searchPlaceholder}
                     value={searchValue}
-                    onChange={(e) => setSearchValue(e.target.value)}
-                    onKeyDown={handleSearchKeyDown}
+                    onChange={handleSearchChange}
                     variant="outlined"
                     fullWidth
                     sx={{
@@ -186,8 +191,7 @@ const Header: React.FC<HeaderProps> = ({
                                 size="small"
                                 placeholder={t.common.searchPlaceholder}
                                 value={searchValue}
-                                onChange={(e) => setSearchValue(e.target.value)}
-                                onKeyDown={handleSearchKeyDown}
+                                onChange={handleSearchChange}
                                 variant="outlined"
                                 fullWidth
                                 sx={{

@@ -118,7 +118,7 @@ export const en: Translations = {
         },
         contact: {
             phone: '+49 165 789 789',
-            email: 'info@store.com',
+            email: 'inventory793@gmail.com',
             address: 'Berlin, Germany',
         }
     },

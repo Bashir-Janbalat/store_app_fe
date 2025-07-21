@@ -27,3 +27,5 @@ Help
 
 
 .env.local
+build_and_run.bat
+docker-compose.local.store_app_fe.yml

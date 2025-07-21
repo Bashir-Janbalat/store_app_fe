@@ -3,6 +3,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        VITE_API_BASE_URL_STORE: http://localhost:9091/store/api
+        VITE_API_BASE_URL_INVENTORY: http://localhost:8081/inventory/api
     ports:
       - "4000:4000"
     container_name: store_frontend

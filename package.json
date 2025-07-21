@@ -9,8 +9,8 @@
     "preview": "vite preview",
     "docker:build": "docker build -t store_app_fe .",
     "docker:run": "docker run --env-file .env.local -p 4000:4000 store_app_fe",
-    "docker:up": "docker-compose -f docker-compose.store_app_fe.yml up",
-    "docker:down": "docker-compose -f docker-compose.store_app_fe.yml down"
+    "docker:up": "docker-compose -f docker-compose.local.store_app_fe.yml up",
+    "docker:down": "docker-compose -f docker-compose.local.store_app_fe.yml down"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
